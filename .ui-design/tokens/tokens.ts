@@ -1,0 +1,117 @@
+export const colors = {
+  primary: {
+    50: '#EBF4FD',
+    100: '#D2E7FB',
+    200: '#A5CFF7',
+    300: '#6DB2F1',
+    400: '#3D97E8',
+    500: '#0D77DD',
+    600: '#0B65BC',
+    700: '#094F95',
+    800: '#073B70',
+    900: '#05284B',
+    950: '#031829',
+  },
+  accent: {
+    50: '#FBF0F7',
+    100: '#F5DBEB',
+    200: '#EBB7DB',
+    300: '#DC8AC3',
+    400: '#C960A9',
+    500: '#933974',
+    600: '#7D3063',
+    700: '#632651',
+    800: '#4A1D3D',
+    900: '#321329',
+    950: '#1E0B19',
+  },
+  background: '#FFFFFF',
+  backgroundSoft: '#F5F5F7',
+  surface: '#FFFFFF',
+  text: '#1A1A1A',
+  textMuted: '#666666',
+  textInverse: '#FFFFFF',
+  border: '#E2E2E8',
+  success: '#16A34A',
+  warning: '#F59E0B',
+  error: '#DC2626',
+} as const;
+
+export const typography = {
+  fontFamily: {
+    sans: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    mono: 'ui-monospace, "Fira Code", monospace',
+  },
+  fontSize: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    base: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+    '5xl': '3rem',
+  },
+  fontWeight: {
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+  },
+  lineHeight: {
+    tight: 1.15,
+    snug: 1.3,
+    normal: 1.5,
+    relaxed: 1.6,
+    loose: 1.8,
+  },
+} as const;
+
+export const spacing = {
+  1: '4px',
+  2: '8px',
+  3: '12px',
+  4: '16px',
+  5: '24px',
+  6: '32px',
+  7: '40px',
+  8: '48px',
+  9: '64px',
+} as const;
+
+export const borderRadius = {
+  sm: '4px',
+  base: '6px',
+  md: '8px',
+  lg: '12px',
+  xl: '16px',
+  '2xl': '24px',
+  full: '9999px',
+} as const;
+
+export const shadows = {
+  sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
+  base: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+  md: '0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06)',
+  lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
+  xl: '0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)',
+} as const;
+
+export const breakpoints = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+} as const;
+
+export type ColorToken = typeof colors;
+export type PrimaryShade = keyof typeof colors.primary;
+export type AccentShade = keyof typeof colors.accent;
+export type SpacingToken = keyof typeof spacing;
+export type RadiusToken = keyof typeof borderRadius;
+export type ShadowToken = keyof typeof shadows;
+export type FontSizeToken = keyof typeof typography.fontSize;
+export type FontWeightToken = keyof typeof typography.fontWeight;
+export type BreakpointToken = keyof typeof breakpoints;

@@ -1,0 +1,42 @@
+{
+  "preset": "standard",
+  "brand": "GOAL Platform",
+  "colorMode": "light",
+  "colors": {
+    "primary": "#0D77DD",
+    "primaryDark": "#0050BF",
+    "accent": "#933974",
+    "background": "#FFFFFF",
+    "backgroundSoft": "#F5F5F7",
+    "surface": "#FFFFFF",
+    "text": "#1A1A1A",
+    "textMuted": "#666666",
+    "textInverse": "#FFFFFF",
+    "border": "#E2E2E8",
+    "success": "#16A34A",
+    "warning": "#F59E0B",
+    "error": "#DC2626"
+  },
+  "typography": {
+    "fontFamily": "Inter",
+    "fontFamilyFallback": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "monoFamily": "ui-monospace, \"Fira Code\", monospace",
+    "baseSize": "16px",
+    "scaleRatio": 1.25
+  },
+  "spacing": {
+    "base": 4,
+    "unit": "px",
+    "scale": [4, 8, 12, 16, 24, 32, 40, 48, 64]
+  },
+  "borderRadius": {
+    "base": "12px",
+    "pill": "9999px"
+  },
+  "layout": {
+    "maxWidth": "1120px",
+    "columns": 12
+  },
+  "createdAt": "2026-02-26",
+  "version": "1.0.0"
+}
