@@ -6,6 +6,8 @@ import { TipCallout } from '@/components/interactive/TipCallout';
 import { InfoCard } from '@/components/interactive/InfoCard';
 import { AnimatedDemo } from '@/components/interactive/AnimatedDemo';
 import { ChecklistItem } from '@/components/interactive/ChecklistItem';
+import { Screenshot } from '@/components/interactive/Screenshot';
+import { Quiz } from '@/components/interactive/Quiz';
 
 function slugify(text: string): string {
   return text
@@ -128,4 +130,6 @@ export const mdxComponents: MDXComponents = {
   InfoCard,
   AnimatedDemo,
   ChecklistItem,
+  Screenshot,
+  Quiz,
 };

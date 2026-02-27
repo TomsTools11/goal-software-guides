@@ -32,6 +32,17 @@ export const guides: GuideMetadata[] = [
     difficulty: 'Beginner',
     tags: ['AI', 'Automation', 'Productivity'],
   },
+  {
+    slug: 'close-crm',
+    title: 'Mastering Close CRM',
+    description:
+      'Configure your Close environment, capture high-signal leads, manage opportunities, and optimize your sales pipeline.',
+    icon: '/images/guides/close-crm-icon.svg',
+    chapters: 7,
+    estimatedTime: '25 min',
+    difficulty: 'Intermediate',
+    tags: ['CRM', 'Sales', 'Pipeline'],
+  },
 ];
 
 export function getGuideBySlug(slug: string): GuideMetadata | undefined {
