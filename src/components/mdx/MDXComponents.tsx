@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
+import type { ReactNode } from 'react';
 import { Accordion } from '@/components/interactive/Accordion';
 import { StepByStep } from '@/components/interactive/StepByStep';
 import { TipCallout } from '@/components/interactive/TipCallout';
@@ -6,26 +7,53 @@ import { InfoCard } from '@/components/interactive/InfoCard';
 import { AnimatedDemo } from '@/components/interactive/AnimatedDemo';
 import { ChecklistItem } from '@/components/interactive/ChecklistItem';
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+function getTextContent(children: ReactNode): string {
+  if (typeof children === 'string') return children;
+  if (typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(getTextContent).join('');
+  if (children && typeof children === 'object' && 'props' in children) {
+    return getTextContent((children as { props: { children?: ReactNode } }).props.children);
+  }
+  return '';
+}
+
 export const mdxComponents: MDXComponents = {
-  // Heading overrides — scroll-mt to clear sticky header
+  // Heading overrides — scroll-mt to clear sticky header, auto-generate IDs
   h1: (props) => (
     <h1
       className="mb-6 text-3xl font-bold leading-tight text-text md:text-4xl"
       {...props}
     />
   ),
-  h2: (props) => (
-    <h2
-      className="mb-4 mt-12 scroll-mt-24 text-2xl font-bold leading-snug text-text"
-      {...props}
-    />
-  ),
-  h3: (props) => (
-    <h3
-      className="mb-3 mt-8 scroll-mt-24 text-xl font-semibold leading-snug text-text"
-      {...props}
-    />
-  ),
+  h2: (props) => {
+    const id = props.id || slugify(getTextContent(props.children));
+    return (
+      <h2
+        id={id}
+        className="mb-4 mt-12 scroll-mt-24 text-2xl font-bold leading-snug text-text"
+        {...props}
+      />
+    );
+  },
+  h3: (props) => {
+    const id = props.id || slugify(getTextContent(props.children));
+    return (
+      <h3
+        id={id}
+        className="mb-3 mt-8 scroll-mt-24 text-xl font-semibold leading-snug text-text"
+        {...props}
+      />
+    );
+  },
 
   // Text
   p: (props) => (
