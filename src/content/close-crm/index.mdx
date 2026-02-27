@@ -1,0 +1,301 @@
+# Mastering Close CRM
+
+Your comprehensive guide to configuring Close, capturing high-signal leads, managing your sales pipeline, and running account reviews — designed for the GOAL Platform team.
+
+---
+
+## Key Terminology
+
+Before diving into procedures, get familiar with the core vocabulary you will encounter daily in Close CRM. Expand each card below for a concise definition.
+
+<TipCallout variant="info" title="Why Terminology Matters">
+Close CRM uses specific terms that map directly to your sales workflow. Understanding these upfront prevents confusion when configuring pipelines, building Smart Views, or discussing pipeline metrics with your team.
+</TipCallout>
+
+<InfoCard title="Lead" icon="🏢">
+A **Lead** is the top-level entity in Close. It represents a company or organization you are pursuing. A single Lead can contain multiple Contacts, Opportunities, and Activities. Think of it as the "account" container.
+</InfoCard>
+
+<InfoCard title="Contact" icon="👤">
+A **Contact** is an individual person associated with a Lead. Each Contact has their own email, phone number, and communication history. A Lead can have many Contacts — for example, the CEO, CTO, and purchasing manager at the same company.
+</InfoCard>
+
+<InfoCard title="Opportunity" icon="💰">
+An **Opportunity** represents a potential deal tied to a Lead. It has a monetary value, a confidence percentage, and an expected close date. Opportunities move through Pipeline stages as the deal progresses.
+</InfoCard>
+
+<InfoCard title="Pipeline" icon="🔄">
+A **Pipeline** is a visual representation of your sales stages — from initial qualification to closed-won or closed-lost. Each Pipeline contains ordered stages (e.g., Qualification → Proposal → Negotiation → Closed Won). You can create multiple Pipelines for different sales processes.
+</InfoCard>
+
+<InfoCard title="Smart View" icon="🔍">
+A **Smart View** is a saved, dynamic filter that surfaces specific subsets of your Leads. For example, "Leads with no activity in 7 days" or "High-value opportunities closing this month." Smart Views update automatically as data changes.
+</InfoCard>
+
+<InfoCard title="Activity" icon="📋">
+An **Activity** is any interaction logged against a Lead — emails sent, calls made, SMS messages, notes, or meetings. Activities create the communication timeline that powers reporting and Smart Views.
+</InfoCard>
+
+<InfoCard title="Custom Field" icon="🏷️">
+A **Custom Field** is a user-defined data point you add to Leads, Contacts, or Opportunities. Examples include "Lead Source," "Industry," or "Contract Renewal Date." Custom Fields allow you to segment, filter, and report on data specific to your business.
+</InfoCard>
+
+<InfoCard title="Lead Status" icon="🚦">
+A **Lead Status** categorizes where a Lead sits in your overall sales process (e.g., Potential, Qualified, Unqualified, Customer). This is different from Opportunity stages — Lead Status tracks the *relationship*, while Pipeline stages track the *deal*.
+</InfoCard>
+
+<InfoCard title="Task" icon="✅">
+A **Task** is a to-do item assigned to a team member, optionally linked to a Lead. Tasks have due dates and can trigger reminders. Use them for follow-ups, proposal deadlines, and accountability checkpoints.
+</InfoCard>
+
+<InfoCard title="Workflow" icon="⚡">
+A **Workflow** is an automated sequence of actions triggered by events in Close. For example, when a Lead Status changes to "Qualified," a Workflow can automatically create a Task, send an email template, or update a Custom Field.
+</InfoCard>
+
+---
+
+## Procedure 1: Initial Environment Configuration
+
+Before your team begins using Close CRM, the environment must be configured correctly. A poorly set up CRM leads to inconsistent data, missed follow-ups, and unreliable reporting.
+
+<Screenshot
+  src="/images/guides/close-crm/settings.png"
+  alt="Close CRM Account settings page showing profile configuration, email settings, and sidebar navigation to Organization, Custom Fields, and Pipelines"
+  title="Close CRM — Account Settings"
+  caption="The Settings panel — use the left sidebar to navigate Organization, Custom Fields, Pipelines, and Integrations."
+/>
+
+<StepByStep steps={[
+  { title: "Configure organization settings", content: "Navigate to Settings → Organization. Set your company name, default currency, and time zone. These defaults propagate to all new Opportunities and Activities. Incorrect time zone settings will cause scheduled emails and call logs to display wrong timestamps." },
+  { title: "Define Lead Statuses", content: "Go to Settings → Lead Statuses. Create statuses that match your sales process: Potential, Qualified, Unqualified, Customer, and Churned. Order them logically — Close will display them in the order you set. Avoid creating too many statuses; 4–6 is optimal for most teams." },
+  { title: "Create Custom Fields", content: "Navigate to Settings → Custom Fields. Add fields for Lead Source (dropdown: Website, Referral, LinkedIn, Cold Outreach), Industry (dropdown), Annual Revenue (number), and any other data points your team tracks. Use dropdowns over free-text wherever possible to keep data clean." },
+  { title: "Set up email integration", content: "Go to Settings → Connected Accounts and connect your team email. Close supports Gmail, Outlook, and custom SMTP. Once connected, all emails sent and received from connected accounts are automatically logged to the matching Lead — no manual entry required." },
+  { title: "Configure Pipeline stages", content: "Navigate to Settings → Pipelines. Create your primary sales pipeline with stages: Qualification → Discovery → Proposal → Negotiation → Closed Won / Closed Lost. Set a default confidence percentage for each stage (e.g., Qualification: 10%, Proposal: 50%, Negotiation: 75%)." }
+]} />
+
+<TipCallout variant="warning" title="Common Setup Mistake">
+Do not skip Custom Field configuration. If your team starts entering Leads before Custom Fields exist, you will end up with inconsistent data that is painful to clean up later. Always finish environment setup *before* importing or creating Leads.
+</TipCallout>
+
+<ChecklistItem id="close-env-org-settings">Organization name, currency, and time zone configured</ChecklistItem>
+<ChecklistItem id="close-env-lead-statuses">Lead Statuses created and ordered</ChecklistItem>
+<ChecklistItem id="close-env-custom-fields">Custom Fields added (Lead Source, Industry, etc.)</ChecklistItem>
+<ChecklistItem id="close-env-email">Email integration connected and tested</ChecklistItem>
+<ChecklistItem id="close-env-pipeline">Pipeline stages created with confidence percentages</ChecklistItem>
+
+---
+
+## Procedure 2: High-Signal Lead Capture
+
+Leads are the lifeblood of your pipeline. The goal is not to capture *every* lead — it is to capture **high-signal** leads with enough context for your team to act intelligently. Quality over quantity.
+
+<Screenshot
+  src="/images/guides/close-crm/new-lead.png"
+  alt="Close CRM New Lead dialog with Company Name and Contact Name fields, plus options to import leads and review potential contacts"
+  title="Close CRM — New Lead"
+  caption="The New Lead dialog — enter the company and primary contact name, then click Create Lead."
+/>
+
+<StepByStep steps={[
+  { title: "Identify the lead source", content: "Before creating a Lead, determine where this prospect came from: inbound website form, LinkedIn outreach, referral, cold email reply, or trade show. This will be captured in the Lead Source custom field and is critical for tracking which channels drive revenue." },
+  { title: "Create the Lead record", content: "Click the + button or press 'L' to create a new Lead. Enter the company name, website URL, and set the Lead Status to 'Potential.' Add at least one Contact with their name, title, email, and phone number. The more complete the initial record, the less time you'll spend filling gaps later." },
+  { title: "Populate Custom Fields", content: "Set the Lead Source, Industry, and any other Custom Fields you configured. If the prospect mentioned a specific need or pain point during initial contact, capture it in the Notes field. This context is what makes the difference between a 'cold' CRM record and an actionable lead." },
+  { title: "Log the initial activity", content: "Immediately log the activity that created this lead — whether it was an email exchange, a phone call, or a LinkedIn message. This establishes the communication timeline from day one. In Close, go to the Lead and click 'Log Activity' or simply send your first email directly from the Lead record." },
+  { title: "Create a follow-up Task", content: "Before moving on, create a Task for the next action: 'Send proposal,' 'Schedule discovery call,' or 'Follow up in 3 days.' Assign it to yourself or the appropriate team member. Leads without follow-up tasks are leads that fall through the cracks." }
+]} />
+
+<Screenshot
+  src="/images/guides/close-crm/lead-page.png"
+  alt="Close CRM lead detail page for Shirl Crowe showing About info, activity timeline with call notes, Contacts, and Opportunities in the sidebar"
+  title="Close CRM — Lead Detail Page"
+  caption="A populated Lead page — the activity timeline, contacts, and opportunities are all visible at a glance."
+/>
+
+<TipCallout variant="tip" title="LinkedIn + Close Workflow">
+When prospecting on LinkedIn, use this workflow: identify the prospect → check if a Lead already exists in Close (search by company name) → if not, create a new Lead → add the LinkedIn profile URL as a Contact field. This prevents duplicate records and connects your outreach channels. Your Notion pipeline tracker can cross-reference Close Lead IDs for reporting.
+</TipCallout>
+
+<ChecklistItem id="close-lead-source">Lead Source identified and recorded</ChecklistItem>
+<ChecklistItem id="close-lead-created">Lead created with company name, status, and at least one Contact</ChecklistItem>
+<ChecklistItem id="close-lead-custom-fields">Custom Fields populated (Source, Industry, etc.)</ChecklistItem>
+<ChecklistItem id="close-lead-activity">Initial activity logged</ChecklistItem>
+<ChecklistItem id="close-lead-followup">Follow-up Task created with due date</ChecklistItem>
+
+---
+
+## Procedure 3: Managing Opportunities & Pipeline
+
+Once a Lead is qualified, you convert interest into a trackable Opportunity. The Pipeline view gives your team a real-time snapshot of deal flow, revenue projections, and bottlenecks.
+
+<Screenshot
+  src="/images/guides/close-crm/pipeline.png"
+  alt="Close CRM Sales Pipeline board showing opportunity cards organized by stage with deal values, monthly amounts, and status indicators"
+  title="Close CRM — Sales Pipeline"
+  caption="The Pipeline board — drag opportunities between stages, review deal values, and spot stalled deals at a glance."
+/>
+
+<StepByStep steps={[
+  { title: "Create an Opportunity", content: "Open the Lead and click 'Add Opportunity.' Enter the deal value (estimated contract amount), select the Pipeline, set the current stage (usually Qualification), and add an expected close date. Set the confidence percentage — this affects your weighted pipeline forecast." },
+  { title: "Move deals through stages", content: "As the deal progresses, update the Opportunity stage. After a successful discovery call, move from Qualification to Discovery. After sending a proposal, move to Proposal. Each stage change should be accompanied by an Activity log explaining what happened and what the next step is." },
+  { title: "Update deal values and dates", content: "As you learn more about the deal, update the Opportunity value and expected close date. A $50K estimate that becomes a $35K proposal should be adjusted immediately — your pipeline forecast depends on accurate numbers, not optimistic guesses." },
+  { title: "Use the Pipeline board view", content: "Switch to the Pipeline board view for a visual Kanban-style layout. You can drag Opportunities between stages. Pay attention to deals that have been stuck in the same stage for too long — these are the ones most likely to go stale. Use Smart Views to surface stalled deals automatically." },
+  { title: "Close the deal", content: "When a deal is won, move it to Closed Won and update the final value. When a deal is lost, move it to Closed Lost and log a note explaining why — 'Lost to competitor,' 'Budget cut,' 'No response.' This loss data is critical for improving your sales process over time." }
+]} />
+
+<TipCallout variant="important" title="Pipeline Hygiene Rule">
+Review your pipeline at least once per week. Delete or close Opportunities that are clearly dead. A bloated pipeline with stale deals gives leadership a false sense of revenue forecasting and hides real problems. Your weighted pipeline value should reflect reality, not hope.
+</TipCallout>
+
+<ChecklistItem id="close-opp-created">Opportunity created with value, stage, and close date</ChecklistItem>
+<ChecklistItem id="close-opp-stages">Deal stages updated as conversations progress</ChecklistItem>
+<ChecklistItem id="close-opp-values">Deal values and dates adjusted to reflect reality</ChecklistItem>
+<ChecklistItem id="close-opp-board">Pipeline board reviewed for stalled deals</ChecklistItem>
+<ChecklistItem id="close-opp-closed">Won/lost deals properly closed with notes</ChecklistItem>
+
+---
+
+## Procedure 4: Account Review & Optimization
+
+Regular account reviews prevent pipeline decay and surface coaching opportunities. This procedure should be run weekly by team leads and monthly at the organizational level.
+
+<StepByStep steps={[
+  { title: "Run the weekly pipeline review", content: "Open the Pipeline view and sort by 'Expected Close Date.' Identify deals closing this week and next week. For each: Is the close date realistic? Has there been recent activity? Is the deal value accurate? Flag any deal that hasn't had activity in the last 5 business days." },
+  { title: "Review Smart Views for at-risk leads", content: "Check your 'No Activity (7 days)' Smart View. These leads are going cold. For each one, either log a follow-up activity (call, email) or update the Lead Status to reflect reality. Leads in 'Potential' status with no activity for 14+ days should be moved to 'Unqualified' or archived." },
+  { title: "Audit Custom Field completeness", content: "Run a Smart View filtered for Leads where Lead Source is empty, or Industry is empty. Incomplete records degrade your reporting. Set a team goal of 100% field completeness for all active Leads. Block time each week to clean up records." },
+  { title: "Analyze win/loss patterns", content: "Go to Reporting and review your win rate by Lead Source, by team member, and by deal size. Look for patterns: Which sources produce the highest close rates? Which deal sizes close fastest? Where do deals most commonly stall? Use these insights to adjust your prospecting strategy." },
+  { title: "Update forecasts and share findings", content: "After your review, update any stale Opportunity values or close dates. Compile key metrics — total pipeline value, weighted forecast, deals at risk — and share with the team. Use Close's built-in reporting or export to your Notion dashboard for a consolidated view." }
+]} />
+
+<Screenshot
+  src="/images/guides/close-crm/account-page.png"
+  alt="Close CRM account page for Supreme Choice Insurance Solutions showing About details, scheduled tasks, opportunities with values, and activity timeline with call summaries"
+  title="Close CRM — Account Review"
+  caption="An account page during review — check tasks, opportunity values, and recent activity to assess deal health."
+/>
+
+<Screenshot
+  src="/images/guides/close-crm/lead-list.png"
+  alt="Close CRM Leads list view showing all leads with Name, Contacts, and Status columns, plus Smart Views in the sidebar"
+  title="Close CRM — Leads List"
+  caption="The Leads list view — use the sidebar Smart Views to quickly filter by status, activity, or custom criteria."
+/>
+
+<ChecklistItem id="close-review-pipeline">Weekly pipeline review completed</ChecklistItem>
+<ChecklistItem id="close-review-smart-views">At-risk leads reviewed via Smart Views</ChecklistItem>
+<ChecklistItem id="close-review-fields">Custom Field completeness audited</ChecklistItem>
+<ChecklistItem id="close-review-patterns">Win/loss patterns analyzed</ChecklistItem>
+<ChecklistItem id="close-review-forecast">Forecasts updated and findings shared</ChecklistItem>
+
+---
+
+## Procedure 5: Reporting & Dashboard Analysis
+
+Close CRM's built-in reporting gives you real-time visibility into team performance, revenue trends, and pipeline health. Learning to read these dashboards is essential for data-driven sales management.
+
+<Screenshot
+  src="/images/guides/close-crm/conversations.png"
+  alt="Close CRM History view showing call logs with summaries, timestamps, and activity details across multiple leads"
+  title="Close CRM — Activity History"
+  caption="The History view — review call logs, email exchanges, and activity summaries across all leads."
+/>
+
+<StepByStep steps={[
+  { title: "Navigate to the Reports section", content: "Click 'Reporting' in the left sidebar. Close provides pre-built reports for Activity Overview, Pipeline Funnel, Revenue, and individual rep performance. Start with the Activity Overview to see call volume, email volume, and overall team engagement." },
+  { title: "Review the Pipeline Funnel report", content: "This report shows how many Opportunities are in each Pipeline stage and the total value at each stage. Look for funnel imbalances — if you have 50 deals in Qualification but only 2 in Proposal, your team may not be progressing deals effectively. A healthy funnel narrows gradually." },
+  { title: "Analyze revenue trends", content: "The Revenue report shows closed-won revenue over time. Compare month-over-month and quarter-over-quarter. Look for seasonality patterns. If revenue is declining, cross-reference with your Activity report — declining activity usually predicts declining revenue 30–60 days later." },
+  { title: "Review individual performance", content: "Drill into per-rep metrics: calls made, emails sent, deals closed, average deal size, and win rate. Use these metrics for coaching conversations, not punishment. A rep with high activity but low close rate may need help with discovery or negotiation skills." },
+  { title: "Export and share key metrics", content: "Close allows you to export report data as CSV. Use this to build combined dashboards in Notion or Google Sheets that merge CRM data with other business metrics. Set up a recurring weekly export to keep your team dashboard current." }
+]} />
+
+<ChecklistItem id="close-report-activity">Activity Overview report reviewed</ChecklistItem>
+<ChecklistItem id="close-report-funnel">Pipeline Funnel analyzed for bottlenecks</ChecklistItem>
+<ChecklistItem id="close-report-revenue">Revenue trends reviewed month-over-month</ChecklistItem>
+<ChecklistItem id="close-report-reps">Individual rep performance reviewed</ChecklistItem>
+<ChecklistItem id="close-report-export">Key metrics exported and shared</ChecklistItem>
+
+---
+
+## Critical Nuances
+
+These are the non-obvious details that separate productive CRM usage from frustrating, data-polluted workflows. Each nuance below comes from real-world experience managing Close CRM at scale.
+
+<TipCallout variant="warning" title="Data Integrity Is Non-Negotiable">
+A CRM is only as valuable as the data it contains. If your team treats Close as an afterthought — logging activities days late, leaving Custom Fields blank, or letting Opportunities stagnate — the entire system becomes unreliable. Make CRM hygiene a daily habit, not a weekly chore.
+</TipCallout>
+
+<Accordion title="Lead vs. Opportunity: Understanding the Distinction">
+New Close users often confuse Leads and Opportunities. Here is the rule: a **Lead** is the *company relationship* — it exists regardless of whether there is an active deal. An **Opportunity** is a *specific deal* being pursued with that company. One Lead can have multiple Opportunities over time (e.g., an initial contract, a renewal, an upsell). When you close a deal, the Opportunity is closed but the Lead remains active as a customer. Never delete Leads when deals close — update the Lead Status to "Customer" instead.
+</Accordion>
+
+<Accordion title="Avoiding Duplicate Records">
+Duplicates are the most common data quality issue in any CRM. Before creating a new Lead, always search Close by company name, domain, and contact email. Close has a built-in duplicate detection warning, but it is not foolproof. If you discover duplicates, merge them immediately via the Lead detail page (Actions → Merge). Unresolved duplicates lead to split communication histories and inaccurate reporting.
+</Accordion>
+
+<Accordion title="Smart View Best Practices">
+Smart Views are powerful but can become unwieldy. Follow these rules: (1) Name them clearly — "Hot Leads No Activity 7d" is better than "My Filter." (2) Keep filters specific — a view with 500+ results is too broad to be actionable. (3) Share team-critical views with the entire organization. (4) Review and prune Smart Views monthly — delete views that nobody uses.
+</Accordion>
+
+<Accordion title="Email Sequences and Automation Pitfalls">
+Close supports email sequences (automated follow-up chains). Use them for initial outreach to cold leads, but **never** for active deal communication. Automated emails in the middle of a negotiation feel impersonal and can damage trust. Additionally, always set sequence sending limits — blasting 500 emails in an hour will trigger spam filters and hurt your domain reputation. Start with 50–75 per day and increase gradually.
+</Accordion>
+
+---
+
+## Assessment Quiz
+
+Test your understanding of Close CRM concepts and best practices with this short quiz. You need the knowledge from all previous sections to answer confidently.
+
+<Quiz
+  id="close-crm"
+  title="Close CRM Assessment"
+  questions={[
+    {
+      question: "A Lead in Close CRM represents which of the following?",
+      options: [
+        "An individual person you are selling to",
+        "A company or organization with associated contacts and deals",
+        "A single sales opportunity with a monetary value",
+        "A task assigned to a sales team member"
+      ],
+      correctIndex: 1,
+      explanation: "A Lead is the top-level entity representing a company or organization. It contains Contacts (people), Opportunities (deals), and Activities (communication history). Individual people are Contacts, not Leads."
+    },
+    {
+      question: "What should you do BEFORE importing or manually creating your first Leads in Close?",
+      options: [
+        "Create at least 10 Smart Views",
+        "Connect your LinkedIn account",
+        "Configure Lead Statuses, Custom Fields, and Pipeline stages",
+        "Export your contacts from Gmail"
+      ],
+      correctIndex: 2,
+      explanation: "Environment configuration (Lead Statuses, Custom Fields, and Pipeline stages) must be completed before any data entry. If your team starts creating Leads before Custom Fields exist, you will end up with inconsistent, hard-to-clean data."
+    },
+    {
+      question: "A deal has been stuck in the 'Proposal' stage for 3 weeks with no logged activity. What is the recommended action?",
+      options: [
+        "Wait another week — deals take time",
+        "Delete the Opportunity to clean the pipeline",
+        "Contact the prospect, log the activity, and update the stage or close date based on the response",
+        "Move it to Closed Won to improve your pipeline metrics"
+      ],
+      correctIndex: 2,
+      explanation: "Stalled deals need direct action — reach out to the prospect, log what you learn, and update the Opportunity accordingly. Deleting or ignoring stale deals degrades pipeline accuracy. Moving dead deals to Closed Won is data fraud."
+    },
+    {
+      question: "Which of the following is the BEST Smart View naming convention?",
+      options: [
+        "My Filter 2",
+        "test_view_final_v3",
+        "Hot Leads No Activity 7d",
+        "Untitled Smart View"
+      ],
+      correctIndex: 2,
+      explanation: "Smart View names should be descriptive and immediately tell the user what the filter surfaces. 'Hot Leads No Activity 7d' clearly communicates: these are hot leads with no logged activity in the last 7 days. Vague or default names make Smart Views useless for team collaboration."
+    }
+  ]}
+/>
+
+<TipCallout variant="tip" title="Next Steps">
+Now that you have completed the Close CRM guide, put your knowledge into practice. Start by completing the configuration checklist in Procedure 1, then create your first Lead following the Procedure 2 workflow. If you have not yet completed the **Mastering Notion** guide, do that next — your Notion workspace integrates directly with Close for pipeline reporting and team dashboards.
+</TipCallout>

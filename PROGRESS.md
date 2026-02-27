@@ -7,14 +7,37 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Feb 26, 2026 — Session 3)
+## Latest Update (Feb 27, 2026 — Session 6)
 
 ### Changes This Session
-- **Guide icons replaced with inline Material Design SVGs** — removed broken external SVG icons (`notion-icon.svg`, `claude-icon.svg`) rendered via `next/image`; replaced with inline Material Design icons (description icon for Notion, auto_awesome sparkle for Claude) rendered directly in JSX with branded color backgrounds
-- **Netlify deployment configured** — added `netlify.toml` and `@netlify/plugin-nextjs`
-- **Responsive design and accessibility polish** — layout, visual, and a11y improvements across the app
-- **Brand icons fixed** — replaced placeholder guide icons with recognizable Notion and Claude brand icons
-- **Progress bar and TOC fixes** — compact table of contents and progress bar improvements
+- **Disposition Data Import SOP added** — 6th SOP sourced from Notion, registered in `guides.ts` with 11 chapters covering the full disposition import lifecycle: strategic intent, prerequisites, data requirements, CRM extraction, file prep, bulk import workflow, submission cadence, error fixing, advanced merging, tactical optimization, and ROI/CPH benchmarks
+  - `disposition-data-import-sop/index.mdx` — uses ChecklistItem, StepByStep, Accordion, InfoCard, and TipCallout components
+- **DataTable component created** (`src/components/interactive/DataTable.tsx`) — reusable styled table component accepting `headers` and `rows` props, renders with rounded border container, soft header background, row separators, and responsive horizontal scroll
+- **Markdown tables replaced** — all 3 files using raw markdown pipe tables (`|`) converted to `<DataTable>` JSX component (Turbopack in Next.js 16 doesn't support remark-gfm plugins for markdown table parsing):
+  - `disposition-data-import-sop/index.mdx` — data requirements table
+  - `sales-demo-sop/index.mdx` — fee structure table
+  - `notion/index.mdx` — typography and width options table
+- **Table styling improved** in `MDXComponents.tsx` — added `thead`, `tr` overrides with background, borders, and better padding as fallback for any future HTML tables
+- **AnimatedDemo light theme** — Notion-specific demos now render with a light background instead of dark, matching Notion's actual UI
+
+### Previous Session (Session 5 — Feb 27, 2026)
+- SOPs section added with 5 initial SOPs
+- Guide categorization (`category: 'guide' | 'sop'`) and `getGuidesByCategory()` helper
+- Landing page restructured into two sections with visual differentiation
+- Reusable GuideCard component extracted
+- 5 SOP MDX content files created from Notion GOAL Resources
+
+### Previous Session (Session 4 — Feb 27, 2026)
+- Close CRM guide added with real screenshots
+- Quiz and Screenshot interactive components built
+- Landing page changed to 3-column grid
+- Progress bar reset fix
+
+### Previous Session (Session 3 — Feb 26, 2026)
+- Guide icons replaced with inline Material Design SVGs
+- Netlify deployment configured
+- Responsive design and accessibility polish
+- Progress bar and TOC fixes
 
 ### Previous Session (Session 2)
 - Notion guide completed — full interactive MDX content authored
@@ -24,7 +47,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Feb 26, 2026)
+## Current State (Feb 27, 2026 — Session 6)
 
 ### What's Been Built
 
@@ -58,6 +81,9 @@ A Next.js web application that hosts interactive software training guides for GO
 - `ChecklistItem.tsx` — trackable checklist items
 - `InfoCard.tsx` — highlighted info cards
 - `TipCallout.tsx` — tip/warning callout blocks
+- `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback
+- `Screenshot.tsx` — browser chrome frame for displaying app screenshots
+- `DataTable.tsx` — styled data table with headers, row separators, and responsive scroll
 
 **6. Hooks** (`src/hooks/`)
 - `useHeadings.ts` — extracts headings from content
@@ -73,6 +99,16 @@ A Next.js web application that hosts interactive software training guides for GO
 **8. Guide Content** (`src/content/`)
 - `notion/index.mdx` — Notion guide (complete)
 - `claude-cowork/index.mdx` — Claude Cowork guide (complete)
+- `close-crm/index.mdx` — Close CRM guide (complete)
+- `account-review-sop/index.mdx` — Account Review SOP (complete)
+- `client-onboarding-sop/index.mdx` — Client Onboarding SOP (complete)
+- `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (complete)
+- `right-pricing-sop/index.mdx` — Right Pricing SOP (complete)
+- `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (complete)
+- `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (complete)
+
+**9. Scripts** (`scripts/`)
+- `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
 
 ### Reference Materials (project root)
 - `cowork_guide_content.md` — Claude Cowork guide source content
@@ -85,13 +121,28 @@ A Next.js web application that hosts interactive software training guides for GO
 ---
 
 ## What's Next
+
+### SOPs
+- [x] ~~Account Review SOP MDX content~~
+- [x] ~~Client Onboarding SOP MDX content~~
+- [x] ~~Campaign Optimization SOP MDX content~~
+- [x] ~~Right Pricing SOP MDX content~~
+- [x] ~~GOAL Sales Demo SOP MDX content~~
+- [x] ~~Disposition Data Import SOP MDX content~~
+- [x] ~~All 6 SOP routes verified and deployed~~
+
+### Guides
 - [x] ~~Finish writing the Notion guide MDX content~~
 - [x] ~~Build out the Claude Cowork guide MDX content~~
+- [x] ~~Build out the Close CRM guide MDX content~~
 - [ ] Create a Dia Browser guide
+
+### Infrastructure
 - [x] ~~Test the full app build (`npm run build`) and fix any issues~~
-- [ ] Add search functionality across guides
 - [x] ~~Deploy (Netlify configured)~~
+- [ ] Add search functionality across guides
 - [ ] Move reference PDFs/docs out of the repo root or into a `docs/` folder
+- [ ] Replace placeholder Close CRM screenshots with live captures
 
 ---
 

@@ -36,11 +36,11 @@ function NotionSidebarDemo() {
           key={i}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs hover:bg-white/10"
+          className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs hover:bg-black/5"
           style={{ paddingLeft: `${8 + page.indent * 16}px` }}
         >
           <span className="text-[10px] opacity-60">{page.indent > 0 ? '📄' : '📁'}</span>
-          <span className="text-white/90">{page.name}</span>
+          <span className="text-gray-700">{page.name}</span>
         </motion.div>
       ))}
     </div>
@@ -67,7 +67,7 @@ function NotionDatabaseDemo() {
           <span
             key={v}
             className={`rounded px-2 py-0.5 text-[10px] font-medium transition-colors ${
-              v === view ? 'bg-white/20 text-white' : 'text-white/50'
+              v === view ? 'bg-gray-200 text-gray-800' : 'text-gray-400'
             }`}
           >
             {v.charAt(0).toUpperCase() + v.slice(1)}
@@ -83,9 +83,9 @@ function NotionDatabaseDemo() {
         {view === 'table' && (
           <div className="space-y-1">
             {['Task Alpha', 'Task Beta', 'Task Gamma'].map((name, i) => (
-              <div key={i} className="flex items-center gap-3 rounded bg-white/5 px-2 py-1.5 text-[10px] text-white/80">
+              <div key={i} className="flex items-center gap-3 rounded bg-gray-100 px-2 py-1.5 text-[10px] text-gray-700">
                 <span className="w-20 truncate">{name}</span>
-                <span className={`rounded px-1.5 py-0.5 text-[9px] ${i === 0 ? 'bg-green-500/20 text-green-300' : i === 1 ? 'bg-blue-500/20 text-blue-300' : 'bg-yellow-500/20 text-yellow-300'}`}>
+                <span className={`rounded px-1.5 py-0.5 text-[9px] ${i === 0 ? 'bg-green-100 text-green-700' : i === 1 ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
                   {i === 0 ? 'Done' : i === 1 ? 'In Progress' : 'To Do'}
                 </span>
               </div>
@@ -95,9 +95,9 @@ function NotionDatabaseDemo() {
         {view === 'board' && (
           <div className="flex gap-2">
             {['To Do', 'In Progress', 'Done'].map((col) => (
-              <div key={col} className="flex-1 rounded bg-white/5 p-1.5">
-                <p className="mb-1 text-[9px] font-medium text-white/60">{col}</p>
-                <div className="rounded bg-white/10 p-1.5 text-[9px] text-white/80">Task</div>
+              <div key={col} className="flex-1 rounded bg-gray-100 p-1.5">
+                <p className="mb-1 text-[9px] font-medium text-gray-500">{col}</p>
+                <div className="rounded bg-white p-1.5 text-[9px] text-gray-700 shadow-sm">Task</div>
               </div>
             ))}
           </div>
@@ -105,7 +105,7 @@ function NotionDatabaseDemo() {
         {view === 'gallery' && (
           <div className="grid grid-cols-3 gap-1.5">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="rounded bg-white/10 p-2 text-center text-[9px] text-white/80">
+              <div key={n} className="rounded bg-gray-100 p-2 text-center text-[9px] text-gray-700">
                 Card {n}
               </div>
             ))}
@@ -196,6 +196,7 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
   const [playing, setPlaying] = useState(false);
   const [prefersReduced, setPrefersReduced] = useState(false);
   const DemoComponent = demos[type];
+  const isNotion = type.startsWith('notion-');
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -210,19 +211,19 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
   }, [isInView, prefersReduced]);
 
   return (
-    <div ref={ref} className="my-6 overflow-hidden rounded-xl border border-white/10 bg-[#1e1e2e] shadow-lg">
+    <div ref={ref} className={`my-6 overflow-hidden rounded-xl border shadow-lg ${isNotion ? 'border-gray-200 bg-white' : 'border-white/10 bg-[#1e1e2e]'}`}>
       {/* Browser chrome */}
-      <div className="flex items-center gap-2 border-b border-white/10 bg-[#181825] px-4 py-2.5">
+      <div className={`flex items-center gap-2 border-b px-4 py-2.5 ${isNotion ? 'border-gray-200 bg-gray-50' : 'border-white/10 bg-[#181825]'}`}>
         <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
-        <span className="ml-3 flex-1 text-center text-[10px] text-white/40">
+        <span className={`ml-3 flex-1 text-center text-[10px] ${isNotion ? 'text-gray-400' : 'text-white/40'}`}>
           {title ?? defaultTitles[type]}
         </span>
         <button
           type="button"
           onClick={() => setPlaying(false)}
-          className="min-h-[44px] min-w-[44px] px-2 text-[10px] text-white/30 transition-colors hover:text-white/60"
+          className={`min-h-[44px] min-w-[44px] px-2 text-[10px] transition-colors ${isNotion ? 'text-gray-300 hover:text-gray-500' : 'text-white/30 hover:text-white/60'}`}
           aria-label="Replay animation"
         >
           ↻ Replay
@@ -238,7 +239,7 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
             <button
               type="button"
               onClick={() => setPlaying(true)}
-              className="min-h-[44px] rounded-full bg-white/10 px-6 py-3 text-xs text-white/70 transition-colors hover:bg-white/20"
+              className={`min-h-[44px] rounded-full px-6 py-3 text-xs transition-colors ${isNotion ? 'bg-gray-100 text-gray-500 hover:bg-gray-200' : 'bg-white/10 text-white/70 hover:bg-white/20'}`}
             >
               ▶ Play
             </button>

@@ -13,16 +13,14 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
 
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set());
 
-  // Load from localStorage on mount
+  // Reset progress on mount so each visit starts fresh at 0%
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(storageKey);
-      if (stored) {
-        setCompletedSections(new Set(JSON.parse(stored)));
-      }
+      localStorage.removeItem(storageKey);
     } catch {
-      // ignore parse errors
+      // ignore storage errors
     }
+    setCompletedSections(new Set());
   }, [storageKey]);
 
   // Track sections as user scrolls past them
