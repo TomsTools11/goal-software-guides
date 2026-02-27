@@ -1,12 +1,28 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { guides } from '@/lib/guides';
+
+const guideIcons: Record<string, React.ReactNode> = {
+  notion: (
+    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#191919]">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+      </svg>
+    </div>
+  ),
+  'claude-cowork': (
+    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#D97757]">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+        <path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z" />
+      </svg>
+    </div>
+  ),
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -65,13 +81,13 @@ export default function Home() {
               <motion.div key={guide.slug} variants={fadeUp}>
                 <Card interactive className="flex h-full flex-col">
                   <div className="mb-4 flex items-start justify-between">
-                    <Image
-                      src={guide.icon}
-                      alt=""
-                      width={48}
-                      height={48}
-                      className="rounded-lg"
-                    />
+                    {guideIcons[guide.slug] ?? (
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-200">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#666">
+                          <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
+                        </svg>
+                      </div>
+                    )}
                     <Badge variant="primary">{guide.difficulty}</Badge>
                   </div>
 

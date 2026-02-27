@@ -7,13 +7,20 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Feb 26, 2026 — Session 2)
+## Latest Update (Feb 26, 2026 — Session 3)
 
 ### Changes This Session
-- **Notion guide completed** — full interactive MDX content authored (`src/content/notion/index.mdx`)
-- **Claude Cowork guide completed** — full interactive MDX content authored (`src/content/claude-cowork/index.mdx`)
-- **GitHub repo created** — project pushed to https://github.com/TomsTools11/goal-software-guides
-- **PROGRESS.md added** — this file, for tracking state across sessions
+- **Guide icons replaced with inline Material Design SVGs** — removed broken external SVG icons (`notion-icon.svg`, `claude-icon.svg`) rendered via `next/image`; replaced with inline Material Design icons (description icon for Notion, auto_awesome sparkle for Claude) rendered directly in JSX with branded color backgrounds
+- **Netlify deployment configured** — added `netlify.toml` and `@netlify/plugin-nextjs`
+- **Responsive design and accessibility polish** — layout, visual, and a11y improvements across the app
+- **Brand icons fixed** — replaced placeholder guide icons with recognizable Notion and Claude brand icons
+- **Progress bar and TOC fixes** — compact table of contents and progress bar improvements
+
+### Previous Session (Session 2)
+- Notion guide completed — full interactive MDX content authored
+- Claude Cowork guide completed — full interactive MDX content authored
+- GitHub repo created and pushed
+- PROGRESS.md added
 
 ---
 
@@ -81,9 +88,9 @@ A Next.js web application that hosts interactive software training guides for GO
 - [x] ~~Finish writing the Notion guide MDX content~~
 - [x] ~~Build out the Claude Cowork guide MDX content~~
 - [ ] Create a Dia Browser guide
-- [ ] Test the full app build (`npm run build`) and fix any issues
+- [x] ~~Test the full app build (`npm run build`) and fix any issues~~
 - [ ] Add search functionality across guides
-- [ ] Deploy (Vercel or similar)
+- [x] ~~Deploy (Netlify configured)~~
 - [ ] Move reference PDFs/docs out of the repo root or into a `docs/` folder
 
 ---
