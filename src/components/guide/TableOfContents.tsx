@@ -3,7 +3,11 @@
 import { useHeadings } from '@/hooks/useHeadings';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 
-export function TableOfContents() {
+interface TableOfContentsProps {
+  onNavigate?: () => void;
+}
+
+export function TableOfContents({ onNavigate }: TableOfContentsProps) {
   const allHeadings = useHeadings();
   // Only show h2 headings for a compact sidebar TOC
   const headings = allHeadings.filter((h) => h.level === 2);
@@ -24,6 +28,7 @@ export function TableOfContents() {
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById(heading.id)?.scrollIntoView({ behavior: 'smooth' });
+                  onNavigate?.();
                 }}
                 className={`block rounded px-2 py-1 leading-snug transition-colors ${
                   isActive

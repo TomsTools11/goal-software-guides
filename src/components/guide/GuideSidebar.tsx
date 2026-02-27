@@ -8,9 +8,10 @@ import type { GuideMetadata } from '@/lib/guides';
 interface GuideSidebarProps {
   guide: GuideMetadata;
   progressPercent: number;
+  onNavigate?: () => void;
 }
 
-export function GuideSidebar({ guide, progressPercent }: GuideSidebarProps) {
+export function GuideSidebar({ guide, progressPercent, onNavigate }: GuideSidebarProps) {
   return (
     <aside className="flex flex-col gap-5">
       <div>
@@ -30,7 +31,7 @@ export function GuideSidebar({ guide, progressPercent }: GuideSidebarProps) {
       </div>
 
       <div className="border-t border-border pt-4">
-        <TableOfContents />
+        <TableOfContents onNavigate={onNavigate} />
       </div>
     </aside>
   );

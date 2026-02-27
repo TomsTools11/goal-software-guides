@@ -17,7 +17,7 @@ export function Accordion({ title, children, defaultOpen = false }: AccordionPro
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-semibold text-text transition-colors hover:bg-background-soft"
+        className="flex min-h-[44px] w-full items-center justify-between gap-3 px-5 py-4 text-left text-sm font-semibold text-text transition-colors hover:bg-background-soft"
         aria-expanded={open}
       >
         <span>{title}</span>

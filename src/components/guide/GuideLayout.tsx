@@ -34,7 +34,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
           </div>
 
           {/* Content */}
-          <article className="min-w-0 max-w-none">{children}</article>
+          <article className="prose-readable min-w-0 max-w-none">{children}</article>
         </div>
       </Container>
 
@@ -96,7 +96,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
                   </svg>
                 </button>
               </div>
-              <GuideSidebar guide={guide} progressPercent={percentComplete} />
+              <GuideSidebar guide={guide} progressPercent={percentComplete} onNavigate={() => setTocOpen(false)} />
             </motion.div>
           </>
         )}

@@ -15,7 +15,7 @@ export function InfoCard({ title, icon, children }: InfoCardProps) {
   return (
     <motion.div
       layout
-      className="my-3 cursor-pointer rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md"
+      className="my-3 min-h-[44px] cursor-pointer rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md"
       onClick={() => setExpanded(!expanded)}
       role="button"
       tabIndex={0}

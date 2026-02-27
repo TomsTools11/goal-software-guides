@@ -194,11 +194,20 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [playing, setPlaying] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(false);
   const DemoComponent = demos[type];
 
   useEffect(() => {
-    if (isInView) setPlaying(true);
-  }, [isInView]);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReduced(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  useEffect(() => {
+    if (isInView && !prefersReduced) setPlaying(true);
+  }, [isInView, prefersReduced]);
 
   return (
     <div ref={ref} className="my-6 overflow-hidden rounded-xl border border-white/10 bg-[#1e1e2e] shadow-lg">
@@ -213,7 +222,7 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
         <button
           type="button"
           onClick={() => setPlaying(false)}
-          className="text-[10px] text-white/30 transition-colors hover:text-white/60"
+          className="min-h-[44px] min-w-[44px] px-2 text-[10px] text-white/30 transition-colors hover:text-white/60"
           aria-label="Replay animation"
         >
           ↻ Replay
@@ -229,7 +238,7 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
             <button
               type="button"
               onClick={() => setPlaying(true)}
-              className="rounded-full bg-white/10 px-4 py-2 text-xs text-white/70 transition-colors hover:bg-white/20"
+              className="min-h-[44px] rounded-full bg-white/10 px-6 py-3 text-xs text-white/70 transition-colors hover:bg-white/20"
             >
               ▶ Play
             </button>

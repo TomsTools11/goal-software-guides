@@ -31,7 +31,7 @@ export function ChecklistItem({ id, children }: ChecklistItemProps) {
   }
 
   return (
-    <label className="my-2 flex cursor-pointer items-start gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-background-soft">
+    <label className="my-2 flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-background-soft">
       <span className="relative mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center">
         <input
           type="checkbox"
