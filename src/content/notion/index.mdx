@@ -1,14 +1,24 @@
 # Mastering Notion
 
-Welcome to the Notion guide. This is placeholder content to verify the guide layout.
+Welcome to the comprehensive Notion guide for the GOAL Platform team.
 
 ## Understanding Notion's Core Philosophy
 
 Notion is a workspace that adapts to you. Unlike traditional tools that lock you into rigid structures, Notion lets you build exactly what you need.
 
+<TipCallout variant="info" title="Key Concept">
+Everything in Notion is a page. Pages can hold other pages, creating infinite depth. Think of it like folders that can also contain content.
+</TipCallout>
+
+<AnimatedDemo type="notion-sidebar" />
+
+<Accordion title="Pages vs. Traditional Folders">
+Unlike a file system where folders only contain files, Notion pages are both containers and content. A page can have text, databases, and child pages all in one place. This eliminates the artificial separation between "where things live" and "what things say."
+</Accordion>
+
 ### Pages as Building Blocks
 
-Every piece of content in Notion lives on a page. Pages can contain other pages, creating a natural hierarchy.
+Every piece of content in Notion lives on a page. Pages can contain other pages, creating a natural hierarchy that mirrors how your team actually thinks about information.
 
 ### The Sidebar
 
@@ -18,33 +28,62 @@ Your sidebar is your navigation hub. Pin important pages, organize by team, and 
 
 A well-structured page communicates professionalism and makes information easy to find.
 
+<StepByStep steps={[
+  { title: "Choose an icon", content: "Click the icon area at the top of any page. Pick an emoji or upload a custom image that represents the page content." },
+  { title: "Set the page width", content: "Click ••• in the top-right corner → toggle 'Full width' for databases and dashboards, or keep standard width for documents." },
+  { title: "Add a cover image", content: "Hover near the top and click 'Add cover'. Choose from Unsplash, upload your own, or pick a gradient." },
+  { title: "Write a clear title", content: "Keep titles concise and descriptive. Use a consistent naming convention across your workspace." }
+]} />
+
 ### Icons and Typography
 
 Choose meaningful icons for your pages. Use headers consistently to create scannable content.
 
 ### Page Width
 
-Full-width pages work great for databases and dashboards. Standard width keeps text readable.
+Full-width pages work great for databases and dashboards. Standard width keeps text readable for long-form content.
 
 ## The Content Layer: Blocks
 
 Everything in Notion is a block. Text, images, databases, embeds — they're all blocks you can rearrange.
 
-### Text Blocks
+<Accordion title="Text Blocks">
+The foundation of any page. Use the slash command `/` to access all block types. Type `/text` for plain text, `/h1` through `/h3` for headings, or just start typing.
+</Accordion>
 
-The foundation of any page. Use the slash command `/` to access all block types.
+<Accordion title="Media Blocks">
+Embed images, videos, files, and web bookmarks. Drag and drop files directly onto a page, or use `/image`, `/video`, or `/file`.
+</Accordion>
 
-### Advanced Blocks
+<Accordion title="Advanced Blocks">
+Callouts draw attention to important information. Toggles hide detail until needed. Synced blocks let you reuse content across multiple pages — edit once, update everywhere.
+</Accordion>
 
-Callouts, toggles, and synced blocks help you organize complex information.
+### Slash Commands
+
+Press `/` anywhere to see all available block types. Start typing to filter. This is the fastest way to work in Notion.
 
 ## Strategic Database Design
 
 Databases are Notion's superpower. They transform simple lists into dynamic, filterable views of your data.
 
-### Property Types
+<AnimatedDemo type="notion-database" />
 
-Text, numbers, dates, selects, relations — each property type serves a specific purpose.
+<InfoCard title="Text & Number Properties" icon="📝">
+Text for names and descriptions. Numbers for quantities, scores, and budgets. Use number formats (currency, percent) to keep data consistent.
+</InfoCard>
+
+<InfoCard title="Select & Multi-Select" icon="🏷️">
+Select for single-choice fields like Status (To Do, In Progress, Done). Multi-select for tags and categories where items can have multiple labels.
+</InfoCard>
+
+<InfoCard title="Date & People" icon="📅">
+Date properties support ranges and reminders. People properties assign owners and collaborators, making it clear who's responsible for what.
+</InfoCard>
+
+<InfoCard title="Relation & Rollup" icon="🔗">
+Relations connect databases together (e.g., Tasks → Projects). Rollups aggregate data across relations (e.g., count tasks per project, sum budget items).
+</InfoCard>
 
 ### Linked Databases
 
@@ -54,14 +93,57 @@ Reference the same data in multiple places. Filter differently per view without 
 
 Transform how you see your data with views. Each view can have its own filters and sorts.
 
+<Accordion title="Table View">
+The default view. Great for data entry and seeing all properties at once. Sort by any column, filter by any property.
+</Accordion>
+
+<Accordion title="Board View">
+Kanban-style columns. Group by a select property (like Status) and drag items between columns. Perfect for project tracking.
+</Accordion>
+
+<Accordion title="Calendar View">
+See items on a timeline based on their date property. Great for content calendars, sprint planning, and deadline tracking.
+</Accordion>
+
+<Accordion title="Gallery View">
+Card-based view that emphasizes visual content. Ideal for design assets, portfolios, and content libraries.
+</Accordion>
+
+<TipCallout variant="tip" title="Dashboard Tip">
+Create a dashboard page with multiple linked databases, each showing a different filtered view. This gives you a command center for your entire workflow.
+</TipCallout>
+
 ## Buttons and Automations
 
 Automate repetitive tasks with Notion's button and automation features.
+
+<StepByStep steps={[
+  { title: "Add a button block", content: "Type /button to create an interactive button on any page." },
+  { title: "Configure the action", content: "Buttons can add pages to databases, edit properties, or open URLs." },
+  { title: "Set property values", content: "Pre-fill date, status, assignee, and other properties automatically when the button is clicked." },
+  { title: "Test your button", content: "Click the button to verify it creates the right item with the right default values." }
+]} />
 
 ## Notion Calendar and Mail
 
 Integrate your calendar and email workflow directly into Notion.
 
+<TipCallout variant="important" title="The TARA System">
+**T**asks, **A**genda, **R**eferences, **A**ction items — use this framework to structure every meeting note. Create a template with these four sections and apply it before every meeting.
+</TipCallout>
+
+<InfoCard title="Calendar Integration" icon="📆">
+Connect Google Calendar or Outlook to see events alongside your Notion tasks. Create Notion pages directly from calendar events for seamless meeting notes.
+</InfoCard>
+
+<InfoCard title="Notion Mail" icon="✉️">
+Forward emails into Notion to capture action items. Use the email-to-page feature to turn client correspondence into trackable tasks.
+</InfoCard>
+
 ## Quick Start Checklist
 
-Your action items to get started with Notion today.
+<ChecklistItem id="notion-1">Create your first workspace and set up team spaces</ChecklistItem>
+<ChecklistItem id="notion-2">Build a team wiki with icons, covers, and organized sub-pages</ChecklistItem>
+<ChecklistItem id="notion-3">Create a task database with Status, Priority, Assignee, and Due Date</ChecklistItem>
+<ChecklistItem id="notion-4">Set up a Board view filtered to your tasks only</ChecklistItem>
+<ChecklistItem id="notion-5">Create a meeting notes template with the TARA framework</ChecklistItem>
