@@ -1,0 +1,188 @@
+# Getting Started with Claude Cowork
+
+Your complete guide to multi-step task automation with Claude Desktop — designed for the GOAL Platform team.
+
+---
+
+## What is Claude Cowork?
+
+Cowork uses the same agentic architecture that powers Claude Code, now accessible within **Claude Desktop** — no terminal required. Instead of responding to prompts one at a time, Claude can take on complex, multi-step tasks and execute them on your behalf.
+
+With Cowork, you can describe an outcome, step away, and come back to **finished work** — formatted documents, organized files, synthesized research, interactive dashboards, and more.
+
+<TipCallout variant="info" title="Availability">
+Cowork is available as a research preview for **paid plans only**: Pro, Max, Team, and Enterprise. It requires the Claude Desktop app on **macOS or Windows** (x64 only). Cowork is **not** available on web or mobile.
+</TipCallout>
+
+<AnimatedDemo type="cowork-setup" />
+
+The key shift from Chat to Cowork is this: **Chat mode** is for quick Q&A, brainstorming, and one-shot tasks. **Cowork mode** is for multi-step projects where Claude needs to read files, create deliverables, and work autonomously over extended periods.
+
+---
+
+## Setting Up Cowork
+
+Getting started takes just a few minutes. Follow each step below.
+
+<StepByStep steps={[
+  { title: "Download Claude Desktop", content: "Search \"download Claude desktop app\" in any browser, or go directly to claude.ai/download. Install the app for your operating system (macOS or Windows x64)." },
+  { title: "Sign in with your paid account", content: "Open Claude Desktop and sign in. You need an active Pro, Max, Team, or Enterprise subscription. Free accounts do not have access to Cowork." },
+  { title: "Find the mode selector", content: "Look for the tabs at the top of the conversation window. You'll see \"Chat\" and \"Cowork\" (or \"Tasks\"). Click the Cowork tab to switch modes." },
+  { title: "Point Claude at a folder", content: "Click the folder icon to select a specific directory on your computer. This gives Claude read/write access to the files in that folder. Be intentional — point to a project folder, not your entire drive." },
+  { title: "Grant permissions", content: "Claude will ask for file access. Choose \"Allow once\" for sensitive folders, or \"Always allow\" for folders you're comfortable with Claude accessing freely in future sessions." },
+  { title: "Select the right model", content: "Always choose the most capable model — Opus. Only drop to a smaller model if you need an immediate response and don't mind lower quality. For Cowork tasks, Opus makes a meaningful difference." },
+  { title: "Describe your task and let it run", content: "Write a clear description of the outcome you want. Claude will analyze your request, show you a plan, then begin execution. Review the plan before letting it proceed on sensitive work." }
+]} />
+
+<TipCallout variant="warning" title="Keep the App Open">
+The Claude Desktop app **must remain open** while Claude is working on a task. If you close the app or your computer goes to sleep, the task will pause. Scheduled tasks also only run while your computer is awake and the app is open.
+</TipCallout>
+
+<TipCallout variant="tip" title="Model Recommendation">
+Always choose **Opus** (the most capable model) for Cowork tasks. The quality difference is significant for complex, multi-step work. Only use a lighter model for simple, time-sensitive questions in Chat mode.
+</TipCallout>
+
+---
+
+## Key Capabilities
+
+Cowork isn't just a chatbot with file access — it's a fundamentally different way of working. Here are the five capabilities that set it apart.
+
+<InfoCard title="Direct Local File Access" icon="📂">
+Claude can **read from and write to your local files** without manual uploads or downloads. Point it at a folder and it can analyze spreadsheets, read documents, examine code, and create new files — all directly on your file system. No more copy-pasting content into chat windows.
+</InfoCard>
+
+<InfoCard title="Sub-Agent Coordination" icon="🔀">
+For complex work, Claude **breaks tasks into smaller subtasks** and coordinates parallel workstreams. One sub-agent might analyze data while another researches a topic and a third writes a summary. This parallelism means complex projects complete much faster than sequential chat conversations.
+</InfoCard>
+
+<InfoCard title="Professional Outputs" icon="📊">
+Claude generates **polished, production-ready deliverables**: Excel spreadsheets with working formulas, PowerPoint presentations, formatted documents, HTML dashboards, and more. These aren't rough drafts — they're files your team can use immediately or hand off to clients.
+</InfoCard>
+
+<InfoCard title="Long-Running Tasks" icon="⏱️">
+Cowork can work on complex tasks for **extended periods** without the conversation timeouts or context limits that affect chat mode. Start a research task, walk away, and come back to a complete analysis. Claude maintains focus and context throughout.
+</InfoCard>
+
+<InfoCard title="Scheduled Tasks" icon="📅">
+Create tasks that run **on-demand or automatically on a recurring schedule**. Type `/schedule` in any Cowork session to set up recurring tasks. Check the "Scheduled" section in the left sidebar to view, create, and manage your scheduled work.
+</InfoCard>
+
+---
+
+## How Cowork Runs Your Tasks
+
+When you start a task in Cowork, Claude follows a structured execution process. You maintain visibility into what Claude is planning and doing at every step.
+
+<AnimatedDemo type="cowork-task" />
+
+<StepByStep steps={[
+  { title: "Analyze and plan", content: "Claude reads your request, examines the relevant files and folder structure, and creates an execution plan. You'll see this plan before work begins — review it to make sure the approach is right." },
+  { title: "Break into subtasks", content: "For complex work, Claude decomposes the problem into smaller, manageable subtasks. Each subtask has a clear objective and can be worked on independently." },
+  { title: "Execute in a sandboxed environment", content: "Work runs in an isolated virtual machine. Claude can create files, run calculations, and build outputs safely. While code runs in a sandbox, Claude can make real changes to your local files when writing outputs." },
+  { title: "Coordinate parallel workstreams", content: "When appropriate, Claude runs multiple subtasks simultaneously using sub-agents. One might gather data while another formats a report. This parallelism is what makes Cowork dramatically faster than sequential chat." },
+  { title: "Deliver finished outputs", content: "Completed work is saved directly to your file system. Documents, spreadsheets, presentations, and dashboards appear in the folder you specified — ready to use, share, or deploy." }
+]} />
+
+### What to Expect During Execution
+
+- **Progress indicators** show what Claude is doing at each step
+- **Transparency** — Claude surfaces its reasoning and approach so you can follow along
+- **Steering** — you can jump in to course-correct or provide additional direction mid-task
+- **Parallel work** — for complex tasks, Claude may coordinate multiple sub-agents simultaneously
+- **Deletion protection** — Claude requires explicit permission before permanently deleting any files
+
+---
+
+## Real-World Use Cases
+
+Here's how teams are using Cowork to transform their workflows.
+
+<Accordion title="Analyze Entire Folders of Documents" defaultOpen>
+Point Claude at a folder of documents — call transcripts, survey responses, support tickets, quarterly reports, proposals — and ask it to categorize, summarize, and extract insights.
+
+**Example:** Point Claude at 321 podcast transcripts → categorize guests by topic, rank AI sentiment, pull key quotes → get an interactive, filterable dashboard as output.
+
+**Also works for:** customer call transcripts, competitor research, proposal analysis, and support ticket categorization.
+</Accordion>
+
+<Accordion title="Research, Compare, and Make Decisions">
+Ask Claude to research options, compare alternatives, and organize findings into a structured format.
+
+**Example:** "Find podcast studios in Austin, compare pricing, amenities, and availability, then create a comparison spreadsheet and begin filling out the top three booking forms."
+
+**Also works for:** supplier evaluations, software comparisons, venue scouting, market research, and vendor selection.
+</Accordion>
+
+<Accordion title="Build Interactive Dashboards and Reports">
+Claude can create filterable dashboards with categories, sentiment scores, charts, and data tables — output as interactive HTML files that open in any browser.
+
+**Example:** Analyze a CSV of customer feedback → build a dashboard with sentiment scores, topic categories, and filterable views → deploy via Vercel for team access.
+
+**Also works for:** executive reports, client deliverables, data visualizations, and KPI dashboards.
+</Accordion>
+
+<Accordion title="Run Multiple Projects Simultaneously">
+Open as many Cowork threads as you need. Each thread operates independently — one analyzes data, another researches a market, a third builds a presentation.
+
+**Key technique:** Stack follow-up instructions while Claude is still working. Don't wait for one task to finish before queuing the next.
+
+*"I can walk away from my computer for hours while all of these threads are managing all of these stacked up tasks."* — Allie K. Miller, Forbes
+</Accordion>
+
+<Accordion title="Hand Off Outputs to Your Team">
+Everything Claude creates is a real file on your computer. Download apps, move files into VS Code, hand to an engineer, or connect to Vercel for deployment.
+
+**The workflow:** Claude builds the first version → you review and refine → your team finishes the last mile. This dramatically accelerates the 0-to-1 phase of any project.
+</Accordion>
+
+---
+
+## Permissions, Limits, and Best Practices
+
+<TipCallout variant="warning" title="Security: Know the Boundaries">
+Cowork runs **directly on your computer** and can make real changes to your files. Code executes safely in an isolated space, but outputs are written to your local file system. Conversation history is stored locally and is **not** captured in Audit Logs, Compliance API, or Data Exports. **Do not use Cowork for regulated workloads.**
+</TipCallout>
+
+### Permissions and Security
+
+- Cowork runs locally on your machine — not in the cloud
+- Claude can read and write files in the folders you grant access to
+- Deletion requires explicit permission — Claude won't silently remove files
+- Conversation history is stored locally, not subject to Anthropic's data retention
+- Activity is **not** captured in enterprise Audit Logs or Compliance APIs
+
+### Usage Limits
+
+Cowork consumes more usage allocation than standard chat — it's compute-intensive and uses more tokens. To manage limits effectively:
+
+- **Batch related work** into single sessions rather than many small tasks
+- Use standard **Chat mode for simple Q&A** that doesn't require file access
+- Monitor your usage in **Settings → Usage**
+
+### Current Limitations
+
+- Desktop app must remain open during tasks
+- Scheduled tasks only run while your computer is awake
+- Excel/PowerPoint integration is Mac-only (research preview)
+- Windows arm64 not supported
+- Not available on web or mobile
+
+### Global and Folder Instructions
+
+**Global Instructions** are standing instructions that apply to every Cowork session. Navigate to Settings → Cowork → Edit Global Instructions. Use these to specify your preferred tone, output format, and background on your role.
+
+**Folder Instructions** provide project-specific context when you select a local folder. Claude can also update these on its own during a session as it learns about your project.
+
+### Best Practices Checklist
+
+<ChecklistItem id="cowork-1">Always use the most capable model (Opus) for Cowork tasks</ChecklistItem>
+<ChecklistItem id="cowork-2">Point Claude at specific project folders — not your entire drive</ChecklistItem>
+<ChecklistItem id="cowork-3">Use "Always allow" for folders you trust; "Allow once" for sensitive directories</ChecklistItem>
+<ChecklistItem id="cowork-4">Stack follow-up instructions while Claude is working — don't wait for completion</ChecklistItem>
+<ChecklistItem id="cowork-5">Set global instructions to define your role, preferred tone, and output format</ChecklistItem>
+<ChecklistItem id="cowork-6">Run multiple threads simultaneously for maximum productivity</ChecklistItem>
+<ChecklistItem id="cowork-7">Use Cowork for complex multi-step work; use Chat for simple Q&A</ChecklistItem>
+<ChecklistItem id="cowork-8">Batch related tasks into single sessions to manage usage limits</ChecklistItem>
+<ChecklistItem id="cowork-9">Review Claude's plan before letting it run on sensitive files</ChecklistItem>
+<ChecklistItem id="cowork-10">Keep the Claude Desktop app open while tasks are running</ChecklistItem>
