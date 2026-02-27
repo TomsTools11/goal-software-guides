@@ -107,6 +107,18 @@ export const guides: GuideMetadata[] = [
     tags: ['Sales', 'Demo', 'Closing'],
     category: 'sop',
   },
+  {
+    slug: 'disposition-data-import-sop',
+    title: 'Disposition Data Import SOP',
+    description:
+      'End-to-end process for importing client disposition data into GOAL — file preparation, bulk import workflow, error resolution, and CPH benchmarks.',
+    icon: '',
+    chapters: 11,
+    estimatedTime: '20 min',
+    difficulty: 'Intermediate',
+    tags: ['Data Import', 'Dispositions', 'CPA'],
+    category: 'sop',
+  },
 ];
 
 export function getGuideBySlug(slug: string): GuideMetadata | undefined {

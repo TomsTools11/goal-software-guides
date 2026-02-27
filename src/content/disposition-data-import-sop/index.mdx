@@ -1,0 +1,282 @@
+# Disposition Data Import SOP
+
+Disposition data reflects what happened after a GOAL lead was delivered (Contacted, Quoted, Bound). When disposition outcomes are consistently fed back into GOAL, the platform can optimize toward real business outcomes and calculate true **Cost Per Acquisition (CPA)** and **Cost Per Household (CPH)**.
+
+This SOP covers the full lifecycle — why the feedback loop matters, how to prepare and import data, how to fix errors, and how the data is used for optimization.
+
+---
+
+## 1.0 Strategic Intent: The Disposition Feedback Loop
+
+<TipCallout variant="important" title="Why This Matters">
+Without clean and consistent disposition data, optimization is limited and performance reporting can be misleading. Disposition imports act as the optimization "brain" of the GOAL platform.
+</TipCallout>
+
+Closing the loop between lead capture and agency outcomes enables:
+
+<InfoCard title="Channel & Traffic Source Clarity" icon="🔍">
+Identify high-performing "honey holes" where quoted and bound rates are strongest. Know exactly which sources produce revenue, not just clicks.
+</InfoCard>
+
+<InfoCard title="Cost Control" icon="💰">
+Avoid unproductive bidding wars that inflate costs without returns. Redirect spend to channels that convert.
+</InfoCard>
+
+<InfoCard title="Real Optimization" icon="📈">
+Shift budget based on what converts, not just clicks and leads. Move from CPL-based decisions to CPA-based decisions.
+</InfoCard>
+
+---
+
+## 2.0 Prerequisites and System Access
+
+Before starting a disposition import, confirm the following are in place:
+
+<ChecklistItem id="dispo-prereq-1">**CRM Access** — Ability to export disposition or policy outcome data from the client CRM (Ricochet, Agency Zoom, Lead Manager, etc.)</ChecklistItem>
+
+<ChecklistItem id="dispo-prereq-2">**Quote Burst Typhoon** (when applicable) — If the agency uses Allstate Lead Manager and requires a bridge, confirm Quote Burst Typhoon access is active</ChecklistItem>
+
+<ChecklistItem id="dispo-prereq-3">**Agent ID Mapping** (when applicable) — Confirm the Allstate Agent ID has been provided to GOAL to connect the bridge</ChecklistItem>
+
+<ChecklistItem id="dispo-prereq-4">**Lead Line Configuration** — A dedicated lead line should bypass IVR/phone trees and ring directly to a representative</ChecklistItem>
+
+<ChecklistItem id="dispo-prereq-5">**System Transition Awareness** — If the agency is transitioning systems (e.g., Lightspeed to AAV), confirm the lead line is updated in GOAL immediately</ChecklistItem>
+
+---
+
+## 3.0 Data Requirements and Structural Standards
+
+### 3.1 Required Identifiers
+
+<TipCallout variant="info" title="Primary Matching Key">
+**Phone number is the primary matching key.** Names and physical addresses are not required if the agency prefers a low-PII approach. GOAL matching works best with a stable unique identifier.
+</TipCallout>
+
+### 3.2 Required and Optional Outcome Fields
+
+At minimum, capture the outcomes below:
+
+| Field | Required? | Description |
+|---|---|---|
+| **Phone Number** | Required | Primary key used to match GOAL prospects to CRM outcomes |
+| **contacted** | Required for import | 1 if contact was made. Blank or 0 if not |
+| **quoted** | Required for import | 1 if a quote was provided. Blank or 0 if not |
+| **bound** | Required for import | 1 if a sale/policy was issued. Blank or 0 if not |
+| **Premium** | Optional | Total premium or policy value. Useful for revenue overlays |
+| **Household status** | Optional but recommended | Used to compute Cost Per Household (CPH) and justify total spend |
+
+### 3.3 Status Mapping Standard
+
+<TipCallout variant="warning" title="Formatting Rule">
+Use **1** for "Yes." Leave **blank** (preferred) or use **0** for "No." Do not use text values like "Yes" or "True" — these will cause import errors.
+</TipCallout>
+
+---
+
+## 4.0 Extracting Disposition Data from Agency Systems
+
+GOAL accepts raw exports from common insurance CRMs and telemarketing systems. Prefer a **raw export** to reduce manual work.
+
+<Accordion title="Ricochet (RICO)">
+Primary system of record for LeadMiner outcomes. Export dispositions for both call dispositions and data leads. Make sure the export includes the final disposition status and phone number for matching.
+</Accordion>
+
+<Accordion title="Allstate Lead Manager">
+Use the Quote Burst bridge where applicable. Export raw disposition/policy outcome reports. Confirm that the Allstate Agent ID is mapped in GOAL before importing.
+</Accordion>
+
+<Accordion title="LeadMiner Transfers">
+Outcomes often live in Ricochet. Confirm the export includes final disposition status. Cross-reference with GOAL lead data to verify attribution.
+</Accordion>
+
+<Accordion title="Other CRMs (Agency Zoom, etc.)">
+Export as CSV or Excel. Ensure phone number is present and disposition columns can be mapped to the contacted/quoted/bound standard. When in doubt, export raw and clean in a spreadsheet before import.
+</Accordion>
+
+---
+
+## 5.0 Preparing the File for Bulk Import
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Export from CRM",
+    content: "Export the disposition or policy outcome data from the client's CRM as CSV or Excel format. Include all available fields — you can clean later."
+  },
+  {
+    title: "Step 2: Verify Phone Number Column",
+    content: "Ensure phone number is present and preferably normalized consistently (e.g., 10-digit format without dashes or country codes). Phone is the primary matching key."
+  },
+  {
+    title: "Step 3: Add Disposition Columns",
+    content: "Add or rename columns to match GOAL's expected format:\n\n• contacted — 1 if contact was made\n• quoted — 1 if a quote was provided\n• bound — 1 if a sale/policy was issued"
+  },
+  {
+    title: "Step 4: Map Statuses",
+    content: "Convert CRM-specific statuses into the three standard columns using binary values:\n\n• Contact made → contacted = 1\n• Quote provided → quoted = 1\n• Sale/Policy issued → bound = 1\n\nLeave blank or set to 0 for outcomes that did not occur."
+  },
+  {
+    title: "Step 5: Clean the Data",
+    content: "Remove rows not attributed to GOAL leads (if you are certain of attribution). If attribution is unclear, keep the export raw and use the advanced merge process in Section 9."
+  },
+  {
+    title: "Step 6: Save as CSV",
+    content: "Save or export the final file as CSV. Double-check that no special characters or encoding issues are present in the phone number column."
+  }
+]} />
+
+---
+
+## 6.0 Uploading via Conversion Bulk Import
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Log In",
+    content: "Log into the client's GOAL account with appropriate admin or manager credentials."
+  },
+  {
+    title: "Step 2: Navigate to Import",
+    content: "Go to **Settings → Conversion Bulk Import**. This is the only method that pushes disposition data into analytics and reporting."
+  },
+  {
+    title: "Step 3: Upload the CSV",
+    content: "Drag and drop or browse to select the prepared CSV file."
+  },
+  {
+    title: "Step 4: Map Fields",
+    content: "Map the CSV columns to GOAL fields:\n\n• Phone number → GOAL phone field\n• contacted → Contacted field\n• quoted → Quoted field\n• bound → Bound field"
+  },
+  {
+    title: "Step 5: Select Import Mode",
+    content: "Choose the correct import mode:\n\n• **Initial Import** — Use only for the first upload on a new account\n• **Overwrite** — Use for all subsequent uploads to update existing records"
+  },
+  {
+    title: "Step 6: Import and Review",
+    content: "Click **Import** and review the results summary. Check for any error rows and proceed to Section 8 if errors are found."
+  }
+]} />
+
+<TipCallout variant="warning" title="Critical: Use Bulk Import, Not Manual Entry">
+Manual portal entry does **not** push to analytics or reporting. The Conversion Bulk Import is required for data to flow into optimization and CPA calculations.
+</TipCallout>
+
+---
+
+## 7.0 Submission Workflow and Cadence
+
+Disposition-driven optimization stays current only when reporting is consistent.
+
+<InfoCard title="Recommended Cadence" icon="📅">
+**Weekly or bi-weekly** — Best for active accounts with frequent geo/carrier/source changes.
+
+**Monthly** — Minimum standard for ROI tracking and basic performance oversight. Never go longer than monthly.
+</InfoCard>
+
+<InfoCard title="Common Submission Methods" icon="📤">
+**Direct export** — Client emails CSV/Excel export to the assigned Account Manager, who processes the import.
+
+**Prospect View + Bulk Import** — For agencies not using an automated push, the Account Manager pulls data from the GOAL Prospect View and processes the import directly.
+</InfoCard>
+
+---
+
+## 8.0 Fixing Import Errors
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Review the Error Log",
+    content: "After every import, review the error log. GOAL will flag rows that failed to match or import correctly."
+  },
+  {
+    title: "Step 2: Identify Root Causes",
+    content: "Most failures are due to:\n\n• Mismatched phone numbers (formatting, landline vs. cell)\n• Missing or incorrect Call IDs (where applicable)\n• Invalid status values (text instead of 1/0)"
+  },
+  {
+    title: "Step 3: Cross-Reference Failed Rows",
+    content: "Cross-reference failed rows against GOAL lead data to find the correct phone number or Call ID. Check for formatting differences."
+  },
+  {
+    title: "Step 4: Prioritize Fixes",
+    content: "Prioritize **Quoted** and **Bound** fixes first, since they most directly impact CPA calculations and optimization decisions."
+  },
+  {
+    title: "Step 5: Re-Upload Corrections",
+    content: "Correct the CSV and re-upload using **Overwrite** mode. Only include the corrected rows to avoid unnecessary processing."
+  }
+]} />
+
+---
+
+## 9.0 Advanced: Merging Data When Attribution Is Unclear
+
+When lead attribution is unclear or mixed across vendors, use this process:
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Export CRM Disposition Data",
+    content: "Export the full disposition dataset from the client's CRM, including all vendors and sources."
+  },
+  {
+    title: "Step 2: Export GOAL Lead Data",
+    content: "Export the lead data from the GOAL platform for the same time period."
+  },
+  {
+    title: "Step 3: Join Datasets",
+    content: "Join the two datasets using **phone number** as the primary matching key. Use Excel VLOOKUP, Google Sheets, or a data tool."
+  },
+  {
+    title: "Step 4: Identify Attribution Errors",
+    content: "Use AI tools or manual review to identify GOAL leads that are incorrectly attributed to other vendors in the CRM."
+  },
+  {
+    title: "Step 5: Correct and Import",
+    content: "Correct attribution in the import file and process through the standard Conversion Bulk Import workflow."
+  }
+]} />
+
+---
+
+## 10.0 Tactical Optimization: How the Data Is Used
+
+Disposition overlays allow the GOAL team to move beyond clicks/leads and optimize on profitability.
+
+<InfoCard title="Bid Adjustments" icon="🎯">
+**Bid up** on carriers, segments, zip codes, and times of day where quoted and bound rates prove strong. **Bid down** or **exclude** underperforming channels, geographies, or dayparts.
+</InfoCard>
+
+<InfoCard title="AI Call Summaries" icon="🤖">
+AI-generated call summaries add qualitative context to disposition outcomes, including whether the prospect received a quote, the premium quoted (when available), whether a sale occurred, and clear next steps or coaching opportunities.
+</InfoCard>
+
+---
+
+## 11.0 ROI Analysis and Benchmarks (CPH)
+
+The goal is disciplined spend based on outcomes, not vanity metrics.
+
+<InfoCard title="CPH Benchmarks" icon="📊">
+**Ideal target:** $300 CPH
+
+**Competitive benchmarks:** MediaAlpha often $330–$360 CPH, EverQuote around $380 CPH
+
+**Neutral/profitable threshold:** Under $675 CPH
+</InfoCard>
+
+<TipCallout variant="info" title="Why CPH Matters">
+Cost Per Household (CPH) is the ultimate performance metric because it accounts for the full value of a customer relationship — not just a single policy. Agencies that track CPH can justify higher lead spend when household bundling is strong.
+</TipCallout>
+
+---
+
+## Critical Reminders
+
+<TipCallout variant="warning" title="Manual Entry Does Not Count">
+Manual portal entry does **not** push to analytics/reporting. Bulk import is required for data to flow into the optimization engine.
+</TipCallout>
+
+<TipCallout variant="important" title="Phone Matching Nuance">
+Phone is the best matching key, but watch for landline vs. cell variations and common CRM data quality issues. Normalize phone formats before import.
+</TipCallout>
+
+<TipCallout variant="info" title="Client Communication Script (When Reluctant)">
+"In order for me to send you better leads, I have to know who you contact, quote, and sell. Without it, I'm flying completely blind."
+</TipCallout>
