@@ -7,6 +7,16 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
+## Latest Update (Feb 26, 2026 — Session 2)
+
+### Changes This Session
+- **Notion guide completed** — full interactive MDX content authored (`src/content/notion/index.mdx`)
+- **Claude Cowork guide completed** — full interactive MDX content authored (`src/content/claude-cowork/index.mdx`)
+- **GitHub repo created** — project pushed to https://github.com/TomsTools11/goal-software-guides
+- **PROGRESS.md added** — this file, for tracking state across sessions
+
+---
+
 ## Current State (Feb 26, 2026)
 
 ### What's Been Built
@@ -53,9 +63,9 @@ A Next.js web application that hosts interactive software training guides for GO
 - Landing page (`src/app/page.tsx`) with guide cards
 - MDX components mapping (`src/components/mdx/MDXComponents.tsx`)
 
-**8. Content Directories** (`src/content/`)
-- `notion/index.mdx` — Notion guide (started)
-- `claude-cowork/` — Claude Cowork guide (directory created, content pending)
+**8. Guide Content** (`src/content/`)
+- `notion/index.mdx` — Notion guide (complete)
+- `claude-cowork/index.mdx` — Claude Cowork guide (complete)
 
 ### Reference Materials (project root)
 - `cowork_guide_content.md` — Claude Cowork guide source content
@@ -68,8 +78,8 @@ A Next.js web application that hosts interactive software training guides for GO
 ---
 
 ## What's Next
-- [ ] Finish writing the Notion guide MDX content
-- [ ] Build out the Claude Cowork guide MDX content
+- [x] ~~Finish writing the Notion guide MDX content~~
+- [x] ~~Build out the Claude Cowork guide MDX content~~
 - [ ] Create a Dia Browser guide
 - [ ] Test the full app build (`npm run build`) and fix any issues
 - [ ] Add search functionality across guides
