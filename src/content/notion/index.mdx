@@ -72,13 +72,16 @@ The primary visual signals of any page are its **Title**, **Icon**, and **Cover*
 
 Choose your font and width based on the content type:
 
-| Setting | Option | Best For |
-|---------|--------|----------|
-| **Page Width** | Standard | Text-heavy documents, reading-focused pages |
-| **Page Width** | Full Width | Dashboards, wide databases, multi-column layouts |
-| **Font** | Default (Sans-Serif) | General business docs, task lists, team documentation |
-| **Font** | Serif | Long-form articles, formal documents |
-| **Font** | Mono | Technical documentation, code snippets |
+<DataTable
+  headers={["Setting", "Option", "Best For"]}
+  rows={[
+    ["Page Width", "Standard", "Text-heavy documents, reading-focused pages"],
+    ["Page Width", "Full Width", "Dashboards, wide databases, multi-column layouts"],
+    ["Font", "Default (Sans-Serif)", "General business docs, task lists, team documentation"],
+    ["Font", "Serif", "Long-form articles, formal documents"],
+    ["Font", "Mono", "Technical documentation, code snippets"]
+  ]}
+/>
 
 ### The Three Dots vs. Six Dots
 

@@ -56,14 +56,17 @@ Before starting a disposition import, confirm the following are in place:
 
 At minimum, capture the outcomes below:
 
-| Field | Required? | Description |
-|---|---|---|
-| **Phone Number** | Required | Primary key used to match GOAL prospects to CRM outcomes |
-| **contacted** | Required for import | 1 if contact was made. Blank or 0 if not |
-| **quoted** | Required for import | 1 if a quote was provided. Blank or 0 if not |
-| **bound** | Required for import | 1 if a sale/policy was issued. Blank or 0 if not |
-| **Premium** | Optional | Total premium or policy value. Useful for revenue overlays |
-| **Household status** | Optional but recommended | Used to compute Cost Per Household (CPH) and justify total spend |
+<DataTable
+  headers={["Field", "Required?", "Description"]}
+  rows={[
+    ["Phone Number", "Required", "Primary key used to match GOAL prospects to CRM outcomes"],
+    ["contacted", "Required for import", "1 if contact was made. Blank or 0 if not"],
+    ["quoted", "Required for import", "1 if a quote was provided. Blank or 0 if not"],
+    ["bound", "Required for import", "1 if a sale/policy was issued. Blank or 0 if not"],
+    ["Premium", "Optional", "Total premium or policy value. Useful for revenue overlays"],
+    ["Household status", "Optional but recommended", "Used to compute Cost Per Household (CPH) and justify total spend"]
+  ]}
+/>
 
 ### 3.3 Status Mapping Standard
 

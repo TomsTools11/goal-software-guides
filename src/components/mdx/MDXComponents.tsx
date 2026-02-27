@@ -8,6 +8,7 @@ import { AnimatedDemo } from '@/components/interactive/AnimatedDemo';
 import { ChecklistItem } from '@/components/interactive/ChecklistItem';
 import { Screenshot } from '@/components/interactive/Screenshot';
 import { Quiz } from '@/components/interactive/Quiz';
+import { DataTable } from '@/components/interactive/DataTable';
 
 function slugify(text: string): string {
   return text
@@ -106,18 +107,24 @@ export const mdxComponents: MDXComponents = {
 
   // Tables
   table: (props) => (
-    <div className="my-4 overflow-x-auto">
+    <div className="my-6 overflow-x-auto rounded-lg border border-border">
       <table className="w-full text-sm" {...props} />
     </div>
   ),
+  thead: (props) => (
+    <thead className="bg-background-soft" {...props} />
+  ),
+  tr: (props) => (
+    <tr className="border-b border-border last:border-b-0" {...props} />
+  ),
   th: (props) => (
     <th
-      className="border-b border-border px-3 py-2 text-left font-semibold text-text"
+      className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text"
       {...props}
     />
   ),
   td: (props) => (
-    <td className="border-b border-border px-3 py-2 text-text-muted" {...props} />
+    <td className="px-4 py-3 text-text-muted" {...props} />
   ),
 
   // Strong / em
@@ -132,4 +139,5 @@ export const mdxComponents: MDXComponents = {
   ChecklistItem,
   Screenshot,
   Quiz,
+  DataTable,
 };
