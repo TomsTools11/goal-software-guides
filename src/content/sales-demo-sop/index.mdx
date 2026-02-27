@@ -111,15 +111,23 @@ Growth goals, brand strategy, concerns about market shifts (rates, regs). Unders
 
 Use this template during every discovery call:
 
-```
-Why now:
-Current sources:
-Spend / volume:
-Team size / staffing:
-Tech stack:
-What's broken / impact:
-Success definition:
-```
+<CopyableTemplate
+  title="Discovery Notes"
+  sections={[
+    {
+      heading: "Discovery",
+      fields: [
+        { label: "Why now:" },
+        { label: "Current sources:" },
+        { label: "Spend / volume:" },
+        { label: "Team size / staffing:" },
+        { label: "Tech stack:" },
+        { label: "What's broken / impact:" },
+        { label: "Success definition:" }
+      ]
+    }
+  ]}
+/>
 
 ---
 
@@ -247,21 +255,29 @@ No. Re-anchor to CPA. GOAL is a PPC (pay-per-click) model, not PPL (pay-per-lead
 
 ### Demo Recap Email Template
 
-```
-Subject: GOAL demo recap + next steps
-
-What we covered
--
--
--
-
-Key takeaways
--
--
-
-Next steps
--
-```
+<CopyableTemplate
+  title="Demo Recap Email"
+  sections={[
+    {
+      heading: "Subject",
+      fields: [
+        { label: "Subject:", placeholder: "GOAL demo recap + next steps" }
+      ]
+    },
+    {
+      heading: "What We Covered",
+      bullets: 3
+    },
+    {
+      heading: "Key Takeaways",
+      bullets: 2
+    },
+    {
+      heading: "Next Steps",
+      bullets: 1
+    }
+  ]}
+/>
 
 ---
 

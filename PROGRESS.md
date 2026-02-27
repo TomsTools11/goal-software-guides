@@ -7,21 +7,25 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Feb 27, 2026 — Session 5)
+## Latest Update (Feb 27, 2026 — Session 6)
 
 ### Changes This Session
-- **SOPs section added** — new "Standard Operating Procedures" category introduced alongside existing Software Guides
-- **Guide categorization** — `category: 'guide' | 'sop'` field added to `GuideMetadata` interface with `getGuidesByCategory()` helper
-- **Landing page restructured** — split from a single flat grid into two distinct sections: "Software Guides" and "Standard Operating Procedures" with section headers, divider, and visual differentiation (green left border accent on SOP cards, "View SOP" button label)
-- **Reusable GuideCard component** — extracted shared card rendering into a `GuideCard` component used by both sections
-- **5 SOP entries registered** in `guides.ts`: Account Review, Client Onboarding, Campaign Optimization, Right Pricing, GOAL Sales Demo
-- **5 SOP icons added** to landing page icon map (Material Design icons with forest green `#0F4C35` backgrounds)
-- **5 SOP MDX content files created** — all sourced from Notion GOAL Resources database:
-  - `account-review-sop/index.mdx` — KPIs, 4-phase review cycle, escalation protocol, terminology
-  - `client-onboarding-sop/index.mdx` — 3-phase onboarding, checklists, targeting vs modifiers, pitfalls
-  - `campaign-optimization-sop/index.mdx` — 5-pillar optimization, feedback loop, budget controls, AI scoring
-  - `right-pricing-sop/index.mdx` — 6-step bid management, Periscope dashboard, source modifiers
-  - `sales-demo-sop/index.mdx` — full sales flow, discovery template, fee structure, scorecard
+- **Disposition Data Import SOP added** — 6th SOP sourced from Notion, registered in `guides.ts` with 11 chapters covering the full disposition import lifecycle: strategic intent, prerequisites, data requirements, CRM extraction, file prep, bulk import workflow, submission cadence, error fixing, advanced merging, tactical optimization, and ROI/CPH benchmarks
+  - `disposition-data-import-sop/index.mdx` — uses ChecklistItem, StepByStep, Accordion, InfoCard, and TipCallout components
+- **DataTable component created** (`src/components/interactive/DataTable.tsx`) — reusable styled table component accepting `headers` and `rows` props, renders with rounded border container, soft header background, row separators, and responsive horizontal scroll
+- **Markdown tables replaced** — all 3 files using raw markdown pipe tables (`|`) converted to `<DataTable>` JSX component (Turbopack in Next.js 16 doesn't support remark-gfm plugins for markdown table parsing):
+  - `disposition-data-import-sop/index.mdx` — data requirements table
+  - `sales-demo-sop/index.mdx` — fee structure table
+  - `notion/index.mdx` — typography and width options table
+- **Table styling improved** in `MDXComponents.tsx` — added `thead`, `tr` overrides with background, borders, and better padding as fallback for any future HTML tables
+- **AnimatedDemo light theme** — Notion-specific demos now render with a light background instead of dark, matching Notion's actual UI
+
+### Previous Session (Session 5 — Feb 27, 2026)
+- SOPs section added with 5 initial SOPs
+- Guide categorization (`category: 'guide' | 'sop'`) and `getGuidesByCategory()` helper
+- Landing page restructured into two sections with visual differentiation
+- Reusable GuideCard component extracted
+- 5 SOP MDX content files created from Notion GOAL Resources
 
 ### Previous Session (Session 4 — Feb 27, 2026)
 - Close CRM guide added with real screenshots
@@ -43,7 +47,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Feb 27, 2026)
+## Current State (Feb 27, 2026 — Session 6)
 
 ### What's Been Built
 
@@ -79,6 +83,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `TipCallout.tsx` — tip/warning callout blocks
 - `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback
 - `Screenshot.tsx` — browser chrome frame for displaying app screenshots
+- `DataTable.tsx` — styled data table with headers, row separators, and responsive scroll
 
 **6. Hooks** (`src/hooks/`)
 - `useHeadings.ts` — extracts headings from content
@@ -100,6 +105,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (complete)
 - `right-pricing-sop/index.mdx` — Right Pricing SOP (complete)
 - `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (complete)
+- `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (complete)
 
 **9. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
@@ -122,9 +128,8 @@ A Next.js web application that hosts interactive software training guides for GO
 - [x] ~~Campaign Optimization SOP MDX content~~
 - [x] ~~Right Pricing SOP MDX content~~
 - [x] ~~GOAL Sales Demo SOP MDX content~~
-- [x] ~~Verify all 5 SOP routes render correctly~~
-- [ ] Commit & push SOP changes (currently unstaged)
-- [ ] Build and deploy with SOPs
+- [x] ~~Disposition Data Import SOP MDX content~~
+- [x] ~~All 6 SOP routes verified and deployed~~
 
 ### Guides
 - [x] ~~Finish writing the Notion guide MDX content~~

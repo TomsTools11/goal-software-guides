@@ -9,6 +9,7 @@ import { ChecklistItem } from '@/components/interactive/ChecklistItem';
 import { Screenshot } from '@/components/interactive/Screenshot';
 import { Quiz } from '@/components/interactive/Quiz';
 import { DataTable } from '@/components/interactive/DataTable';
+import { CopyableTemplate } from '@/components/interactive/CopyableTemplate';
 
 function slugify(text: string): string {
   return text
@@ -140,4 +141,5 @@ export const mdxComponents: MDXComponents = {
   Screenshot,
   Quiz,
   DataTable,
+  CopyableTemplate,
 };
