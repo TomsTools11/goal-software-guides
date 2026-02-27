@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { Card } from '@/components/ui/Card';
@@ -123,6 +124,12 @@ function GuideCard({ guide, buttonLabel }: { guide: GuideMetadata; buttonLabel: 
 }
 
 export default function Home() {
+  // Reset all guide progress when the user returns to the homepage
+  useEffect(() => {
+    for (const guide of guides) {
+      localStorage.removeItem(`goal-guide-progress-${guide.slug}`);
+    }
+  }, []);
   const softwareGuides = getGuidesByCategory('guide');
   const sops = getGuidesByCategory('sop');
 
