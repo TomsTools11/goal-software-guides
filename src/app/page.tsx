@@ -149,7 +149,7 @@ export default function Home() {
               variants={fadeUp}
               className="text-4xl font-bold leading-tight text-text md:text-5xl"
             >
-              Learn the tools that power your workflow
+              Interactive Guides for Goal Processes
             </motion.h1>
             <motion.p
               variants={fadeUp}

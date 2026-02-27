@@ -123,6 +123,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - [x] ~~Right Pricing SOP MDX content~~
 - [x] ~~GOAL Sales Demo SOP MDX content~~
 - [x] ~~Verify all 5 SOP routes render correctly~~
+- [ ] Commit & push SOP changes (currently unstaged)
 - [ ] Build and deploy with SOPs
 
 ### Guides
