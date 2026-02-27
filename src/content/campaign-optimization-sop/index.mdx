@@ -1,0 +1,297 @@
+# Campaign Optimization SOP
+
+Standard operating procedure for optimizing GOAL insurance campaigns to protect margins, prevent lead decay, and drive profitable household outcomes through disciplined, data-backed decision making.
+
+---
+
+## 1.0 Purpose
+
+<TipCallout variant="info" title="Why This SOP Exists">
+This SOP defines the standard operating procedure for optimizing GOAL insurance campaigns to protect margins, prevent lead decay, and drive profitable household outcomes through disciplined, data-backed decision making.
+</TipCallout>
+
+---
+
+## 2.0 Scope
+
+This SOP applies to all Account Managers and Operations stakeholders responsible for:
+
+- Campaign performance optimization inside the GOAL platform
+- Data integrity and feedback-loop setup (disposition integration)
+- Budget control and pacing strategy
+- Targeting, bid modifiers, and source/channel optimization
+- Funnel experience and creative alignment
+- Ongoing performance auditing and coaching insights
+
+---
+
+## 3.0 Definitions, Success Metrics & Non-Negotiables
+
+### Primary Outcome Metric
+
+<InfoCard title="CPH (Cost Per Household)" icon="🏠">
+The primary efficiency target. The goal is to spend only where traffic produces quoteable and sellable households (often multi-policy bundles).
+
+- **Hard benchmark:** CPH under **$675** (neutral-to-profitable threshold)
+- **Target goal:** **$300**
+</InfoCard>
+
+### Supporting Metrics
+
+<InfoCard title="CPA (Cost Per Acquisition)" icon="💰">
+Primary platform KPI used to steer optimization decisions. Measures the total cost to acquire a new customer (a sold policy).
+</InfoCard>
+
+<InfoCard title="CPL (Cost Per Lead)" icon="📊">
+Secondary metric — potentially misleading if used in isolation. **Do not chase cheap leads that do not close.** CPL should always be evaluated alongside CPA and CPH.
+</InfoCard>
+
+<TipCallout variant="important" title="Data Hygiene Rules">
+**The phone number rule:** Use phone numbers as the unique identifier for matching leads to CRM outcomes. Assume names and addresses are noisy and inconsistent. Document every change made in the account and tie changes back to measurable outcomes in the next review.
+</TipCallout>
+
+---
+
+## 4.0 Executive Introduction
+
+<TipCallout variant="info" title="Strategic Context">
+In the high-stakes insurance vertical, campaign optimization within the GOAL platform is a non-negotiable requirement for mitigating lead decay and protecting margins. The strategic objective is to shift focus from raw lead volume to maximum **Cost Per Household (CPH)** efficiency. Every dollar of ad spend must be directed toward high-intent prospects who can be bundled into profitable households. Proactive optimization is the only defense against destructive bidding wars that drive unsustainable acquisition costs.
+</TipCallout>
+
+---
+
+## 5.0 Establishing the Data Feedback Loop
+
+Optimization without disposition (dispo) data is guesswork. Disposition data is the "holy grail" because it connects leads to true business outcomes.
+
+### Integration Strategy
+
+<InfoCard title="Integration Goal" icon="🔗">
+Build a consistent feedback loop between GOAL lead data and the agency CRM. If direct integration with Allstate Corporate is blocked or delayed, use **Quote Burst** as the strategic bridge. Quote Burst is approved for lead manager communication and allows operational agility.
+</InfoCard>
+
+### Weekly Operational Commands
+
+<StepByStep steps={[
+  {
+    title: "Extract Raw Source Data",
+    content: "Weekly, pull raw disposition reports from Lead Manager, Ricochet (RICO), or Quote Burst. Reports must capture every interaction: quoted, sold, not reached, duplicate, etc."
+  },
+  {
+    title: "Execute Phone-Number Matching",
+    content: "Match consumer phone numbers from GOAL prospects to quote and sale outcomes in the CRM. This prevents misattribution by producers and creates objective ROI truth."
+  },
+  {
+    title: "Overlay Premium and Product Data",
+    content: "Append premium amounts and policy types (Auto, Home, Umbrella/PUP, etc.). Use this to identify sources that drive high-value, multi-policy households."
+  },
+  {
+    title: "Validate TCPA Compliance and Consent",
+    content: "Confirm the 'Certificate of Authenticity' via TrustedForm for each prospect. Maintain session replay and event logs (timestamp, IP, device) as a rapid defense against TCPA complaints."
+  }
+]} />
+
+### Quality Control Checklist
+
+<ChecklistItem id="qc-phone">Export includes phone number</ChecklistItem>
+<ChecklistItem id="qc-date">Export includes lead created date/time</ChecklistItem>
+<ChecklistItem id="qc-source">Export includes source / channel / publisher identifiers</ChecklistItem>
+<ChecklistItem id="qc-dispo">Export includes disposition and notes</ChecklistItem>
+<ChecklistItem id="qc-quote">Export includes quote amount and sale outcome (if available)</ChecklistItem>
+<ChecklistItem id="qc-product">Export includes product type and bundling details</ChecklistItem>
+
+---
+
+## 6.0 Strategic Campaign Optimization
+
+Optimization is executed across five pillars. Each pillar addresses a different dimension of campaign performance.
+
+### 6.1 Analyzing Campaign Demographics
+
+<Accordion title="Demographic Analysis Procedure">
+Demographic analysis enables precise budget allocation toward high-converting segments.
+
+1. **Access data:** Navigate to the Analytics tab within the client's GOAL account.
+2. **Review core data points:** Age (highest conversion ranges), Gender (performance by product line), Device type (Mobile vs Desktop quality), Property type (Home campaigns), Number of vehicles (Auto campaigns).
+3. **Implementation:** Cross-reference with dispo/CRM outcomes. Deprioritize or exclude underperforming segments. Increase bid allocation for high-performing segments. Prioritize quality over volume to lower CPA and improve CPH.
+</Accordion>
+
+### 6.2 Geographic and Zip Code Analysis
+
+<Accordion title="Geographic Optimization Procedure">
+Geographic optimization focuses spend on areas with the highest intent and carrier competitiveness.
+
+1. **Data preparation:** Obtain a CRM export containing sales/quote outcomes, zip codes, and phone numbers.
+2. **Targeting adjustment:** Map close rates and CPH by zip code using Excel/Google Sheets. Identify **hot zips** (bid up or prioritize) and **black hole zips** (exclude or bid down).
+3. **Monitor carrier rate revisions** (often every ~6 months) that can shift geographic performance.
+</Accordion>
+
+### 6.3 Source Attribution Analysis
+
+<Accordion title="Source Optimization Procedure">
+Source optimization prevents waste by aligning spend to channels that actually produce quotes and sales.
+
+1. **Quality evaluation:** In Analytics, identify Source/Channel/Publisher drivers of lead volume.
+2. **Match sources to outcomes:** Use phone-number matching and disposition data.
+3. **Optimization action:** Reduce spend on high-volume, low-conversion sources. Protect and scale sources that produce profitable households.
+</Accordion>
+
+### 6.4 Establishing Optimization Authority
+
+<Accordion title="Building Strategic Partnership">
+Operate as a strategic partner, not a passive reporter.
+
+- **Demonstrate competence:** Present data-backed insights in review meetings and tie changes to CPA/CPH movement.
+- **Formalize authority:** Request permission to make adjustments autonomously within agreed parameters.
+- **If client prefers control:** Provide a written list of recommended actions after analysis.
+- **Documentation:** Log all changes made and report impact at the next review.
+</Accordion>
+
+---
+
+## 7.0 Budget Controls & Dynamic Funding Strategies
+
+Meticulous financial control is required due to the natural ebbs and flows of daily lead volume. A rigid budget is a liability. Strategic flexibility captures high-intent spikes without violating monthly economics.
+
+<InfoCard title="Static / Daily Caps" icon="📅">
+Fixed spending limits applied Monday through Friday. Best for agencies with fixed staffing and predictable call capacity.
+</InfoCard>
+
+<InfoCard title="Dynamic / Monthly Caps" icon="📈">
+Run more aggressively day-to-day to capture spikes while adhering to a strict monthly ceiling. Essential for volatile markets where daily caps can block high-intent demand.
+</InfoCard>
+
+<TipCallout variant="warning" title="Pacing Principle: Front-Load the Week">
+Spend should be **front-loaded early in the week** to align with peak staffing. If the team is not available to answer calls or work leads quickly, spend is wasted.
+</TipCallout>
+
+---
+
+## 8.0 Core Targeting: Lean and Mean Filter Configuration
+
+Core filters are the first line of defense against ineligible or low-value prospects.
+
+### Non-Negotiable Filters
+
+<ChecklistItem id="filter-property">Property type exclusions — evaluate excluding mobile homes and apartments for home-heavy agencies</ChecklistItem>
+<ChecklistItem id="filter-carrier">Current carrier filtering — exclude existing Allstate customers (0% ROI on already-serviced leads)</ChecklistItem>
+<ChecklistItem id="filter-credit">Credit self-reporting logic — use "Bad Credit" filter to remove highest-risk prospects</ChecklistItem>
+<ChecklistItem id="filter-wildfire">Colorado wildfire eligibility — exclude zip codes with Zesty scores 9–10 (ineligible properties = dead spend)</ChecklistItem>
+
+---
+
+## 9.0 Strategic Bid Modifiers & Competitive Conquesting
+
+Bid modifiers enable surgical precision: increase bids on profitable segments without raising universal costs.
+
+<Accordion title="Carrier Specificity (Conquesting)">
+Bid up on prospects currently insured by carriers where Allstate is winning on rate. Colorado example: target Farmers customers to exploit the 2% deductible vulnerability.
+</Accordion>
+
+<Accordion title="Demographic Slicing (Honey Holes)">
+Combine carrier + age insights. Example: if State Farm ages 25–35 has a high win rate, apply a modifier to own that segment.
+</Accordion>
+
+<Accordion title="Auto-to-Home Feed Strategy">
+Auto volume is often **~10x** home volume. Target the auto funnel but filter for homeowners and two-plus cars. This feeds a home-heavy agency while leveraging higher auto inventory.
+</Accordion>
+
+<Accordion title="Day-Parting">
+Apply time-based modifiers where quote-to-sale is strongest. Common window: **9:00 AM to 11:00 AM**, but use account data to validate. Bid down during off-hours when staff is unavailable.
+</Accordion>
+
+---
+
+## 10.0 Funnel Branding & Creative Optimization
+
+The consumer journey must be optimized for instant gratification. Friction causes drop-off.
+
+<InfoCard title="Funnel Efficiency Upgrades" icon="⚡">
+Use **Google Autocomplete API** to auto-fill addresses and reduce typing. Pull Year/Make/Model data from publishers when available to avoid redundant consumer inputs.
+</InfoCard>
+
+<InfoCard title="Brand Alignment" icon="🏷️">
+Ensure agency logos and headshots are prominent. Local branding differentiates the agency from national aggregators and builds immediate trust.
+</InfoCard>
+
+<InfoCard title="Attention Optimization" icon="👁️">
+Use subtle animations (example: moving vehicle graphic style) to increase CTR among static competitor logos.
+</InfoCard>
+
+---
+
+## 11.0 Advanced Performance Analysis: AI Call Scoring & Source Auditing
+
+AI enables auditing at scale across 100% of conversations, providing coaching insights and source truth.
+
+<StepByStep steps={[
+  {
+    title: "Script Compliance & Initiative Auditing",
+    content: "Use AI call scoring to verify if producers are mentioning and positioning Umbrella/PUP policies and executing bundling initiatives consistently."
+  },
+  {
+    title: "Result Verification",
+    content: "Automatically verify whether callers were quoted or sold. Capture AI summaries of next steps to coach missed opportunities."
+  },
+  {
+    title: "Source Auditing (Publisher Truth)",
+    content: "Identify which publishers (e.g., insurance.com) are driving the leads that become sales. This is the objective source of truth for attribution."
+  },
+  {
+    title: "Double Down Strategy",
+    content: "When a high-performing publisher is verified through AI + dispo matching, manually reallocate a larger share of daily budget to that channel. Ride the wave in real time while protecting CPH."
+  }
+]} />
+
+---
+
+## 12.0 Critical Nuances & Best Practices
+
+<TipCallout variant="warning" title="Metric Priority">
+Optimize for CPA and CPH. Be cautious using CPL as a decision driver — a low CPL does not guarantee a low CPA.
+</TipCallout>
+
+<TipCallout variant="warning" title="Phone Number Matching">
+Always match via phone number to prevent attribution errors. Names and addresses are too noisy for reliable matching.
+</TipCallout>
+
+<TipCallout variant="warning" title="Strategic Context Matters">
+Apply rules based on the client's niche (preferred vs non-standard, product mix, state constraints). What works in Colorado may not work in Texas.
+</TipCallout>
+
+<TipCallout variant="warning" title="Carrier & Product Changes">
+Rate tables and underwriting shifts can invalidate prior wins. Revalidate assumptions regularly — at minimum every 6 months.
+</TipCallout>
+
+<TipCallout variant="warning" title="Compliance Readiness">
+Keep TrustedForm evidence and logs organized for fast dispute defense. A TCPA complaint can arrive at any time — be ready.
+</TipCallout>
+
+---
+
+## 13.0 Summary: The Optimization Loop
+
+High-performance lead generation is a continuous loop:
+
+<StepByStep steps={[
+  {
+    title: "Extract & Validate",
+    content: "Extract and validate outcome data (disposition + premium + product) from the CRM every week."
+  },
+  {
+    title: "Match Leads to Outcomes",
+    content: "Match leads to outcomes via phone number. This is the only reliable identifier."
+  },
+  {
+    title: "Adjust Levers",
+    content: "Adjust targeting, bids, budget pacing, and sources based on what the data shows."
+  },
+  {
+    title: "Audit Execution",
+    content: "Audit execution via AI call scoring and validate publisher truth. Verify that producers are executing on mandates."
+  },
+  {
+    title: "Reallocate Aggressively",
+    content: "Reallocate aggressively to what is working while maintaining CPH under $675 (target $300). Cut what isn't performing."
+  }
+]} />

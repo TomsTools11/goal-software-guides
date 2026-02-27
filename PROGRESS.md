@@ -7,14 +7,33 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Feb 26, 2026 — Session 3)
+## Latest Update (Feb 27, 2026 — Session 5)
 
 ### Changes This Session
-- **Guide icons replaced with inline Material Design SVGs** — removed broken external SVG icons (`notion-icon.svg`, `claude-icon.svg`) rendered via `next/image`; replaced with inline Material Design icons (description icon for Notion, auto_awesome sparkle for Claude) rendered directly in JSX with branded color backgrounds
-- **Netlify deployment configured** — added `netlify.toml` and `@netlify/plugin-nextjs`
-- **Responsive design and accessibility polish** — layout, visual, and a11y improvements across the app
-- **Brand icons fixed** — replaced placeholder guide icons with recognizable Notion and Claude brand icons
-- **Progress bar and TOC fixes** — compact table of contents and progress bar improvements
+- **SOPs section added** — new "Standard Operating Procedures" category introduced alongside existing Software Guides
+- **Guide categorization** — `category: 'guide' | 'sop'` field added to `GuideMetadata` interface with `getGuidesByCategory()` helper
+- **Landing page restructured** — split from a single flat grid into two distinct sections: "Software Guides" and "Standard Operating Procedures" with section headers, divider, and visual differentiation (green left border accent on SOP cards, "View SOP" button label)
+- **Reusable GuideCard component** — extracted shared card rendering into a `GuideCard` component used by both sections
+- **5 SOP entries registered** in `guides.ts`: Account Review, Client Onboarding, Campaign Optimization, Right Pricing, GOAL Sales Demo
+- **5 SOP icons added** to landing page icon map (Material Design icons with forest green `#0F4C35` backgrounds)
+- **5 SOP MDX content files created** — all sourced from Notion GOAL Resources database:
+  - `account-review-sop/index.mdx` — KPIs, 4-phase review cycle, escalation protocol, terminology
+  - `client-onboarding-sop/index.mdx` — 3-phase onboarding, checklists, targeting vs modifiers, pitfalls
+  - `campaign-optimization-sop/index.mdx` — 5-pillar optimization, feedback loop, budget controls, AI scoring
+  - `right-pricing-sop/index.mdx` — 6-step bid management, Periscope dashboard, source modifiers
+  - `sales-demo-sop/index.mdx` — full sales flow, discovery template, fee structure, scorecard
+
+### Previous Session (Session 4 — Feb 27, 2026)
+- Close CRM guide added with real screenshots
+- Quiz and Screenshot interactive components built
+- Landing page changed to 3-column grid
+- Progress bar reset fix
+
+### Previous Session (Session 3 — Feb 26, 2026)
+- Guide icons replaced with inline Material Design SVGs
+- Netlify deployment configured
+- Responsive design and accessibility polish
+- Progress bar and TOC fixes
 
 ### Previous Session (Session 2)
 - Notion guide completed — full interactive MDX content authored
@@ -24,7 +43,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Feb 26, 2026)
+## Current State (Feb 27, 2026)
 
 ### What's Been Built
 
@@ -58,6 +77,8 @@ A Next.js web application that hosts interactive software training guides for GO
 - `ChecklistItem.tsx` — trackable checklist items
 - `InfoCard.tsx` — highlighted info cards
 - `TipCallout.tsx` — tip/warning callout blocks
+- `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback
+- `Screenshot.tsx` — browser chrome frame for displaying app screenshots
 
 **6. Hooks** (`src/hooks/`)
 - `useHeadings.ts` — extracts headings from content
@@ -73,6 +94,15 @@ A Next.js web application that hosts interactive software training guides for GO
 **8. Guide Content** (`src/content/`)
 - `notion/index.mdx` — Notion guide (complete)
 - `claude-cowork/index.mdx` — Claude Cowork guide (complete)
+- `close-crm/index.mdx` — Close CRM guide (complete)
+- `account-review-sop/index.mdx` — Account Review SOP (complete)
+- `client-onboarding-sop/index.mdx` — Client Onboarding SOP (complete)
+- `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (complete)
+- `right-pricing-sop/index.mdx` — Right Pricing SOP (complete)
+- `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (complete)
+
+**9. Scripts** (`scripts/`)
+- `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
 
 ### Reference Materials (project root)
 - `cowork_guide_content.md` — Claude Cowork guide source content
@@ -85,13 +115,28 @@ A Next.js web application that hosts interactive software training guides for GO
 ---
 
 ## What's Next
+
+### SOPs
+- [x] ~~Account Review SOP MDX content~~
+- [x] ~~Client Onboarding SOP MDX content~~
+- [x] ~~Campaign Optimization SOP MDX content~~
+- [x] ~~Right Pricing SOP MDX content~~
+- [x] ~~GOAL Sales Demo SOP MDX content~~
+- [x] ~~Verify all 5 SOP routes render correctly~~
+- [ ] Build and deploy with SOPs
+
+### Guides
 - [x] ~~Finish writing the Notion guide MDX content~~
 - [x] ~~Build out the Claude Cowork guide MDX content~~
+- [x] ~~Build out the Close CRM guide MDX content~~
 - [ ] Create a Dia Browser guide
+
+### Infrastructure
 - [x] ~~Test the full app build (`npm run build`) and fix any issues~~
-- [ ] Add search functionality across guides
 - [x] ~~Deploy (Netlify configured)~~
+- [ ] Add search functionality across guides
 - [ ] Move reference PDFs/docs out of the repo root or into a `docs/` folder
+- [ ] Replace placeholder Close CRM screenshots with live captures
 
 ---
 
