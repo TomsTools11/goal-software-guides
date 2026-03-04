@@ -38,9 +38,16 @@ export function CourseCard({ guide, icon, progress }: CourseCardProps) {
     >
       <div className="mb-3 flex items-start justify-between">
         {icon}
-        <Badge variant={guide.category === 'sop' ? 'accent' : 'primary'}>
-          {guide.category === 'sop' ? 'SOP' : 'Guide'}
-        </Badge>
+        {guide.category === 'sop' ? (
+          <span
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+            style={{ backgroundColor: '#166534', color: '#bbf7d0' }}
+          >
+            SOP
+          </span>
+        ) : (
+          <Badge variant="primary">Guide</Badge>
+        )}
       </div>
 
       <h3 className="mb-1 text-base font-bold text-text">{guide.title}</h3>

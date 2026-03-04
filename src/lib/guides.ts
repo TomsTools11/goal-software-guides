@@ -119,6 +119,42 @@ export const guides: GuideMetadata[] = [
     tags: ['Data Import', 'Dispositions', 'CPA'],
     category: 'sop',
   },
+  {
+    slug: 'sales-discovery-process',
+    title: 'GOAL Sales Discovery Process',
+    description:
+      'Master consultative discovery for insurance sales — scorecard framework, qualification, deep problem exploration, and demo transition techniques.',
+    icon: '',
+    chapters: 9,
+    estimatedTime: '35 min',
+    difficulty: 'Intermediate',
+    tags: ['Sales', 'Discovery', 'Qualification'],
+    category: 'sop',
+  },
+  {
+    slug: 'setting-expectations-sop',
+    title: 'Setting Firm Expectations & Handling Objections',
+    description:
+      'Build confidence handling the data requirement, 90-day ramp conversation, and the "burned by lead vendors" objection — with case studies and talk tracks.',
+    icon: '',
+    chapters: 8,
+    estimatedTime: '30 min',
+    difficulty: 'Intermediate',
+    tags: ['Sales', 'Objections', 'Expectations'],
+    category: 'sop',
+  },
+  {
+    slug: 'competition-research',
+    title: 'GOAL Competition Research',
+    description:
+      'Know the competitive landscape — market positioning, competitor strengths and weaknesses, battlecards, objection handling, and landmine questions for every major competitor.',
+    icon: '',
+    chapters: 8,
+    estimatedTime: '25 min',
+    difficulty: 'Beginner',
+    tags: ['Sales', 'Competition', 'Battlecards'],
+    category: 'sop',
+  },
 ];
 
 export function getGuideBySlug(slug: string): GuideMetadata | undefined {

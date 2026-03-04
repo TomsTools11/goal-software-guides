@@ -72,6 +72,27 @@ export const guideIcons: Record<string, React.ReactNode> = {
       </svg>
     </IconBox>
   ),
+  'sales-discovery-process': (
+    <IconBox bg="#0F4C35">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+      </svg>
+    </IconBox>
+  ),
+  'setting-expectations-sop': (
+    <IconBox bg="#0F4C35">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+      </svg>
+    </IconBox>
+  ),
+  'competition-research': (
+    <IconBox bg="#0F4C35">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
+      </svg>
+    </IconBox>
+  ),
 };
 
 const defaultIcon = (
