@@ -12,6 +12,51 @@ interface StepByStepProps {
   steps: Step[];
 }
 
+function formatContent(content: React.ReactNode): React.ReactNode {
+  if (typeof content !== 'string') return content;
+
+  const blocks = content.split('\n\n');
+  const elements: React.ReactNode[] = [];
+  let bulletBuffer: string[] = [];
+
+  function flushBullets() {
+    if (bulletBuffer.length === 0) return;
+    elements.push(
+      <ul key={`ul-${elements.length}`} className="mt-2 space-y-2">
+        {bulletBuffer.map((item, j) => {
+          const dashIdx = item.indexOf(' — ');
+          if (dashIdx !== -1) {
+            return (
+              <li key={j} className="flex gap-1.5 before:mt-1.5 before:block before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-primary/40">
+                <span><strong className="text-text">{item.slice(0, dashIdx)}</strong> — {item.slice(dashIdx + 3)}</span>
+              </li>
+            );
+          }
+          return (
+            <li key={j} className="flex gap-1.5 before:mt-1.5 before:block before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-primary/40">
+              <span>{item}</span>
+            </li>
+          );
+        })}
+      </ul>
+    );
+    bulletBuffer = [];
+  }
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (trimmed.startsWith('• ')) {
+      bulletBuffer.push(trimmed.slice(2));
+    } else {
+      flushBullets();
+      elements.push(<p key={`p-${elements.length}`} className="mt-2 first:mt-0">{trimmed}</p>);
+    }
+  }
+  flushBullets();
+
+  return <>{elements}</>;
+}
+
 export function StepByStep({ steps }: StepByStepProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -77,7 +122,7 @@ export function StepByStep({ steps }: StepByStepProps) {
                     transition={{ duration: 0.25 }}
                     className="text-sm leading-relaxed text-text-muted"
                   >
-                    {step.content}
+                    {formatContent(step.content)}
                   </motion.div>
                 )}
               </div>
