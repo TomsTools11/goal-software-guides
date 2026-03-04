@@ -33,7 +33,7 @@ export function TableOfContents({ completedSections, onNavigate }: TableOfConten
                 }}
                 className={`flex items-center gap-2 rounded px-2 py-1 leading-snug transition-colors ${
                   isActive
-                    ? 'border-l-2 border-primary bg-primary-50 font-semibold text-primary'
+                    ? 'border-l-2 border-primary bg-primary/10 font-semibold text-primary'
                     : isCompleted
                       ? 'border-l-2 border-success/40 text-text-muted'
                       : 'border-l-2 border-transparent text-text-muted hover:bg-background-soft hover:text-text'

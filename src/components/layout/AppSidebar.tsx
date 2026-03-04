@@ -25,7 +25,7 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
         onClick={onNavigate}
         className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
           isActive
-            ? 'border-l-2 border-primary bg-primary-50 font-semibold text-primary'
+            ? 'border-l-2 border-primary bg-primary/10 font-semibold text-primary'
             : 'border-l-2 border-transparent text-text-muted hover:bg-background-soft hover:text-text'
         }`}
       >

@@ -16,7 +16,7 @@ export function ProgressBar({ value, className = '', showLabel = false, size = '
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <div
-        className={`${heightClass} w-full overflow-hidden rounded-full bg-primary-100`}
+        className={`${heightClass} w-full overflow-hidden rounded-full bg-primary/15`}
         role="progressbar"
         aria-valuenow={clamped}
         aria-valuemin={0}

@@ -76,7 +76,7 @@ export const mdxComponents: MDXComponents = {
   // Blockquote
   blockquote: (props) => (
     <blockquote
-      className="my-4 border-l-4 border-primary-200 pl-4 italic text-text-muted"
+      className="my-4 border-l-4 border-primary/30 pl-4 italic text-text-muted"
       {...props}
     />
   ),
@@ -84,7 +84,7 @@ export const mdxComponents: MDXComponents = {
   // Code
   code: (props) => (
     <code
-      className="rounded bg-background-soft px-1.5 py-0.5 font-mono text-sm text-primary-700"
+      className="rounded bg-background-soft px-1.5 py-0.5 font-mono text-sm text-primary"
       {...props}
     />
   ),
@@ -98,7 +98,7 @@ export const mdxComponents: MDXComponents = {
   // Links
   a: (props) => (
     <a
-      className="font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:text-primary-700 hover:decoration-primary"
+      className="font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:text-primary-600 hover:decoration-primary"
       {...props}
     />
   ),

@@ -8,25 +8,25 @@ interface TipCalloutProps {
 
 const config: Record<TipVariant, { bg: string; border: string; icon: string; iconColor: string }> = {
   tip: {
-    bg: 'bg-green-50',
+    bg: 'bg-success/10',
     border: 'border-l-success',
     icon: '💡',
     iconColor: 'text-success',
   },
   warning: {
-    bg: 'bg-amber-50',
+    bg: 'bg-warning/10',
     border: 'border-l-warning',
     icon: '⚠️',
     iconColor: 'text-warning',
   },
   info: {
-    bg: 'bg-primary-50',
+    bg: 'bg-primary/10',
     border: 'border-l-primary',
     icon: 'ℹ️',
     iconColor: 'text-primary',
   },
   important: {
-    bg: 'bg-accent-50',
+    bg: 'bg-accent/10',
     border: 'border-l-accent',
     icon: '🔑',
     iconColor: 'text-accent',

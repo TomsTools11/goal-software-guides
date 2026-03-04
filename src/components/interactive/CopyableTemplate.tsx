@@ -76,7 +76,7 @@ export function CopyableTemplate({ title, sections }: CopyableTemplateProps) {
         <button
           type="button"
           onClick={handleCopy}
-          className="flex min-h-[36px] items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-muted transition-all hover:border-primary-200 hover:bg-primary-50 hover:text-primary"
+          className="flex min-h-[36px] items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-muted transition-all hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
         >
           <AnimatePresence mode="wait">
             {copied ? (

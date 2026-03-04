@@ -84,7 +84,7 @@ export function StepByStep({ steps }: StepByStepProps) {
                     isActive
                       ? 'bg-primary text-text-inverse'
                       : isCompleted
-                        ? 'bg-primary-100 text-primary-700'
+                        ? 'bg-primary/15 text-primary'
                         : 'bg-background-soft text-text-muted'
                   }`}
                   aria-label={`Step ${i + 1}: ${step.title}`}
@@ -100,7 +100,7 @@ export function StepByStep({ steps }: StepByStepProps) {
                 {i < steps.length - 1 && (
                   <div
                     className={`w-0.5 flex-1 ${
-                      isCompleted ? 'bg-primary-200' : 'bg-border'
+                      isCompleted ? 'bg-primary/25' : 'bg-border'
                     }`}
                   />
                 )}

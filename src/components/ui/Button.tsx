@@ -22,9 +22,9 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary text-text-inverse hover:bg-primary-700 focus-visible:ring-primary-300',
+    'bg-primary text-text-inverse hover:bg-primary-700 focus-visible:ring-primary/40',
   secondary:
-    'bg-transparent text-primary border border-primary hover:bg-primary-50 focus-visible:ring-primary-300',
+    'bg-transparent text-primary border border-primary hover:bg-primary/10 focus-visible:ring-primary/40',
 };
 
 const base =
