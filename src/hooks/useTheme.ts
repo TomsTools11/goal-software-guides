@@ -1,12 +1,22 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'goal-theme';
 
-export function useTheme() {
+interface ThemeContextValue {
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+export const ThemeContext = createContext<ThemeContextValue>({
+  theme: 'light',
+  toggleTheme: () => {},
+});
+
+export function useThemeProvider() {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
@@ -26,4 +36,8 @@ export function useTheme() {
   }, []);
 
   return { theme, toggleTheme };
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
 }

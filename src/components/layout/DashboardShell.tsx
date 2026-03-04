@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppSidebar } from './AppSidebar';
 import { TopBar } from './TopBar';
+import { ThemeContext, useThemeProvider } from '@/hooks/useTheme';
 
 interface DashboardShellProps {
   children: React.ReactNode;
@@ -11,8 +12,10 @@ interface DashboardShellProps {
 
 export function DashboardShell({ children }: DashboardShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const themeValue = useThemeProvider();
 
   return (
+    <ThemeContext.Provider value={themeValue}>
     <div className="flex h-screen overflow-hidden">
       {/* Desktop sidebar */}
       <div className="hidden w-64 shrink-0 border-r border-border lg:block">
@@ -53,5 +56,6 @@ export function DashboardShell({ children }: DashboardShellProps) {
         </main>
       </div>
     </div>
+    </ThemeContext.Provider>
   );
 }
