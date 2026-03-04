@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getGuidesByCategory } from '@/lib/guides';
+import { useTheme } from '@/hooks/useTheme';
 
 interface AppSidebarProps {
   onNavigate?: () => void;
@@ -14,6 +15,7 @@ const sops = getGuidesByCategory('sop');
 
 export function AppSidebar({ onNavigate }: AppSidebarProps) {
   const pathname = usePathname();
+  const { theme } = useTheme();
 
   function navLink(href: string, label: string) {
     const isActive = pathname === href;
@@ -38,11 +40,11 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
       <div className="flex h-14 shrink-0 items-center px-5">
         <Link href="/" onClick={onNavigate} className="flex items-center gap-2">
           <Image
-            src="/images/goal_blk.png"
+            src={theme === 'dark' ? '/images/goal_wht.png' : '/images/goal_blk.png'}
             alt="GOAL Platform"
             width={100}
             height={32}
-            className="h-7 w-auto dark:invert"
+            className="h-7 w-auto"
             priority
           />
         </Link>
