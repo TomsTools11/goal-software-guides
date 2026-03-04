@@ -4,12 +4,12 @@ import { useHeadings } from '@/hooks/useHeadings';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 
 interface TableOfContentsProps {
+  completedSections?: Set<string>;
   onNavigate?: () => void;
 }
 
-export function TableOfContents({ onNavigate }: TableOfContentsProps) {
+export function TableOfContents({ completedSections, onNavigate }: TableOfContentsProps) {
   const allHeadings = useHeadings();
-  // Only show h2 headings for a compact sidebar TOC
   const headings = allHeadings.filter((h) => h.level === 2);
   const activeId = useScrollSpy(headings.map((h) => h.id));
 
@@ -21,6 +21,7 @@ export function TableOfContents({ onNavigate }: TableOfContentsProps) {
       <ul className="space-y-0.5 text-xs">
         {headings.map((heading) => {
           const isActive = heading.id === activeId;
+          const isCompleted = completedSections?.has(heading.id);
           return (
             <li key={heading.id}>
               <a
@@ -30,13 +31,20 @@ export function TableOfContents({ onNavigate }: TableOfContentsProps) {
                   document.getElementById(heading.id)?.scrollIntoView({ behavior: 'smooth' });
                   onNavigate?.();
                 }}
-                className={`block rounded px-2 py-1 leading-snug transition-colors ${
+                className={`flex items-center gap-2 rounded px-2 py-1 leading-snug transition-colors ${
                   isActive
                     ? 'border-l-2 border-primary bg-primary-50 font-semibold text-primary'
-                    : 'border-l-2 border-transparent text-text-muted hover:bg-background-soft hover:text-text'
+                    : isCompleted
+                      ? 'border-l-2 border-success/40 text-text-muted'
+                      : 'border-l-2 border-transparent text-text-muted hover:bg-background-soft hover:text-text'
                 }`}
               >
-                {heading.text}
+                {isCompleted && !isActive && (
+                  <svg className="shrink-0 text-success" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+                <span>{heading.text}</span>
               </a>
             </li>
           );

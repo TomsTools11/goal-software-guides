@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Container } from '@/components/layout/Container';
 import { GuideSidebar } from './GuideSidebar';
+import { GuideHeader } from './GuideHeader';
+import { GuideNavigation } from './GuideNavigation';
 import { ScrollProgress } from './ScrollProgress';
 import { useHeadings } from '@/hooks/useHeadings';
 import { useProgressTracker } from '@/hooks/useProgressTracker';
@@ -17,26 +19,36 @@ interface GuideLayoutProps {
 export function GuideLayout({ guide, children }: GuideLayoutProps) {
   const headings = useHeadings();
   const h2Ids = headings.filter((h) => h.level === 2).map((h) => h.id);
-  const { percentComplete } = useProgressTracker(guide.slug, h2Ids);
+  const { completedSections, percentComplete } = useProgressTracker(guide.slug, h2Ids);
   const [tocOpen, setTocOpen] = useState(false);
 
   return (
     <>
       <ScrollProgress />
 
-      <Container className="py-10">
-        <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
-          {/* Desktop sidebar */}
-          <div className="hidden lg:block">
-            <div className="sticky top-20">
-              <GuideSidebar guide={guide} progressPercent={percentComplete} />
-            </div>
-          </div>
+      {/* Breadcrumb */}
+      <nav className="mb-4 text-sm text-text-muted" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-primary transition-colors">Dashboard</Link>
+        <span className="mx-2">/</span>
+        <span className="text-text">{guide.title}</span>
+      </nav>
 
-          {/* Content */}
-          <article className="prose-readable min-w-0 max-w-none">{children}</article>
+      <GuideHeader guide={guide} progressPercent={percentComplete} />
+
+      <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8">
+        {/* Desktop sidebar */}
+        <div className="hidden lg:block">
+          <div className="sticky top-4">
+            <GuideSidebar progressPercent={percentComplete} completedSections={completedSections} />
+          </div>
         </div>
-      </Container>
+
+        {/* Content */}
+        <div className="min-w-0">
+          <article className="prose-readable max-w-none">{children}</article>
+          <GuideNavigation currentSlug={guide.slug} />
+        </div>
+      </div>
 
       {/* Mobile FAB */}
       <button
@@ -96,7 +108,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
                   </svg>
                 </button>
               </div>
-              <GuideSidebar guide={guide} progressPercent={percentComplete} onNavigate={() => setTocOpen(false)} />
+              <GuideSidebar progressPercent={percentComplete} completedSections={completedSections} onNavigate={() => setTocOpen(false)} />
             </motion.div>
           </>
         )}

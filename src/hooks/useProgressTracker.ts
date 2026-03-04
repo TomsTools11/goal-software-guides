@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { getGuideProgress, updateSectionProgress } from '@/lib/progress';
 
 interface ProgressState {
   completedSections: Set<string>;
@@ -9,36 +10,34 @@ interface ProgressState {
 }
 
 export function useProgressTracker(slug: string, sectionIds: string[]): ProgressState {
-  const storageKey = `goal-guide-progress-${slug}`;
+  const [completedSections, setCompletedSections] = useState<Set<string>>(() => {
+    const existing = getGuideProgress(slug);
+    return existing ? new Set(existing.completedSections) : new Set();
+  });
 
-  const [completedSections, setCompletedSections] = useState<Set<string>>(new Set());
-
-  // Reset progress on mount so each visit starts fresh at 0%
+  // Load existing progress and update lastAccessed
   useEffect(() => {
-    try {
-      localStorage.removeItem(storageKey);
-    } catch {
-      // ignore storage errors
+    const existing = getGuideProgress(slug);
+    if (existing) {
+      setCompletedSections(new Set(existing.completedSections));
     }
-    setCompletedSections(new Set());
-  }, [storageKey]);
+    // Touch lastAccessed
+    if (sectionIds.length > 0) {
+      updateSectionProgress(slug, existing?.completedSections ?? [], sectionIds.length);
+    }
+  }, [slug, sectionIds.length]);
 
-  // Track sections as user scrolls past them
   const markCompleted = useCallback(
     (id: string) => {
       setCompletedSections((prev) => {
         if (prev.has(id)) return prev;
         const next = new Set(prev);
         next.add(id);
-        try {
-          localStorage.setItem(storageKey, JSON.stringify([...next]));
-        } catch {
-          // storage full — ignore
-        }
+        updateSectionProgress(slug, [...next], sectionIds.length);
         return next;
       });
     },
-    [storageKey]
+    [slug, sectionIds.length]
   );
 
   // Observe sections passing viewport

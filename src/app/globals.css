@@ -56,7 +56,9 @@
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
 
   /* Layout */
-  --container-max: 1120px;
+  --container-max: 1280px;
+  --sidebar-width: 256px;
+  --topbar-height: 56px;
 }
 
 /* ── Base Styles ── */

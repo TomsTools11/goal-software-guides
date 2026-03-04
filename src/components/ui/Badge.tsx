@@ -1,4 +1,4 @@
-type BadgeVariant = 'default' | 'primary' | 'accent';
+type BadgeVariant = 'default' | 'primary' | 'accent' | 'success';
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -10,6 +10,7 @@ const variants: Record<BadgeVariant, string> = {
   default: 'bg-background-soft text-text-muted',
   primary: 'bg-primary-50 text-primary-700',
   accent: 'bg-accent-50 text-accent-700',
+  success: 'bg-green-50 text-green-700',
 };
 
 export function Badge({ children, variant = 'default', className = '' }: BadgeProps) {
