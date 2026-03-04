@@ -88,7 +88,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
               onClick={() => setTocOpen(false)}
             />
             <motion.div
-              className="fixed inset-x-0 bottom-0 z-50 max-h-[70vh] overflow-y-auto rounded-t-2xl bg-white p-6 shadow-xl lg:hidden"
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[70vh] overflow-y-auto rounded-t-2xl bg-surface p-6 shadow-xl lg:hidden"
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}

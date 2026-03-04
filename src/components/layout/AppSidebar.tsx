@@ -33,7 +33,7 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
   }
 
   return (
-    <aside className="flex h-full flex-col overflow-y-auto bg-white">
+    <aside className="flex h-full flex-col overflow-y-auto bg-surface">
       {/* Logo */}
       <div className="flex h-14 shrink-0 items-center px-5">
         <Link href="/" onClick={onNavigate} className="flex items-center gap-2">
@@ -42,7 +42,7 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
             alt="GOAL Platform"
             width={100}
             height={32}
-            className="h-7 w-auto"
+            className="h-7 w-auto dark:invert"
             priority
           />
         </Link>

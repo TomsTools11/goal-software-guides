@@ -11,7 +11,7 @@ interface GuideHeaderProps {
 
 export function GuideHeader({ guide, progressPercent }: GuideHeaderProps) {
   return (
-    <div className="mb-8 rounded-xl border border-border bg-white p-6 shadow-sm">
+    <div className="mb-8 rounded-xl border border-border bg-surface p-6 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-text">{guide.title}</h1>

@@ -61,6 +61,23 @@
   --topbar-height: 56px;
 }
 
+/* ── Dark Mode Overrides ── */
+.dark {
+  --color-background: #0F0F13;
+  --color-background-soft: #1A1A22;
+  --color-surface: #1E1E28;
+  --color-text: #E8E8ED;
+  --color-text-muted: #9999A8;
+  --color-text-inverse: #1A1A1A;
+  --color-border: #2E2E3A;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-base: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.3);
+}
+
 /* ── Base Styles ── */
 @layer base {
   html {

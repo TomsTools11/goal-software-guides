@@ -12,7 +12,7 @@ interface StatCardProps {
 export function StatCard({ icon, value, label, accentColor }: StatCardProps) {
   return (
     <motion.div
-      className="rounded-xl border border-border bg-white p-5 shadow-sm"
+      className="rounded-xl border border-border bg-surface p-5 shadow-sm"
       style={{ borderTopWidth: 3, borderTopColor: accentColor }}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
