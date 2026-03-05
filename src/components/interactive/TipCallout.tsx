@@ -6,31 +6,11 @@ interface TipCalloutProps {
   children: React.ReactNode;
 }
 
-const config: Record<TipVariant, { bg: string; border: string; icon: string; iconColor: string }> = {
-  tip: {
-    bg: 'bg-success/10',
-    border: 'border-l-success',
-    icon: '💡',
-    iconColor: 'text-success',
-  },
-  warning: {
-    bg: 'bg-warning/10',
-    border: 'border-l-warning',
-    icon: '⚠️',
-    iconColor: 'text-warning',
-  },
-  info: {
-    bg: 'bg-primary/10',
-    border: 'border-l-primary',
-    icon: 'ℹ️',
-    iconColor: 'text-primary',
-  },
-  important: {
-    bg: 'bg-accent/10',
-    border: 'border-l-accent',
-    icon: '🔑',
-    iconColor: 'text-accent',
-  },
+const config: Record<TipVariant, { bg: string; border: string; icon: string }> = {
+  tip: { bg: 'bg-success/10', border: 'border-l-success', icon: '💡' },
+  warning: { bg: 'bg-warning/10', border: 'border-l-warning', icon: '⚠️' },
+  info: { bg: 'bg-primary/10', border: 'border-l-primary', icon: 'ℹ️' },
+  important: { bg: 'bg-accent/10', border: 'border-l-accent', icon: '🔑' },
 };
 
 export function TipCallout({ variant = 'tip', title, children }: TipCalloutProps) {

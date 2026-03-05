@@ -66,8 +66,10 @@ export function updateSectionProgress(
   return store[slug];
 }
 
-export function getDashboardStats(totalGuides: number): DashboardStats {
-  const store = readStore();
+export function computeStatsFromStore(
+  store: ProgressStore,
+  totalGuides: number
+): DashboardStats {
   let completed = 0;
   let inProgress = 0;
 
@@ -87,17 +89,20 @@ export function getDashboardStats(totalGuides: number): DashboardStats {
   };
 }
 
-export function getRecentlyAccessed(): Array<{ slug: string; progress: GuideProgress }> {
-  const store = readStore();
+export function sortByRecentlyAccessed(
+  store: ProgressStore
+): Array<{ slug: string; progress: GuideProgress }> {
   return Object.entries(store)
     .map(([slug, progress]) => ({ slug, progress }))
     .sort((a, b) => b.progress.lastAccessed - a.progress.lastAccessed);
 }
 
-export function resetGuideProgress(slug: string) {
-  const store = readStore();
-  delete store[slug];
-  writeStore(store);
+export function getDashboardStats(totalGuides: number): DashboardStats {
+  return computeStatsFromStore(readStore(), totalGuides);
+}
+
+export function getRecentlyAccessed(): Array<{ slug: string; progress: GuideProgress }> {
+  return sortByRecentlyAccessed(readStore());
 }
 
 export function resetAllProgress() {

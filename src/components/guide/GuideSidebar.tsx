@@ -2,14 +2,16 @@
 
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { TableOfContents } from './TableOfContents';
+import type { Heading } from '@/hooks/useHeadings';
 
 interface GuideSidebarProps {
+  headings: Heading[];
   progressPercent: number;
   completedSections: Set<string>;
   onNavigate?: () => void;
 }
 
-export function GuideSidebar({ progressPercent, completedSections, onNavigate }: GuideSidebarProps) {
+export function GuideSidebar({ headings, progressPercent, completedSections, onNavigate }: GuideSidebarProps) {
   return (
     <aside className="flex flex-col gap-5">
       <div>
@@ -21,7 +23,7 @@ export function GuideSidebar({ progressPercent, completedSections, onNavigate }:
       </div>
 
       <div className="border-t border-border pt-4">
-        <TableOfContents completedSections={completedSections} onNavigate={onNavigate} />
+        <TableOfContents headings={headings} completedSections={completedSections} onNavigate={onNavigate} />
       </div>
     </aside>
   );

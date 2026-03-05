@@ -20,16 +20,24 @@ export function useThemeProvider() {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    const initial = stored === 'dark' ? 'dark' : 'light';
-    setTheme(initial);
-    document.documentElement.classList.toggle('dark', initial === 'dark');
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
+      const initial = stored === 'dark' ? 'dark' : 'light';
+      setTheme(initial);
+      document.documentElement.classList.toggle('dark', initial === 'dark');
+    } catch {
+      // localStorage unavailable (private browsing, etc.)
+    }
   }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
       const next = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem(STORAGE_KEY, next);
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // ignore
+      }
       document.documentElement.classList.toggle('dark', next === 'dark');
       return next;
     });

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserChrome } from './BrowserChrome';
 
 interface QuizQuestion {
   question: string;
@@ -55,12 +56,9 @@ export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
   function handleNext() {
     const nextQ = currentQuestion + 1;
     if (nextQ >= questions.length) {
-      const finalScore = selectedAnswer === questions[currentQuestion].correctIndex
-        ? score
-        : score;
       setCompleted(true);
       try {
-        localStorage.setItem(storageKey, String(finalScore));
+        localStorage.setItem(storageKey, String(score));
       } catch {
         // ignore
       }
@@ -87,23 +85,17 @@ export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
   const q = questions[currentQuestion];
 
   return (
-    <div className="my-6 overflow-hidden rounded-xl border border-white/10 bg-[#1e1e2e] shadow-lg">
-      {/* Browser chrome */}
-      <div className="flex items-center gap-2 border-b border-white/10 bg-[#181825] px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
-        <span className="ml-3 flex-1 text-center text-[10px] text-white/40">
-          {title}
-        </span>
-        {!completed && (
-          <span className="text-[10px] text-white/30">
-            {currentQuestion + 1}/{questions.length}
-          </span>
-        )}
-      </div>
-
-      {/* Quiz content */}
+    <div className="my-6">
+      <BrowserChrome
+        title={title}
+        trailing={
+          !completed ? (
+            <span className="text-[10px] text-white/30">
+              {currentQuestion + 1}/{questions.length}
+            </span>
+          ) : undefined
+        }
+      >
       <div className="p-5 sm:p-6">
         <AnimatePresence mode="wait">
           {completed ? (
@@ -248,6 +240,7 @@ export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
           )}
         </AnimatePresence>
       </div>
+      </BrowserChrome>
     </div>
   );
 }

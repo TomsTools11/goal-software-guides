@@ -1,14 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getDashboardStats, getRecentlyAccessed, type DashboardStats, type GuideProgress } from '@/lib/progress';
-import { getDashboardStatsRemote, getRecentlyAccessedRemote } from '@/lib/progress-sync';
+import { getAllProgress, computeStatsFromStore, sortByRecentlyAccessed, type DashboardStats, type GuideProgress } from '@/lib/progress';
+import { getAllProgressRemote } from '@/lib/progress-sync';
 import { guides } from '@/lib/guides';
 import { useAuth } from '@/hooks/useAuth';
+
+type ProgressStore = Record<string, GuideProgress>;
 
 interface DashboardData {
   stats: DashboardStats;
   recentlyAccessed: Array<{ slug: string; progress: GuideProgress }>;
+  progress: ProgressStore;
 }
 
 export function useDashboardStats(): DashboardData {
@@ -16,25 +19,24 @@ export function useDashboardStats(): DashboardData {
   const [data, setData] = useState<DashboardData>({
     stats: { totalGuides: guides.length, completed: 0, inProgress: 0, notStarted: guides.length },
     recentlyAccessed: [],
+    progress: {},
   });
 
   useEffect(() => {
     if (authLoading) return;
 
-    if (user) {
-      // Logged in — fetch from Supabase
-      Promise.all([
-        getDashboardStatsRemote(guides.length),
-        getRecentlyAccessedRemote(),
-      ]).then(([stats, recentlyAccessed]) => {
-        setData({ stats, recentlyAccessed });
-      });
-    } else {
-      // Guest — use localStorage
+    function applyStore(store: ProgressStore) {
       setData({
-        stats: getDashboardStats(guides.length),
-        recentlyAccessed: getRecentlyAccessed(),
+        stats: computeStatsFromStore(store, guides.length),
+        recentlyAccessed: sortByRecentlyAccessed(store),
+        progress: store,
       });
+    }
+
+    if (user) {
+      getAllProgressRemote().then(applyStore).catch(() => applyStore(getAllProgress()));
+    } else {
+      applyStore(getAllProgress());
     }
   }, [user, authLoading]);
 

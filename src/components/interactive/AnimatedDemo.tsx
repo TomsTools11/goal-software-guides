@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { BrowserChrome } from './BrowserChrome';
 
 type DemoType = 'notion-sidebar' | 'notion-database' | 'cowork-task' | 'cowork-setup';
 
@@ -211,41 +212,37 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
   }, [isInView, prefersReduced]);
 
   return (
-    <div ref={ref} className={`my-6 overflow-hidden rounded-xl border shadow-lg ${isNotion ? 'border-gray-200 bg-white' : 'border-white/10 bg-[#1e1e2e]'}`}>
-      {/* Browser chrome */}
-      <div className={`flex items-center gap-2 border-b px-4 py-2.5 ${isNotion ? 'border-gray-200 bg-gray-50' : 'border-white/10 bg-[#181825]'}`}>
-        <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
-        <span className={`ml-3 flex-1 text-center text-[10px] ${isNotion ? 'text-gray-400' : 'text-white/40'}`}>
-          {title ?? defaultTitles[type]}
-        </span>
-        <button
-          type="button"
-          onClick={() => setPlaying(false)}
-          className={`min-h-[44px] min-w-[44px] px-2 text-[10px] transition-colors ${isNotion ? 'text-gray-300 hover:text-gray-500' : 'text-white/30 hover:text-white/60'}`}
-          aria-label="Replay animation"
-        >
-          ↻ Replay
-        </button>
-      </div>
-
-      {/* Demo area */}
-      <div className="min-h-[140px]">
-        {playing ? (
-          <DemoComponent />
-        ) : (
-          <div className="flex min-h-[140px] items-center justify-center">
-            <button
-              type="button"
-              onClick={() => setPlaying(true)}
-              className={`min-h-[44px] rounded-full px-6 py-3 text-xs transition-colors ${isNotion ? 'bg-gray-100 text-gray-500 hover:bg-gray-200' : 'bg-white/10 text-white/70 hover:bg-white/20'}`}
-            >
-              ▶ Play
-            </button>
-          </div>
-        )}
-      </div>
+    <div ref={ref} className="my-6">
+      <BrowserChrome
+        title={title ?? defaultTitles[type]}
+        variant={isNotion ? 'light' : 'dark'}
+        trailing={
+          <button
+            type="button"
+            onClick={() => setPlaying(false)}
+            className={`min-h-[44px] min-w-[44px] px-2 text-[10px] transition-colors ${isNotion ? 'text-gray-300 hover:text-gray-500' : 'text-white/30 hover:text-white/60'}`}
+            aria-label="Replay animation"
+          >
+            ↻ Replay
+          </button>
+        }
+      >
+        <div className="min-h-[140px]">
+          {playing ? (
+            <DemoComponent />
+          ) : (
+            <div className="flex min-h-[140px] items-center justify-center">
+              <button
+                type="button"
+                onClick={() => setPlaying(true)}
+                className={`min-h-[44px] rounded-full px-6 py-3 text-xs transition-colors ${isNotion ? 'bg-gray-100 text-gray-500 hover:bg-gray-200' : 'bg-white/10 text-white/70 hover:bg-white/20'}`}
+              >
+                ▶ Play
+              </button>
+            </div>
+          )}
+        </div>
+      </BrowserChrome>
     </div>
   );
 }

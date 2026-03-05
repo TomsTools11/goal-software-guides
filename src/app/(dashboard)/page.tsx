@@ -8,10 +8,12 @@ import { CourseGrid } from '@/components/dashboard/CourseGrid';
 import { resetAllProgress } from '@/lib/progress';
 import { resetAllProgressRemote } from '@/lib/progress-sync';
 import { useAuth } from '@/hooks/useAuth';
+import { useDashboardStats } from '@/hooks/useDashboardStats';
 
 export default function DashboardPage() {
   const [filter, setFilter] = useState<CategoryFilter>('all');
   const { user } = useAuth();
+  const { progress } = useDashboardStats();
 
   async function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
@@ -55,7 +57,7 @@ export default function DashboardPage() {
           <h2 className="text-lg font-bold text-text">All Courses</h2>
           <CategoryTabs active={filter} onChange={setFilter} />
         </div>
-        <CourseGrid filter={filter} />
+        <CourseGrid filter={filter} progress={progress} />
       </div>
     </div>
   );

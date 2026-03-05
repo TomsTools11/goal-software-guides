@@ -46,6 +46,8 @@ export function CopyableTemplate({ title, sections }: CopyableTemplateProps) {
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {
+      // Clipboard access denied — ignore silently
     });
   }
 

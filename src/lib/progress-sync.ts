@@ -1,4 +1,5 @@
 import { getSupabaseBrowserClient } from '@/lib/supabase/client';
+import { computeStatsFromStore, sortByRecentlyAccessed } from '@/lib/progress';
 import type { GuideProgress, DashboardStats } from '@/lib/progress';
 
 type ProgressStore = Record<string, GuideProgress>;
@@ -98,32 +99,14 @@ export async function getDashboardStatsRemote(
   totalGuides: number
 ): Promise<DashboardStats> {
   const store = await getAllProgressRemote();
-  let completed = 0;
-  let inProgress = 0;
-
-  for (const progress of Object.values(store)) {
-    if (progress.percentComplete >= 100) {
-      completed++;
-    } else if (progress.completedSections.length > 0) {
-      inProgress++;
-    }
-  }
-
-  return {
-    totalGuides,
-    completed,
-    inProgress,
-    notStarted: totalGuides - completed - inProgress,
-  };
+  return computeStatsFromStore(store, totalGuides);
 }
 
 export async function getRecentlyAccessedRemote(): Promise<
   Array<{ slug: string; progress: GuideProgress }>
 > {
   const store = await getAllProgressRemote();
-  return Object.entries(store)
-    .map(([slug, progress]) => ({ slug, progress }))
-    .sort((a, b) => b.progress.lastAccessed - a.progress.lastAccessed);
+  return sortByRecentlyAccessed(store);
 }
 
 export async function migrateLocalProgressToRemote(

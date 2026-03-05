@@ -1,17 +1,19 @@
 'use client';
 
-import { useHeadings } from '@/hooks/useHeadings';
+import { useMemo } from 'react';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
+import type { Heading } from '@/hooks/useHeadings';
 
 interface TableOfContentsProps {
+  headings: Heading[];
   completedSections?: Set<string>;
   onNavigate?: () => void;
 }
 
-export function TableOfContents({ completedSections, onNavigate }: TableOfContentsProps) {
-  const allHeadings = useHeadings();
-  const headings = allHeadings.filter((h) => h.level === 2);
-  const activeId = useScrollSpy(headings.map((h) => h.id));
+export function TableOfContents({ headings: allHeadings, completedSections, onNavigate }: TableOfContentsProps) {
+  const headings = useMemo(() => allHeadings.filter((h) => h.level === 2), [allHeadings]);
+  const headingIds = useMemo(() => headings.map((h) => h.id), [headings]);
+  const activeId = useScrollSpy(headingIds);
 
   if (headings.length === 0) return null;
 

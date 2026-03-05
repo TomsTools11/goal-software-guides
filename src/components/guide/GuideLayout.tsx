@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GuideSidebar } from './GuideSidebar';
@@ -18,7 +18,10 @@ interface GuideLayoutProps {
 
 export function GuideLayout({ guide, children }: GuideLayoutProps) {
   const headings = useHeadings();
-  const h2Ids = headings.filter((h) => h.level === 2).map((h) => h.id);
+  const h2Ids = useMemo(
+    () => headings.filter((h) => h.level === 2).map((h) => h.id),
+    [headings]
+  );
   const { completedSections, percentComplete } = useProgressTracker(guide.slug, h2Ids);
   const [tocOpen, setTocOpen] = useState(false);
 
@@ -39,7 +42,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
         {/* Desktop sidebar */}
         <div className="hidden lg:block">
           <div className="sticky top-4">
-            <GuideSidebar progressPercent={percentComplete} completedSections={completedSections} />
+            <GuideSidebar headings={headings} progressPercent={percentComplete} completedSections={completedSections} />
           </div>
         </div>
 
@@ -108,7 +111,7 @@ export function GuideLayout({ guide, children }: GuideLayoutProps) {
                   </svg>
                 </button>
               </div>
-              <GuideSidebar progressPercent={percentComplete} completedSections={completedSections} onNavigate={() => setTocOpen(false)} />
+              <GuideSidebar headings={headings} progressPercent={percentComplete} completedSections={completedSections} onNavigate={() => setTocOpen(false)} />
             </motion.div>
           </>
         )}

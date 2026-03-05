@@ -18,7 +18,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     if (user) {
-      getAllProgressRemote().then(setProgress);
+      getAllProgressRemote().then(setProgress).catch(() => {});
     }
   }, [user]);
 
