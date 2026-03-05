@@ -10,9 +10,10 @@ interface TopBarProps {
 
 export function TopBar({ onMenuClick }: TopBarProps) {
   const { theme, toggleTheme } = useTheme();
-  const { user } = useAuth();
+  const { clerkUser } = useAuth();
 
-  const initial = user?.email?.[0]?.toUpperCase() ?? '?';
+  const email = clerkUser?.primaryEmailAddress?.emailAddress ?? '';
+  const initial = email?.[0]?.toUpperCase() ?? '?';
 
   return (
     <div className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-surface px-4 lg:px-6">
@@ -94,7 +95,7 @@ export function TopBar({ onMenuClick }: TopBarProps) {
       <Link
         href="/account"
         className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white transition-opacity hover:opacity-80"
-        title={user?.email ?? 'Account'}
+        title={email || 'Account'}
       >
         {initial}
       </Link>

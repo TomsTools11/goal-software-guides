@@ -1,34 +1,38 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useConvexAuth, useQuery, useMutation } from 'convex/react';
 import { useAuth } from '@/hooks/useAuth';
-import { getAllProgressRemote, resetAllProgressRemote } from '@/lib/progress-sync';
 import { resetAllProgress } from '@/lib/progress';
 import { guides } from '@/lib/guides';
 import { ProgressBar } from '@/components/ui/ProgressBar';
+import { api } from '../../../../convex/_generated/api';
 import type { GuideProgress } from '@/lib/progress';
 
 type ProgressStore = Record<string, GuideProgress>;
 
 export default function AccountPage() {
-  const { user, loading, signOut } = useAuth();
+  const { clerkUser, loading, signOut, isAuthenticated } = useAuth();
+  const { isAuthenticated: convexAuth } = useConvexAuth();
   const router = useRouter();
-  const [progress, setProgress] = useState<ProgressStore>({});
 
-  useEffect(() => {
-    if (user) {
-      getAllProgressRemote().then(setProgress).catch(() => {});
-    }
-  }, [user]);
+  const remoteProgress = useQuery(
+    api.progress.getAllProgress,
+    convexAuth ? {} : "skip"
+  );
+  const resetRemoteProgress = useMutation(api.progress.resetAllProgress);
 
-  if (loading || !user) {
+  const progress: ProgressStore = (remoteProgress as ProgressStore) ?? {};
+
+  if (loading || !clerkUser) {
     return (
       <div className="flex items-center justify-center py-20">
         <p className="text-text-muted">Loading...</p>
       </div>
     );
   }
+
+  const email = clerkUser.primaryEmailAddress?.emailAddress ?? '';
 
   const completedCourses = guides.filter(
     (g) => progress[g.slug]?.percentComplete === 100
@@ -37,8 +41,8 @@ export default function AccountPage() {
     (g) => !progress[g.slug] || progress[g.slug].percentComplete < 100
   );
 
-  const memberSince = user.created_at
-    ? new Date(user.created_at).toLocaleDateString('en-US', {
+  const memberSince = clerkUser.createdAt
+    ? new Date(clerkUser.createdAt).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
@@ -48,14 +52,12 @@ export default function AccountPage() {
   async function handleSignOut() {
     await signOut();
     router.push('/login');
-    router.refresh();
   }
 
   async function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
-      await resetAllProgressRemote();
+      await resetRemoteProgress();
       resetAllProgress();
-      setProgress({});
     }
   }
 
@@ -76,10 +78,10 @@ export default function AccountPage() {
       <div className="rounded-xl border border-border bg-surface p-6">
         <div className="flex items-center gap-4">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
-            {user.email?.[0]?.toUpperCase() ?? '?'}
+            {email?.[0]?.toUpperCase() ?? '?'}
           </div>
           <div className="flex-1">
-            <p className="font-semibold text-text">{user.email}</p>
+            <p className="font-semibold text-text">{email}</p>
             <p className="text-sm text-text-muted">Member since {memberSince}</p>
           </div>
           <button

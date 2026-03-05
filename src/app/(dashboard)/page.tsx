@@ -1,24 +1,27 @@
 'use client';
 
 import { useState } from 'react';
+import { useConvexAuth, useMutation } from 'convex/react';
 import { StatsOverview } from '@/components/dashboard/StatsOverview';
 import { ContinueLearning } from '@/components/dashboard/ContinueLearning';
 import { CategoryTabs, type CategoryFilter } from '@/components/dashboard/CategoryTabs';
 import { CourseGrid } from '@/components/dashboard/CourseGrid';
 import { resetAllProgress } from '@/lib/progress';
-import { resetAllProgressRemote } from '@/lib/progress-sync';
 import { useAuth } from '@/hooks/useAuth';
 import { useDashboardStats } from '@/hooks/useDashboardStats';
+import { api } from '../../../convex/_generated/api';
 
 export default function DashboardPage() {
   const [filter, setFilter] = useState<CategoryFilter>('all');
-  const { user } = useAuth();
+  const { clerkUser } = useAuth();
+  const { isAuthenticated } = useConvexAuth();
   const { progress } = useDashboardStats();
+  const resetRemoteProgress = useMutation(api.progress.resetAllProgress);
 
   async function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
-      if (user) {
-        await resetAllProgressRemote();
+      if (isAuthenticated) {
+        await resetRemoteProgress();
       }
       resetAllProgress();
       window.location.reload();
@@ -30,7 +33,7 @@ export default function DashboardPage() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-text">
-            {user ? `Welcome back, ${user.email}` : 'Dashboard'}
+            {clerkUser ? `Welcome back, ${clerkUser.primaryEmailAddress?.emailAddress ?? ''}` : 'Dashboard'}
           </h1>
           <p className="mt-1 text-sm text-text-muted">
             Track your progress across all GOAL guides and SOPs.

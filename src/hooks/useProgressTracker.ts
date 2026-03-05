@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useConvexAuth, useMutation } from 'convex/react';
 import { getGuideProgress, updateSectionProgress } from '@/lib/progress';
-import { updateSectionProgressRemote } from '@/lib/progress-sync';
-import { useAuth } from '@/hooks/useAuth';
+import { api } from '../../convex/_generated/api';
 
 interface ProgressState {
   completedSections: Set<string>;
@@ -12,7 +12,8 @@ interface ProgressState {
 }
 
 export function useProgressTracker(slug: string, sectionIds: string[]): ProgressState {
-  const { user } = useAuth();
+  const { isAuthenticated } = useConvexAuth();
+  const upsertProgress = useMutation(api.progress.upsertProgress);
   const [completedSections, setCompletedSections] = useState<Set<string>>(() => {
     const existing = getGuideProgress(slug);
     return existing ? new Set(existing.completedSections) : new Set();
@@ -33,13 +34,17 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
 
   const syncToRemote = useCallback(
     (sections: string[], total: number) => {
-      if (!user) return;
+      if (!isAuthenticated) return;
       if (debounceTimer.current) clearTimeout(debounceTimer.current);
       debounceTimer.current = setTimeout(() => {
-        updateSectionProgressRemote(slug, sections, total);
+        upsertProgress({
+          guideSlug: slug,
+          completedSections: sections,
+          totalSections: total,
+        });
       }, 1500);
     },
-    [user, slug]
+    [isAuthenticated, slug, upsertProgress]
   );
 
   const markCompleted = useCallback(
@@ -51,7 +56,7 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
         const sectionsArr = [...next];
         // Always write to localStorage (works for both guest and logged-in)
         updateSectionProgress(slug, sectionsArr, sectionIds.length);
-        // Also sync to Supabase if logged in (debounced)
+        // Also sync to Convex if logged in (debounced)
         syncToRemote(sectionsArr, sectionIds.length);
         return next;
       });

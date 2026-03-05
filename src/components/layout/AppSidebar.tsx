@@ -22,6 +22,7 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
     const isActive = pathname === href;
     return (
       <Link
+        key={href}
         href={href}
         onClick={onNavigate}
         className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
