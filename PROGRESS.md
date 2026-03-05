@@ -7,9 +7,12 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 5, 2026 — Session 9)
+## Latest Update (Mar 5, 2026 — Session 10)
 
 ### Changes This Session
+- **Auth layout logo fix** — login/signup pages were showing the white (dark-mode) logo on the light background; root cause was Tailwind v4's `dark:` variant using `@media (prefers-color-scheme: dark)` instead of the app's `.dark` class toggle; replaced with `useThemeProvider()` pattern matching the sidebar approach (`src/app/(auth)/layout.tsx`)
+
+### Previous Session (Session 9 — Mar 5, 2026)
 - **Login/account system implemented** — full Supabase email/password auth with per-user progress tracking
 - **New dependencies**: `@supabase/supabase-js` and `@supabase/ssr` added
 - **Supabase client layer** (`src/lib/supabase/`):
@@ -86,7 +89,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 5, 2026 — Session 9)
+## Current State (Mar 5, 2026 — Session 10)
 
 ### What's Been Built
 
@@ -149,6 +152,9 @@ A Next.js web application that hosts interactive software training guides for GO
 - `right-pricing-sop/index.mdx` — Right Pricing SOP (complete)
 - `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (complete)
 - `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (complete)
+- `sales-discovery-process/index.mdx` — Sales Discovery Process (complete, 9 chapters)
+- `setting-expectations-sop/index.mdx` — Setting Firm Expectations & Handling Objections (complete, 8 chapters)
+- `competition-research/index.mdx` — GOAL Competition Research (complete, 8 chapters)
 
 **9. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
@@ -161,7 +167,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `src/middleware.ts` — Next.js middleware for auth session refresh
 
 **11. Auth Pages** (`src/app/(auth)/`)
-- `layout.tsx` — centered auth layout with GOAL logo
+- `layout.tsx` — centered auth layout with theme-aware GOAL logo (uses `useThemeProvider()`)
 - `login/page.tsx` — email/password login
 - `signup/page.tsx` — signup with password confirmation
 
@@ -175,7 +181,6 @@ A Next.js web application that hosts interactive software training guides for GO
 ### Reference Materials (project root)
 - `cowork_guide_content.md` — Claude Cowork guide source content
 - `Mastering_Claude_Cowork.pdf` — Claude Cowork PDF reference
-- `Mastering_Dia_Browser.pdf` — Dia Browser PDF reference
 - `Goal Style Guide Brand + Layout Overview.md` — brand/design reference
 - `Mastering Notion...copy.md` — Notion guide source content
 - `Notion New User Presentation Guide copy.md` — Notion presentation source
