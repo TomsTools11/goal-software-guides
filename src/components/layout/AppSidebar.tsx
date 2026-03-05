@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getGuidesByCategory } from '@/lib/guides';
 import { useTheme } from '@/hooks/useTheme';
-import { useAuth } from '@/hooks/useAuth';
+
 
 interface AppSidebarProps {
   onNavigate?: () => void;
@@ -17,7 +17,6 @@ const sops = getGuidesByCategory('sop');
 export function AppSidebar({ onNavigate }: AppSidebarProps) {
   const pathname = usePathname();
   const { theme } = useTheme();
-  const { user } = useAuth();
 
   function navLink(href: string, label: string) {
     const isActive = pathname === href;
@@ -79,19 +78,9 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
         </div>
       </nav>
 
-      {/* Bottom: Account or Sign In */}
+      {/* Bottom: Account */}
       <div className="border-t border-border px-3 py-3">
-        {user ? (
-          navLink('/account', 'Account')
-        ) : (
-          <Link
-            href="/login"
-            onClick={onNavigate}
-            className="block rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:bg-background-soft hover:text-text"
-          >
-            Sign In
-          </Link>
-        )}
+        {navLink('/account', 'Account')}
       </div>
     </aside>
   );

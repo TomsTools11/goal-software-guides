@@ -45,7 +45,7 @@ export default function SignupPage() {
       <div className="rounded-xl border border-border bg-surface p-6 shadow-md">
         <h1 className="mb-1 text-xl font-bold text-text">Create Account</h1>
         <p className="mb-6 text-sm text-text-muted">
-          Sign up to save your progress across devices.
+          Create an account to access your training courses.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -119,14 +119,6 @@ export default function SignupPage() {
         </p>
       </div>
 
-      <div className="mt-4 text-center">
-        <Link
-          href="/"
-          className="text-sm text-text-muted hover:text-text"
-        >
-          Continue as Guest
-        </Link>
-      </div>
     </div>
   );
 }

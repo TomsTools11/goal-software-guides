@@ -91,22 +91,13 @@ export function TopBar({ onMenuClick }: TopBarProps) {
       </button>
 
       {/* User menu */}
-      {user ? (
-        <Link
-          href="/account"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white transition-opacity hover:opacity-80"
-          title={user.email ?? 'Account'}
-        >
-          {initial}
-        </Link>
-      ) : (
-        <Link
-          href="/login"
-          className="rounded-lg border border-border px-3 py-1.5 text-sm font-medium text-text-muted transition-colors hover:border-primary hover:text-primary"
-        >
-          Sign In
-        </Link>
-      )}
+      <Link
+        href="/account"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white transition-opacity hover:opacity-80"
+        title={user?.email ?? 'Account'}
+      >
+        {initial}
+      </Link>
     </div>
   );
 }

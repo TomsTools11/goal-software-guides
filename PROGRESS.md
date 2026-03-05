@@ -10,7 +10,14 @@ A Next.js web application that hosts interactive software training guides for GO
 ## Latest Update (Mar 5, 2026 — Session 10)
 
 ### Changes This Session
-- **Auth layout logo fix** — login/signup pages were showing the white (dark-mode) logo on the light background; root cause was Tailwind v4's `dark:` variant using `@media (prefers-color-scheme: dark)` instead of the app's `.dark` class toggle; replaced with `useThemeProvider()` pattern matching the sidebar approach (`src/app/(auth)/layout.tsx`)
+- **Auth-gated access** — guest mode removed; all routes now require authentication
+  - Middleware (`src/lib/supabase/middleware.ts`) redirects unauthenticated users to `/login` and authenticated users away from auth pages
+  - "Continue as Guest" links removed from login and signup pages
+  - Login/signup copy updated ("access your training courses" instead of "track progress across devices")
+  - Auth layout updated with "Training Platform" subtitle under GOAL logo
+  - Sidebar always shows "Account" link (removed guest "Sign In" fallback)
+  - TopBar always shows avatar circle (removed guest "Sign In" button)
+- **Auth layout logo fix** — replaced Tailwind v4 `dark:` variant (which uses `prefers-color-scheme`) with `useThemeProvider()` to match the app's `.dark` class toggle
 
 ### Previous Session (Session 9 — Mar 5, 2026)
 - **Login/account system implemented** — full Supabase email/password auth with per-user progress tracking
@@ -193,7 +200,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - [ ] Create `user_progress` table in Supabase (SQL in `plans/login-account-progress-tracking.md` section 1)
 - [ ] Set Supabase env vars in `.env.local` and Netlify
 - [ ] Add Netlify domain to Supabase Auth redirect URLs
-- [ ] Test: guest mode still works, login/signup works, progress migrates, account page shows correct data
+- [ ] Test: login/signup works, progress syncs, account page shows correct data, unauthenticated users redirected to login
 
 ### Online Course Redesign (see `plans/online-course-redesign.md`)
 - [ ] Phase 1: Data model (`course.ts`) + persistent progress hook (`useCourseProgress.ts`)

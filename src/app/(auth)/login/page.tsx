@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div className="rounded-xl border border-border bg-surface p-6 shadow-md">
         <h1 className="mb-1 text-xl font-bold text-text">Sign In</h1>
         <p className="mb-6 text-sm text-text-muted">
-          Sign in to track your progress across devices.
+          Sign in to access your training courses.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -96,14 +96,6 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <div className="mt-4 text-center">
-        <Link
-          href="/"
-          className="text-sm text-text-muted hover:text-text"
-        >
-          Continue as Guest
-        </Link>
-      </div>
     </div>
   );
 }
