@@ -2,22 +2,31 @@
 
 import { guides } from '@/lib/guides';
 import { getAllProgress } from '@/lib/progress';
+import { getAllProgressRemote } from '@/lib/progress-sync';
 import { CourseCard } from './CourseCard';
 import { getGuideIcon } from './guideIcons';
 import type { CategoryFilter } from './CategoryTabs';
 import { useEffect, useState } from 'react';
 import type { GuideProgress } from '@/lib/progress';
+import { useAuth } from '@/hooks/useAuth';
 
 interface CourseGridProps {
   filter: CategoryFilter;
 }
 
 export function CourseGrid({ filter }: CourseGridProps) {
+  const { user, loading: authLoading } = useAuth();
   const [progress, setProgress] = useState<Record<string, GuideProgress>>({});
 
   useEffect(() => {
-    setProgress(getAllProgress());
-  }, []);
+    if (authLoading) return;
+
+    if (user) {
+      getAllProgressRemote().then(setProgress);
+    } else {
+      setProgress(getAllProgress());
+    }
+  }, [user, authLoading]);
 
   const filtered = filter === 'all' ? guides : guides.filter((g) => g.category === filter);
 

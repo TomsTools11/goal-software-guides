@@ -6,12 +6,18 @@ import { ContinueLearning } from '@/components/dashboard/ContinueLearning';
 import { CategoryTabs, type CategoryFilter } from '@/components/dashboard/CategoryTabs';
 import { CourseGrid } from '@/components/dashboard/CourseGrid';
 import { resetAllProgress } from '@/lib/progress';
+import { resetAllProgressRemote } from '@/lib/progress-sync';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function DashboardPage() {
   const [filter, setFilter] = useState<CategoryFilter>('all');
+  const { user } = useAuth();
 
-  function handleReset() {
+  async function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
+      if (user) {
+        await resetAllProgressRemote();
+      }
       resetAllProgress();
       window.location.reload();
     }
@@ -21,7 +27,9 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-text">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-text">
+            {user ? `Welcome back, ${user.email}` : 'Dashboard'}
+          </h1>
           <p className="mt-1 text-sm text-text-muted">
             Track your progress across all GOAL guides and SOPs.
           </p>

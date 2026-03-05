@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { getGuideProgress, updateSectionProgress } from '@/lib/progress';
+import { updateSectionProgressRemote } from '@/lib/progress-sync';
+import { useAuth } from '@/hooks/useAuth';
 
 interface ProgressState {
   completedSections: Set<string>;
@@ -10,10 +12,12 @@ interface ProgressState {
 }
 
 export function useProgressTracker(slug: string, sectionIds: string[]): ProgressState {
+  const { user } = useAuth();
   const [completedSections, setCompletedSections] = useState<Set<string>>(() => {
     const existing = getGuideProgress(slug);
     return existing ? new Set(existing.completedSections) : new Set();
   });
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load existing progress and update lastAccessed
   useEffect(() => {
@@ -27,17 +31,32 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
     }
   }, [slug, sectionIds.length]);
 
+  const syncToRemote = useCallback(
+    (sections: string[], total: number) => {
+      if (!user) return;
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+      debounceTimer.current = setTimeout(() => {
+        updateSectionProgressRemote(slug, sections, total);
+      }, 1500);
+    },
+    [user, slug]
+  );
+
   const markCompleted = useCallback(
     (id: string) => {
       setCompletedSections((prev) => {
         if (prev.has(id)) return prev;
         const next = new Set(prev);
         next.add(id);
-        updateSectionProgress(slug, [...next], sectionIds.length);
+        const sectionsArr = [...next];
+        // Always write to localStorage (works for both guest and logged-in)
+        updateSectionProgress(slug, sectionsArr, sectionIds.length);
+        // Also sync to Supabase if logged in (debounced)
+        syncToRemote(sectionsArr, sectionIds.length);
         return next;
       });
     },
-    [slug, sectionIds.length]
+    [slug, sectionIds.length, syncToRemote]
   );
 
   // Observe sections passing viewport
@@ -62,6 +81,13 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
 
     return () => observer.disconnect();
   }, [sectionIds, markCompleted]);
+
+  // Cleanup debounce on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    };
+  }, []);
 
   const total = sectionIds.length;
   const percent = total > 0 ? Math.round((completedSections.size / total) * 100) : 0;

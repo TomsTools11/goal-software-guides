@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
 
 interface TopBarProps {
@@ -8,6 +10,9 @@ interface TopBarProps {
 
 export function TopBar({ onMenuClick }: TopBarProps) {
   const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+
+  const initial = user?.email?.[0]?.toUpperCase() ?? '?';
 
   return (
     <div className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-surface px-4 lg:px-6">
@@ -84,6 +89,24 @@ export function TopBar({ onMenuClick }: TopBarProps) {
           </svg>
         )}
       </button>
+
+      {/* User menu */}
+      {user ? (
+        <Link
+          href="/account"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white transition-opacity hover:opacity-80"
+          title={user.email ?? 'Account'}
+        >
+          {initial}
+        </Link>
+      ) : (
+        <Link
+          href="/login"
+          className="rounded-lg border border-border px-3 py-1.5 text-sm font-medium text-text-muted transition-colors hover:border-primary hover:text-primary"
+        >
+          Sign In
+        </Link>
+      )}
     </div>
   );
 }
