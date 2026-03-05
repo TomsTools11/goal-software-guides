@@ -17,12 +17,6 @@ export default function AccountPage() {
   const [progress, setProgress] = useState<ProgressStore>({});
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login');
-    }
-  }, [user, loading, router]);
-
-  useEffect(() => {
     if (user) {
       getAllProgressRemote().then(setProgress);
     }
@@ -53,7 +47,7 @@ export default function AccountPage() {
 
   async function handleSignOut() {
     await signOut();
-    router.push('/');
+    router.push('/login');
     router.refresh();
   }
 
