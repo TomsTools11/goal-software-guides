@@ -1,11 +1,9 @@
 'use client';
 
 import { useConvexAuth, useQuery } from 'convex/react';
-import { getAllProgress, computeStatsFromStore, sortByRecentlyAccessed, type DashboardStats, type GuideProgress } from '@/lib/progress';
+import { getAllProgress, computeStatsFromStore, sortByRecentlyAccessed, type DashboardStats, type GuideProgress, type ProgressStore } from '@/lib/progress';
 import { guides } from '@/lib/guides';
 import { api } from '../../convex/_generated/api';
-
-type ProgressStore = Record<string, GuideProgress>;
 
 interface DashboardData {
   stats: DashboardStats;

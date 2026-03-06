@@ -16,7 +16,7 @@ export interface DashboardStats {
   notStarted: number;
 }
 
-type ProgressStore = Record<string, GuideProgress>;
+export type ProgressStore = Record<string, GuideProgress>;
 
 function readStore(): ProgressStore {
   try {
@@ -95,14 +95,6 @@ export function sortByRecentlyAccessed(
   return Object.entries(store)
     .map(([slug, progress]) => ({ slug, progress }))
     .sort((a, b) => b.progress.lastAccessed - a.progress.lastAccessed);
-}
-
-export function getDashboardStats(totalGuides: number): DashboardStats {
-  return computeStatsFromStore(readStore(), totalGuides);
-}
-
-export function getRecentlyAccessed(): Array<{ slug: string; progress: GuideProgress }> {
-  return sortByRecentlyAccessed(readStore());
 }
 
 export function resetAllProgress() {

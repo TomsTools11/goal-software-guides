@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { BrowserChrome } from './BrowserChrome';
 
@@ -48,14 +48,15 @@ function NotionSidebarDemo() {
   );
 }
 
+const DATABASE_VIEWS = ['table', 'board', 'gallery'] as const;
+
 function NotionDatabaseDemo() {
   const [view, setView] = useState<'table' | 'board' | 'gallery'>('table');
-  const views = ['table', 'board', 'gallery'] as const;
 
   useEffect(() => {
-    const idx = views.indexOf(view);
+    const idx = DATABASE_VIEWS.indexOf(view);
     const t = setTimeout(
-      () => setView(views[(idx + 1) % views.length]),
+      () => setView(DATABASE_VIEWS[(idx + 1) % DATABASE_VIEWS.length]),
       2000
     );
     return () => clearTimeout(t);
@@ -64,7 +65,7 @@ function NotionDatabaseDemo() {
   return (
     <div className="p-4">
       <div className="mb-3 flex gap-2">
-        {views.map((v) => (
+        {DATABASE_VIEWS.map((v) => (
           <span
             key={v}
             className={`rounded px-2 py-0.5 text-[10px] font-medium transition-colors ${
@@ -195,21 +196,25 @@ export function AnimatedDemo({ type, title }: AnimatedDemoProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [playing, setPlaying] = useState(false);
-  const [prefersReduced, setPrefersReduced] = useState(false);
   const DemoComponent = demos[type];
   const isNotion = type.startsWith('notion-');
 
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
+  const prefersReduced = useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      mq.addEventListener('change', cb);
+      return () => mq.removeEventListener('change', cb);
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false
+  );
 
-  useEffect(() => {
-    if (isInView && !prefersReduced) setPlaying(true);
-  }, [isInView, prefersReduced]);
+  const shouldAutoPlay = isInView && !prefersReduced;
+  const [didAutoPlay, setDidAutoPlay] = useState(false);
+  if (shouldAutoPlay && !didAutoPlay) {
+    setDidAutoPlay(true);
+    setPlaying(true);
+  }
 
   return (
     <div ref={ref} className="my-6">

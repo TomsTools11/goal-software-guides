@@ -3,7 +3,7 @@
 import { useDashboardStats } from '@/hooks/useDashboardStats';
 import { getGuideBySlug } from '@/lib/guides';
 import { CourseCard } from './CourseCard';
-import { guideIcons } from './guideIcons';
+import { getGuideIcon } from './guideIcons';
 
 export function ContinueLearning() {
   const { recentlyAccessed } = useDashboardStats();
@@ -25,7 +25,7 @@ export function ContinueLearning() {
             <CourseCard
               key={slug}
               guide={guide}
-              icon={guideIcons[slug]}
+              icon={getGuideIcon(slug)}
               progress={progress}
             />
           );

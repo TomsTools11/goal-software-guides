@@ -5,6 +5,8 @@ import { useConvexAuth, useMutation } from 'convex/react';
 import { getGuideProgress, updateSectionProgress } from '@/lib/progress';
 import { api } from '../../convex/_generated/api';
 
+const SYNC_DEBOUNCE_MS = 1500;
+
 interface ProgressState {
   completedSections: Set<string>;
   totalSections: number;
@@ -20,14 +22,18 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
   });
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Load existing progress and update lastAccessed
-  useEffect(() => {
+  // When slug changes, reset state from localStorage
+  const [prevSlug, setPrevSlug] = useState(slug);
+  if (slug !== prevSlug) {
+    setPrevSlug(slug);
     const existing = getGuideProgress(slug);
-    if (existing) {
-      setCompletedSections(new Set(existing.completedSections));
-    }
-    // Touch lastAccessed
+    setCompletedSections(existing ? new Set(existing.completedSections) : new Set());
+  }
+
+  // Touch lastAccessed on mount / slug change
+  useEffect(() => {
     if (sectionIds.length > 0) {
+      const existing = getGuideProgress(slug);
       updateSectionProgress(slug, existing?.completedSections ?? [], sectionIds.length);
     }
   }, [slug, sectionIds.length]);
@@ -42,7 +48,7 @@ export function useProgressTracker(slug: string, sectionIds: string[]): Progress
           completedSections: sections,
           totalSections: total,
         });
-      }, 1500);
+      }, SYNC_DEBOUNCE_MS);
     },
     [isAuthenticated, slug, upsertProgress]
   );

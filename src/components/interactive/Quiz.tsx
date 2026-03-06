@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserChrome } from './BrowserChrome';
 
@@ -17,28 +17,26 @@ interface QuizProps {
   questions: QuizQuestion[];
 }
 
+function readSavedScore(storageKey: string): number | null {
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      const parsed = parseInt(saved, 10);
+      if (!isNaN(parsed)) return parsed;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
 export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
   const storageKey = `goal-quiz-${id}`;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
-  const [score, setScore] = useState(0);
-  const [completed, setCompleted] = useState(false);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(storageKey);
-      if (saved) {
-        const parsed = parseInt(saved, 10);
-        if (!isNaN(parsed)) {
-          setScore(parsed);
-          setCompleted(true);
-        }
-      }
-    } catch {
-      // ignore
-    }
-  }, [storageKey]);
+  const [score, setScore] = useState(() => readSavedScore(storageKey) ?? 0);
+  const [completed, setCompleted] = useState(() => readSavedScore(storageKey) !== null);
 
   function handleSelect(index: number) {
     if (answered) return;

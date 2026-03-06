@@ -20,6 +20,8 @@ export function useAuth() {
     // True while auth state is being determined
     loading: !clerkLoaded || convexLoading,
     isAuthenticated,
+    // Convex-level auth (use for Convex mutations/queries that need auth)
+    convexAuthenticated: convexAuth,
     signOut: () => signOut(),
   };
 }

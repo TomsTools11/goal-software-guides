@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useConvexAuth, useMutation } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { StatsOverview } from '@/components/dashboard/StatsOverview';
 import { ContinueLearning } from '@/components/dashboard/ContinueLearning';
 import { CategoryTabs, type CategoryFilter } from '@/components/dashboard/CategoryTabs';
@@ -13,14 +13,13 @@ import { api } from '../../../convex/_generated/api';
 
 export default function DashboardPage() {
   const [filter, setFilter] = useState<CategoryFilter>('all');
-  const { clerkUser } = useAuth();
-  const { isAuthenticated } = useConvexAuth();
+  const { clerkUser, convexAuthenticated } = useAuth();
   const { progress } = useDashboardStats();
   const resetRemoteProgress = useMutation(api.progress.resetAllProgress);
 
   async function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
-      if (isAuthenticated) {
+      if (convexAuthenticated) {
         await resetRemoteProgress();
       }
       resetAllProgress();

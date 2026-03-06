@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 import { motion } from 'framer-motion';
 
 interface ChecklistItemProps {
@@ -8,27 +8,42 @@ interface ChecklistItemProps {
   children: React.ReactNode;
 }
 
+let listeners: Array<() => void> = [];
+function emitChange() {
+  for (const listener of listeners) listener();
+}
+
+function subscribe(listener: () => void) {
+  listeners = [...listeners, listener];
+  return () => {
+    listeners = listeners.filter((l) => l !== listener);
+  };
+}
+
 export function ChecklistItem({ id, children }: ChecklistItemProps) {
   const storageKey = `goal-checklist-${id}`;
-  const [checked, setChecked] = useState(false);
 
-  useEffect(() => {
-    try {
-      setChecked(localStorage.getItem(storageKey) === 'true');
-    } catch {
-      // ignore
-    }
-  }, [storageKey]);
+  const checked = useSyncExternalStore(
+    subscribe,
+    () => {
+      try {
+        return localStorage.getItem(storageKey) === 'true';
+      } catch {
+        return false;
+      }
+    },
+    () => false
+  );
 
-  function toggle() {
+  const toggle = useCallback(() => {
     const next = !checked;
-    setChecked(next);
     try {
       localStorage.setItem(storageKey, String(next));
     } catch {
       // ignore
     }
-  }
+    emitChange();
+  }, [checked, storageKey]);
 
   return (
     <label className="my-2 flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-background-soft">

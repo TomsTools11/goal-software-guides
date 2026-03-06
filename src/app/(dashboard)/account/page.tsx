@@ -1,24 +1,20 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useConvexAuth, useQuery, useMutation } from 'convex/react';
+import { useQuery, useMutation } from 'convex/react';
 import { useAuth } from '@/hooks/useAuth';
-import { resetAllProgress } from '@/lib/progress';
+import { resetAllProgress, type ProgressStore } from '@/lib/progress';
 import { guides } from '@/lib/guides';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { api } from '../../../../convex/_generated/api';
-import type { GuideProgress } from '@/lib/progress';
-
-type ProgressStore = Record<string, GuideProgress>;
 
 export default function AccountPage() {
-  const { clerkUser, loading, signOut, isAuthenticated } = useAuth();
-  const { isAuthenticated: convexAuth } = useConvexAuth();
+  const { clerkUser, loading, signOut, convexAuthenticated } = useAuth();
   const router = useRouter();
 
   const remoteProgress = useQuery(
     api.progress.getAllProgress,
-    convexAuth ? {} : "skip"
+    convexAuthenticated ? {} : "skip"
   );
   const resetRemoteProgress = useMutation(api.progress.resetAllProgress);
 
@@ -85,6 +81,7 @@ export default function AccountPage() {
             <p className="text-sm text-text-muted">Member since {memberSince}</p>
           </div>
           <button
+            type="button"
             onClick={handleSignOut}
             className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:border-error hover:text-error"
           >
@@ -158,6 +155,7 @@ export default function AccountPage() {
           This will permanently clear all your course progress. This action cannot be undone.
         </p>
         <button
+          type="button"
           onClick={handleReset}
           className="rounded-lg bg-error px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
