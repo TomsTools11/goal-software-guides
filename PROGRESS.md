@@ -7,11 +7,54 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 5, 2026 — Session 10)
+## Latest Update (Mar 6, 2026 — Session 12)
 
 ### Changes This Session
+- **Codebase refactoring and cleanup** — fixed all ESLint errors, removed dead code, consolidated patterns
+  - **Fixed 7 ESLint errors** (`react-hooks/set-state-in-effect`): replaced `useState` + `useEffect` patterns with `useSyncExternalStore` and lazy initializers across `useTheme`, `useHeadings`, `ChecklistItem`, `Quiz`, `ScrollProgress`, `AnimatedDemo`, `useProgressTracker`
+  - **Removed dead code**: deleted unused `getDashboardStats` and `getRecentlyAccessed` from `convex/progress.ts` (never called from frontend) and matching unused wrappers from `src/lib/progress.ts`
+  - **Consolidated `ProgressStore` type**: exported once from `src/lib/progress.ts`, removed 2 duplicate definitions in `useDashboardStats.ts` and `account/page.tsx`
+  - **Unified auth state**: added `convexAuthenticated` field to `useAuth()` hook, removed redundant `useConvexAuth()` imports from Dashboard and Account pages
+  - **Fixed hardcoded SOP badge**: replaced inline `style={{ backgroundColor: '#166534' }}` with `<Badge variant="success">` design system component
+  - **Fixed `ContinueLearning` missing fallback icon**: switched from direct `guideIcons[slug]` access to `getGuideIcon(slug)` which has a default icon fallback
+  - **Added missing `type="button"`** on Sign Out and Reset Progress buttons in Account page
+  - **Extracted magic number**: `1500` debounce delay → named constant `SYNC_DEBOUNCE_MS`
+- **Lint status**: 0 errors, 5 warnings (all in auto-generated `convex/_generated/` files)
+- **Pushed to GitHub**: commit `e44fdab`
+
+### Previous Session (Session 11 — Mar 5, 2026)
+- **Migrated from Supabase to Convex + Clerk** — complete backend and auth replacement
+  - **Auth**: Supabase email/password replaced with Clerk Google OAuth
+  - **Database**: Supabase PostgreSQL replaced with Convex (reactive, real-time)
+  - **Middleware**: Supabase session middleware replaced with `clerkMiddleware()` + `createRouteMatcher()` for server-side route protection
+- **New Convex backend** (`convex/`):
+  - `schema.ts` — `users` and `userProgress` tables with indexes
+  - `auth.config.ts` — Clerk JWT issuer domain config
+  - `users.ts` — `current` query + `getOrCreate` mutation
+  - `progress.ts` — full CRUD: `getAllProgress`, `upsertProgress`, `resetAllProgress`, `migrateLocalProgress`
+- **New frontend providers**:
+  - `src/components/providers/ConvexClientProvider.tsx` — `ClerkProvider` > `ConvexProviderWithClerk` wrapper
+  - `src/components/auth/AuthGuard.tsx` — Convex user sync + localStorage-to-Convex migration on first authenticated load
+  - `src/lib/convex.ts` — `ConvexReactClient` initialization
+- **Rewritten hooks**:
+  - `useAuth.tsx` — wraps Clerk (`useUser`, `useClerk`) + Convex (`useConvexAuth`, `useQuery`); exposes `user` (Convex doc), `clerkUser` (Clerk user), `isAuthenticated`, `convexAuthenticated`, `signOut`
+  - `useProgressTracker.ts` — Convex `useMutation(api.progress.upsertProgress)` replaces Supabase sync
+  - `useDashboardStats.ts` — reactive `useQuery` replaces imperative fetch; auto-updates on progress changes
+- **Auth pages**: Login and signup now use Clerk's `<SignIn />` and `<SignUp />` components (Google OAuth)
+- **Dashboard + Account pages**: use `clerkUser` for display (email, avatar, member since), Convex queries for progress data
+- **Deleted files**:
+  - `src/lib/supabase/` directory (client.ts, server.ts, middleware.ts)
+  - `src/lib/progress-sync.ts`
+- **Config updates**:
+  - `netlify.toml` — build command: `npx convex deploy --cmd 'npm run build'`
+  - `.env.local.example` — Convex + Clerk env var template
+  - `package.json` — removed `@supabase/supabase-js`, `@supabase/ssr`; added `convex`, `@clerk/nextjs`
+- **Bug fix**: AppSidebar missing `key` prop on nav links
+- **Deployed to Netlify** with Convex production deployment
+
+### Previous Session (Session 10 — Mar 5, 2026)
 - **Auth-gated access** — guest mode removed; all routes now require authentication
-  - Middleware (`src/lib/supabase/middleware.ts`) redirects unauthenticated users to `/login` and authenticated users away from auth pages
+  - Middleware redirects unauthenticated users to `/login` and authenticated users away from auth pages
   - "Continue as Guest" links removed from login and signup pages
   - Login/signup copy updated ("access your training courses" instead of "track progress across devices")
   - Auth layout updated with "Training Platform" subtitle under GOAL logo
@@ -22,35 +65,9 @@ A Next.js web application that hosts interactive software training guides for GO
 ### Previous Session (Session 9 — Mar 5, 2026)
 - **Login/account system implemented** — full Supabase email/password auth with per-user progress tracking
 - **New dependencies**: `@supabase/supabase-js` and `@supabase/ssr` added
-- **Supabase client layer** (`src/lib/supabase/`):
-  - `client.ts` — browser Supabase client (singleton via `createBrowserClient`)
-  - `server.ts` — server Supabase client (cookie-based, for server components)
-  - `middleware.ts` — session refresh helper for Next.js middleware
-- **Auth middleware** (`src/middleware.ts`) — refreshes auth session on each request
-- **AuthProvider** (`src/hooks/useAuth.tsx`) — React context providing `user`, `loading`, `signOut`; auto-migrates localStorage progress to Supabase on first login
-- **Progress sync** (`src/lib/progress-sync.ts`) — Supabase CRUD mirroring `progress.ts` interface: `getAllProgressRemote`, `updateSectionProgressRemote`, `resetAllProgressRemote`, `migrateLocalProgressToRemote`
-- **Auth pages**:
-  - `src/app/(auth)/layout.tsx` — centered layout with GOAL logo (no sidebar)
-  - `src/app/(auth)/login/page.tsx` — email/password login + "Continue as Guest" link
-  - `src/app/(auth)/signup/page.tsx` — signup with password confirmation
-- **Account page** (`src/app/(dashboard)/account/page.tsx`) — profile card, completed courses, remaining courses with progress bars, reset progress (danger zone)
-- **Updated hooks** to branch on auth state:
-  - `useProgressTracker.ts` — writes to localStorage always + debounced (1.5s) Supabase sync when logged in
-  - `useDashboardStats.ts` — fetches from Supabase when logged in, localStorage when guest
-- **Updated layout/nav**:
-  - `TopBar.tsx` — avatar initial circle (logged in) or "Sign In" button (guest)
-  - `AppSidebar.tsx` — "Account" nav link at bottom when logged in, "Sign In" when guest
-- **Updated dashboard** (`page.tsx`) — "Welcome back, {email}" greeting, auth-aware reset (clears both Supabase + localStorage)
-- **Updated CourseGrid** — auth-aware progress fetching
-- **Root layout** (`src/app/layout.tsx`) — wrapped in `<AuthProvider>`
-- **`.env.local.example`** created with required Supabase env var template
-- **Guest mode preserved** — all existing localStorage-based progress still works for unauthenticated users
+- **Supabase client layer**, **Auth middleware**, **AuthProvider**, **Progress sync**, **Auth pages**, **Account page** all created
+- **Guest mode preserved** — localStorage-based progress for unauthenticated users
 - **Build verified** — `npm run build` passes cleanly
-
-### Before This Feature Works in Production
-1. Run the SQL from `plans/login-account-progress-tracking.md` (section 1) in Supabase SQL Editor to create the `user_progress` table with RLS policies
-2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local` and Netlify env vars
-3. Add Netlify domain to Supabase Auth > URL Configuration > Redirect URLs
 
 ### Previous Session (Session 8 — Mar 2, 2026)
 - Online course redesign planned — comprehensive plan created (`plans/online-course-redesign.md`)
@@ -96,24 +113,23 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 5, 2026 — Session 10)
+## Current State (Mar 6, 2026 — Session 12)
 
 ### What's Been Built
 
 **1. Project Foundation**
-- Next.js app scaffolded with TypeScript, Tailwind v4, and MDX support
+- Next.js 16 app with TypeScript, Tailwind v4, and MDX support
 - GOAL design token system (CSS custom properties, Tailwind config, TS constants, JSON)
 - PostCSS and ESLint configured
 - Brand assets in place (`goal_blk.png`, `goal_wht.png`, `gicon.png`)
 
 **2. Layout Components** (`src/components/layout/`)
-- `Header.tsx` — site header with GOAL branding
-- `Footer.tsx` — site footer
-- `Container.tsx` — responsive content wrapper
+- `DashboardShell.tsx` — main app shell with sidebar + topbar
+- `AppSidebar.tsx` — sidebar navigation with guide/SOP links
+- `TopBar.tsx` — top bar with search, theme toggle, user avatar
 
 **3. UI Components** (`src/components/ui/`)
 - `Button.tsx`
-- `Card.tsx`
 - `Badge.tsx`
 - `ProgressBar.tsx`
 
@@ -122,6 +138,8 @@ A Next.js web application that hosts interactive software training guides for GO
 - `GuideSidebar.tsx` — sidebar navigation for guides
 - `TableOfContents.tsx` — auto-generated TOC from headings
 - `ScrollProgress.tsx` — reading progress indicator
+- `GuideHeader.tsx` — guide header with metadata
+- `GuideNavigation.tsx` — prev/next navigation
 
 **5. Interactive Components** (`src/components/interactive/`)
 - `Accordion.tsx` — expandable/collapsible sections
@@ -132,75 +150,89 @@ A Next.js web application that hosts interactive software training guides for GO
 - `TipCallout.tsx` — tip/warning callout blocks
 - `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback
 - `Screenshot.tsx` — browser chrome frame for displaying app screenshots
+- `BrowserChrome.tsx` — browser chrome wrapper
 - `DataTable.tsx` — styled data table with headers, row separators, and responsive scroll
-- `CopyableTemplate.tsx` — structured template card with copy-to-clipboard, labeled fields, and bullet placeholders
+- `CopyableTemplate.tsx` — structured template card with copy-to-clipboard
 
-**6. Hooks** (`src/hooks/`)
+**6. Dashboard Components** (`src/components/dashboard/`)
+- `StatsOverview.tsx` — stats cards (total, completed, in progress, not started)
+- `ContinueLearning.tsx` — recently accessed in-progress courses
+- `CourseGrid.tsx` — filterable course card grid
+- `CourseCard.tsx` — individual course card with progress
+- `CategoryTabs.tsx` — guide/SOP filter tabs
+- `StatCard.tsx` — individual stat card
+- `guideIcons.tsx` — SVG icons for each guide
+
+**7. Auth & Backend**
+- **Clerk** (`@clerk/nextjs`) — Google OAuth authentication
+  - `src/middleware.ts` — `clerkMiddleware()` with server-side route protection
+  - `src/components/providers/ConvexClientProvider.tsx` — ClerkProvider + ConvexProviderWithClerk
+  - `src/app/(auth)/login/page.tsx` — Clerk `<SignIn />` component
+  - `src/app/(auth)/signup/page.tsx` — Clerk `<SignUp />` component
+- **Convex** — reactive database + backend functions
+  - `convex/schema.ts` — `users` + `userProgress` tables
+  - `convex/auth.config.ts` — Clerk JWT validation
+  - `convex/users.ts` — user lookup/creation
+  - `convex/progress.ts` — all progress CRUD operations
+  - `src/lib/convex.ts` — ConvexReactClient
+  - `src/components/auth/AuthGuard.tsx` — user sync + localStorage migration
+
+**8. Hooks** (`src/hooks/`)
 - `useHeadings.ts` — extracts headings from content
 - `useScrollSpy.ts` — tracks active section on scroll
-- `useProgressTracker.ts` — tracks reading progress (localStorage + Supabase sync when logged in)
-- `useDashboardStats.ts` — dashboard stats (auth-aware: Supabase or localStorage)
-- `useAuth.tsx` — AuthProvider context + `useAuth()` hook
+- `useProgressTracker.ts` — tracks reading progress (localStorage + Convex sync when logged in)
+- `useDashboardStats.ts` — reactive dashboard stats via Convex `useQuery`
+- `useAuth.tsx` — unified auth hook wrapping Clerk + Convex
 - `useTheme.ts` — dark/light theme toggle
 
-**7. Content & Routing**
-- Guide registry (`src/lib/guides.ts`) with metadata for each guide
-- Dynamic route: `src/app/guides/[slug]/page.tsx` with `GuideLayoutWrapper.tsx`
-- Landing page (`src/app/page.tsx`) with guide cards and progress reset on visit
+**9. Content & Routing**
+- Guide registry (`src/lib/guides.ts`) with metadata for 12 guides/SOPs
+- Dynamic route: `src/app/(dashboard)/guides/[slug]/page.tsx` with `GuideLayoutWrapper.tsx`
+- Dashboard page (`src/app/(dashboard)/page.tsx`) with stats, continue learning, course grid
+- Account page (`src/app/(dashboard)/account/page.tsx`) with profile, progress, sign out
 - MDX components mapping (`src/components/mdx/MDXComponents.tsx`)
 
-**8. Guide Content** (`src/content/`)
-- `notion/index.mdx` — Notion guide (complete)
-- `claude-cowork/index.mdx` — Claude Cowork guide (complete)
-- `close-crm/index.mdx` — Close CRM guide (complete)
-- `account-review-sop/index.mdx` — Account Review SOP (complete)
-- `client-onboarding-sop/index.mdx` — Client Onboarding SOP (complete)
-- `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (complete)
-- `right-pricing-sop/index.mdx` — Right Pricing SOP (complete)
-- `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (complete)
-- `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (complete)
-- `sales-discovery-process/index.mdx` — Sales Discovery Process (complete, 9 chapters)
-- `setting-expectations-sop/index.mdx` — Setting Firm Expectations & Handling Objections (complete, 8 chapters)
-- `competition-research/index.mdx` — GOAL Competition Research (complete, 8 chapters)
+**10. Guide Content** (`src/content/`) — 12 guides/SOPs
+- `notion/index.mdx` — Mastering Notion (8 chapters)
+- `claude-cowork/index.mdx` — Getting Started with Claude Cowork (6 chapters)
+- `close-crm/index.mdx` — Mastering Close CRM (7 chapters)
+- `account-review-sop/index.mdx` — Account Review SOP (5 chapters)
+- `client-onboarding-sop/index.mdx` — Client Onboarding SOP (4 chapters)
+- `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (8 chapters)
+- `right-pricing-sop/index.mdx` — Right Pricing SOP (5 chapters)
+- `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (7 chapters)
+- `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (11 chapters)
+- `sales-discovery-process/index.mdx` — Sales Discovery Process (9 chapters)
+- `setting-expectations-sop/index.mdx` — Setting Firm Expectations & Handling Objections (8 chapters)
+- `competition-research/index.mdx` — GOAL Competition Research (8 chapters)
 
-**9. Scripts** (`scripts/`)
+**11. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
 
-**10. Auth & Progress Sync** (`src/lib/supabase/`, `src/lib/progress-sync.ts`)
-- `supabase/client.ts` — browser Supabase client (singleton)
-- `supabase/server.ts` — server Supabase client (cookie-based)
-- `supabase/middleware.ts` — session refresh helper
-- `progress-sync.ts` — Supabase CRUD for per-user progress
-- `src/middleware.ts` — Next.js middleware for auth session refresh
-
-**11. Auth Pages** (`src/app/(auth)/`)
-- `layout.tsx` — centered auth layout with theme-aware GOAL logo (uses `useThemeProvider()`)
-- `login/page.tsx` — email/password login
-- `signup/page.tsx` — signup with password confirmation
-
-**12. Account Page** (`src/app/(dashboard)/account/page.tsx`)
-- Profile card, completed courses, remaining courses, reset progress
-
-**13. Plans** (`plans/`)
+**12. Plans** (`plans/`)
 - `online-course-redesign.md` — 6-phase plan to transform site into online course platform
-- `login-account-progress-tracking.md` — login/account system plan (implemented)
+- `login-account-progress-tracking.md` — login/account system plan (implemented, then migrated to Convex+Clerk)
 
-### Reference Materials (project root)
-- `cowork_guide_content.md` — Claude Cowork guide source content
-- `Mastering_Claude_Cowork.pdf` — Claude Cowork PDF reference
-- `Goal Style Guide Brand + Layout Overview.md` — brand/design reference
-- `Mastering Notion...copy.md` — Notion guide source content
-- `Notion New User Presentation Guide copy.md` — Notion presentation source
+### Tech Stack
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Content | MDX |
+| Auth | Clerk (Google OAuth) |
+| Database | Convex (reactive) |
+| Hosting | Netlify |
 
 ---
 
 ## What's Next
 
-### Login/Account System — Deploy Checklist
-- [ ] Create `user_progress` table in Supabase (SQL in `plans/login-account-progress-tracking.md` section 1)
-- [ ] Set Supabase env vars in `.env.local` and Netlify
-- [ ] Add Netlify domain to Supabase Auth redirect URLs
-- [ ] Test: login/signup works, progress syncs, account page shows correct data, unauthenticated users redirected to login
+### Clerk Production Setup
+- [ ] Switch Clerk to production instance
+- [ ] Set up Google OAuth credentials (Google Cloud Console)
+- [ ] Update Netlify env vars with production Clerk keys (`pk_live_`, `sk_live_`)
+- [ ] Update Convex dashboard `CLERK_JWT_ISSUER_DOMAIN` with production issuer URL
 
 ### Online Course Redesign (see `plans/online-course-redesign.md`)
 - [ ] Phase 1: Data model (`course.ts`) + persistent progress hook (`useCourseProgress.ts`)
@@ -222,9 +254,23 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ## How to Run
 ```bash
-cp .env.local.example .env.local   # then fill in Supabase URL + anon key
+# 1. Install dependencies
 npm install
+
+# 2. Start Convex dev server (generates types, syncs schema)
+npx convex dev
+
+# 3. In a separate terminal, start Next.js
 npm run dev
 # Open http://localhost:3000
 ```
-Note: The app works without Supabase env vars — auth features won't load but guest mode (localStorage) works fine.
+
+### Environment Variables
+Clerk keys are optional for local dev (keyless mode auto-provisions). For full functionality:
+```
+NEXT_PUBLIC_CONVEX_URL=https://your-project.convex.cloud
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+```
+
+The `CLERK_JWT_ISSUER_DOMAIN` environment variable is set on the Convex dashboard (not in `.env.local`).
