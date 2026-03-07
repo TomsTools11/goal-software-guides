@@ -1,3 +1,5 @@
+export type Category = 'software' | 'account-management' | 'sales';
+
 export interface GuideMetadata {
   slug: string;
   title: string;
@@ -5,7 +7,7 @@ export interface GuideMetadata {
   chapters: number;
   estimatedTime: string;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
-  category: 'guide' | 'sop';
+  categories: Category[];
 }
 
 export const guides: GuideMetadata[] = [
@@ -17,7 +19,7 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '30 min',
     difficulty: 'Beginner',
-    category: 'guide',
+    categories: ['software'],
   },
   {
     slug: 'claude-cowork',
@@ -27,7 +29,7 @@ export const guides: GuideMetadata[] = [
     chapters: 6,
     estimatedTime: '20 min',
     difficulty: 'Beginner',
-    category: 'guide',
+    categories: ['software'],
   },
   {
     slug: 'close-crm',
@@ -37,7 +39,7 @@ export const guides: GuideMetadata[] = [
     chapters: 7,
     estimatedTime: '25 min',
     difficulty: 'Intermediate',
-    category: 'guide',
+    categories: ['software'],
   },
   {
     slug: 'account-review-sop',
@@ -47,7 +49,7 @@ export const guides: GuideMetadata[] = [
     chapters: 5,
     estimatedTime: '15 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['account-management'],
   },
   {
     slug: 'client-onboarding-sop',
@@ -57,7 +59,7 @@ export const guides: GuideMetadata[] = [
     chapters: 4,
     estimatedTime: '20 min',
     difficulty: 'Beginner',
-    category: 'sop',
+    categories: ['account-management'],
   },
   {
     slug: 'campaign-optimization-sop',
@@ -67,7 +69,7 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '25 min',
     difficulty: 'Advanced',
-    category: 'sop',
+    categories: ['account-management'],
   },
   {
     slug: 'right-pricing-sop',
@@ -77,7 +79,7 @@ export const guides: GuideMetadata[] = [
     chapters: 5,
     estimatedTime: '15 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['account-management', 'sales'],
   },
   {
     slug: 'sales-demo-sop',
@@ -87,7 +89,7 @@ export const guides: GuideMetadata[] = [
     chapters: 7,
     estimatedTime: '20 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['account-management', 'sales'],
   },
   {
     slug: 'disposition-data-import-sop',
@@ -97,7 +99,7 @@ export const guides: GuideMetadata[] = [
     chapters: 11,
     estimatedTime: '20 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['account-management'],
   },
   {
     slug: 'sales-discovery-process',
@@ -107,7 +109,7 @@ export const guides: GuideMetadata[] = [
     chapters: 9,
     estimatedTime: '35 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['sales'],
   },
   {
     slug: 'setting-expectations-sop',
@@ -117,7 +119,7 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '30 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['sales'],
   },
   {
     slug: 'competition-research',
@@ -127,7 +129,7 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '25 min',
     difficulty: 'Beginner',
-    category: 'sop',
+    categories: ['sales'],
   },
   {
     slug: 'brand-positioning-captive',
@@ -137,7 +139,7 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '30 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['sales'],
   },
   {
     slug: 'tcpa-compliance',
@@ -147,7 +149,17 @@ export const guides: GuideMetadata[] = [
     chapters: 8,
     estimatedTime: '45 min',
     difficulty: 'Intermediate',
-    category: 'sop',
+    categories: ['sales'],
+  },
+  {
+    slug: 'consultative-targeting-sop',
+    title: 'Consultative Campaign Targeting',
+    description:
+      'Transition from order-taker to trusted marketing advisor — diagnose over-filtering, recommend day-parting windows, and propose hybrid geo strategies that balance volume with quality.',
+    chapters: 8,
+    estimatedTime: '30 min',
+    difficulty: 'Intermediate',
+    categories: ['sales'],
   },
 ];
 
@@ -155,8 +167,8 @@ export function getGuideBySlug(slug: string): GuideMetadata | undefined {
   return guides.find((g) => g.slug === slug);
 }
 
-export function getGuidesByCategory(category: 'guide' | 'sop'): GuideMetadata[] {
-  return guides.filter((g) => g.category === category);
+export function getGuidesByCategory(category: Category): GuideMetadata[] {
+  return guides.filter((g) => g.categories.includes(category));
 }
 
 export function getAllSlugs(): string[] {

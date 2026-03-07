@@ -1,6 +1,6 @@
 'use client';
 
-export type CategoryFilter = 'all' | 'guide' | 'sop';
+export type CategoryFilter = 'all' | 'software' | 'account-management' | 'sales';
 
 interface CategoryTabsProps {
   active: CategoryFilter;
@@ -9,8 +9,9 @@ interface CategoryTabsProps {
 
 const tabs: { value: CategoryFilter; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'guide', label: 'Software Guides' },
-  { value: 'sop', label: 'SOPs' },
+  { value: 'software', label: 'Software' },
+  { value: 'account-management', label: 'Account Management' },
+  { value: 'sales', label: 'Sales' },
 ];
 
 export function CategoryTabs({ active, onChange }: CategoryTabsProps) {

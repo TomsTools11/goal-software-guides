@@ -23,7 +23,7 @@ export function GuideHeader({ guide, progressPercent }: GuideHeaderProps) {
         <Badge variant="primary">{guide.difficulty}</Badge>
         <span className="text-xs text-text-muted">{guide.estimatedTime}</span>
         <span className="text-xs text-text-muted">
-          {guide.chapters} {guide.category === 'sop' ? 'sections' : 'chapters'}
+          {guide.chapters} {guide.categories.includes('software') ? 'chapters' : 'sections'}
         </span>
       </div>
 

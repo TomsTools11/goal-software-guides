@@ -1,6 +1,7 @@
 import React from 'react';
 
-const SOP_ICON_BG = '#0F4C35';
+const ACCT_MGMT_ICON_BG = '#0F4C35';
+const SALES_ICON_BG = '#1A3A5C';
 
 function IconBox({ bg, children }: { bg: string; children: React.ReactNode }) {
   return (
@@ -33,65 +34,72 @@ export const guideIcons: Record<string, React.ReactNode> = {
     </IconBox>
   ),
   'account-review-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
       </svg>
     </IconBox>
   ),
   'client-onboarding-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
       </svg>
     </IconBox>
   ),
   'campaign-optimization-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
       </svg>
     </IconBox>
   ),
   'right-pricing-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
       </svg>
     </IconBox>
   ),
   'sales-demo-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" />
       </svg>
     </IconBox>
   ),
   'disposition-data-import-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={ACCT_MGMT_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
       </svg>
     </IconBox>
   ),
   'sales-discovery-process': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={SALES_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
       </svg>
     </IconBox>
   ),
   'setting-expectations-sop': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={SALES_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
       </svg>
     </IconBox>
   ),
   'competition-research': (
-    <IconBox bg={SOP_ICON_BG}>
+    <IconBox bg={SALES_ICON_BG}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
         <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" />
+      </svg>
+    </IconBox>
+  ),
+  'consultative-targeting-sop': (
+    <IconBox bg={SALES_ICON_BG}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
       </svg>
     </IconBox>
   ),

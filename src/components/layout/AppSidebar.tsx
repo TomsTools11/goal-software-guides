@@ -11,8 +11,9 @@ interface AppSidebarProps {
   onNavigate?: () => void;
 }
 
-const softwareGuides = getGuidesByCategory('guide');
-const sops = getGuidesByCategory('sop');
+const softwareGuides = getGuidesByCategory('software');
+const accountManagement = getGuidesByCategory('account-management');
+const salesGuides = getGuidesByCategory('sales');
 
 export function AppSidebar({ onNavigate }: AppSidebarProps) {
   const pathname = usePathname();
@@ -58,23 +59,33 @@ export function AppSidebar({ onNavigate }: AppSidebarProps) {
           {navLink('/', 'Dashboard')}
         </div>
 
-        {/* Software Guides */}
+        {/* Software */}
         <div>
           <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
-            Software Guides
+            Software
           </p>
           <div className="space-y-0.5">
             {softwareGuides.map((g) => navLink(`/guides/${g.slug}`, g.title))}
           </div>
         </div>
 
-        {/* SOPs */}
+        {/* Account Management */}
         <div>
           <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
-            SOPs
+            Account Management
           </p>
           <div className="space-y-0.5">
-            {sops.map((g) => navLink(`/guides/${g.slug}`, g.title))}
+            {accountManagement.map((g) => navLink(`/guides/${g.slug}`, g.title))}
+          </div>
+        </div>
+
+        {/* Sales */}
+        <div>
+          <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
+            Sales
+          </p>
+          <div className="space-y-0.5">
+            {salesGuides.map((g) => navLink(`/guides/${g.slug}`, g.title))}
           </div>
         </div>
       </nav>

@@ -13,7 +13,9 @@ export function GuideNavigation({ currentSlug }: GuideNavigationProps) {
   if (!currentGuide) return null;
 
   // Navigate within same category
-  const sameCategory = guides.filter((g) => g.category === currentGuide.category);
+  const sameCategory = guides.filter((g) =>
+    g.categories.some((c) => currentGuide.categories.includes(c))
+  );
   const currentIndex = sameCategory.findIndex((g) => g.slug === currentSlug);
   const prev: GuideMetadata | undefined = sameCategory[currentIndex - 1];
   const next: GuideMetadata | undefined = sameCategory[currentIndex + 1];

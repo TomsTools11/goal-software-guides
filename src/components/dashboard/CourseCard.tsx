@@ -4,8 +4,14 @@ import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { Button } from '@/components/ui/Button';
-import type { GuideMetadata } from '@/lib/guides';
+import type { GuideMetadata, Category } from '@/lib/guides';
 import type { GuideProgress } from '@/lib/progress';
+
+const categoryBadge: Record<Category, { label: string; variant: 'primary' | 'success' | 'accent' }> = {
+  software: { label: 'Software', variant: 'primary' },
+  'account-management': { label: 'Account Mgmt', variant: 'accent' },
+  sales: { label: 'Sales', variant: 'success' },
+};
 
 interface CourseCardProps {
   guide: GuideMetadata;
@@ -38,9 +44,13 @@ export function CourseCard({ guide, icon, progress }: CourseCardProps) {
     >
       <div className="mb-3 flex items-start justify-between">
         {icon}
-        <Badge variant={guide.category === 'sop' ? 'success' : 'primary'}>
-          {guide.category === 'sop' ? 'SOP' : 'Guide'}
-        </Badge>
+        <div className="flex gap-1.5">
+          {guide.categories.map((cat) => (
+            <Badge key={cat} variant={categoryBadge[cat].variant}>
+              {categoryBadge[cat].label}
+            </Badge>
+          ))}
+        </div>
       </div>
 
       <h3 className="mb-1 text-base font-bold text-text">{guide.title}</h3>
@@ -55,7 +65,7 @@ export function CourseCard({ guide, icon, progress }: CourseCardProps) {
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
           </svg>
-          {guide.chapters} {guide.category === 'sop' ? 'sections' : 'chapters'}
+          {guide.chapters} {guide.categories.includes('software') ? 'chapters' : 'sections'}
         </span>
         <span>{guide.estimatedTime}</span>
         <Badge variant="default" className="!py-0 !text-[10px]">{guide.difficulty}</Badge>

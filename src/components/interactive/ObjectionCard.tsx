@@ -32,12 +32,12 @@ export function ObjectionCard({ id, objection, response, tip }: ObjectionCardPro
         }}
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
-        className="relative min-h-[200px] cursor-pointer"
+        className="grid min-h-[200px] cursor-pointer"
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front — Objection */}
         <div
-          className="absolute inset-0 flex flex-col justify-between rounded-xl border border-white/10 bg-[#1e1e2e] p-6 shadow-lg"
+          className="flex flex-col justify-between rounded-xl border border-white/10 bg-[#1e1e2e] p-6 shadow-lg [grid-area:1/1]"
           style={{ backfaceVisibility: 'hidden' }}
         >
           <div>
@@ -70,7 +70,7 @@ export function ObjectionCard({ id, objection, response, tip }: ObjectionCardPro
 
         {/* Back — Response */}
         <div
-          className="absolute inset-0 flex flex-col justify-between rounded-xl border border-primary/20 bg-primary/10 p-6 shadow-lg"
+          className="flex flex-col justify-between rounded-xl border border-primary/20 bg-primary/10 p-6 shadow-lg [grid-area:1/1]"
           style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
           <div>

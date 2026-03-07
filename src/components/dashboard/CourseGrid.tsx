@@ -12,7 +12,7 @@ interface CourseGridProps {
 }
 
 export function CourseGrid({ filter, progress }: CourseGridProps) {
-  const filtered = filter === 'all' ? guides : guides.filter((g) => g.category === filter);
+  const filtered = filter === 'all' ? guides : guides.filter((g) => g.categories.includes(filter));
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
