@@ -94,7 +94,7 @@ export default function AccountPage() {
         {completedCourses.length === 0 ? (
           <p className="text-sm text-text-muted">No courses completed yet.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
             {completedCourses.map((guide) => (
               <div
                 key={guide.slug}
@@ -120,7 +120,7 @@ export default function AccountPage() {
         <h2 className="mb-4 text-lg font-bold text-text">
           Remaining Courses ({remainingCourses.length})
         </h2>
-        <div className="space-y-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
           {remainingCourses.map((guide) => {
             const p = progress[guide.slug];
             const percent = p?.percentComplete ?? 0;
