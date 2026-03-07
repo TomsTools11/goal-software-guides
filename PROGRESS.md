@@ -7,9 +7,15 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 7, 2026 — Session 15)
+## Latest Update (Mar 7, 2026 — Session 16)
 
 ### Changes This Session
+- **Fixed RevealCard stages not clickable** — `RevealCard` component had a progressive unlock mechanism that locked stages 2 and 3 until the user clicked through in order. This made them appear broken/non-interactive. Removed the locking system, localStorage persistence, and success banner — all stages are now freely clickable with content revealed on click. Affects 3 instances across `brand-positioning-captive` and `consultative-targeting-sop` modules.
+- **Fixed account page not showing progress** — Account page was only reading progress from Convex (remote database), while progress data was stored in localStorage. Dashboard worked because `useDashboardStats` falls back to localStorage. Switched account page to use the same `useDashboardStats` hook so it picks up progress from either source.
+- **Progress bars always visible on account page** — Previously only shown when > 0%. Now every module row shows a progress bar track regardless of completion state.
+- **Two-column layout for account page courses** — Both "Completed Courses" and "Remaining Courses" sections now use a responsive two-column grid (`md:grid-cols-2`) to reduce scrolling, single column on mobile.
+
+### Previous Session (Session 15 — Mar 7, 2026)
 - **Category system restructured** — replaced binary `category: 'guide' | 'sop'` with multi-tag `categories: Category[]` where `Category = 'software' | 'account-management' | 'sales'`
   - Guides can now belong to multiple categories (e.g. Right Pricing → Account Management + Sales)
   - `CategoryTabs` updated: "Software Guides" / "SOPs" tabs → "Software" / "Account Management" / "Sales"
