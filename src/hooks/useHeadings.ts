@@ -1,6 +1,6 @@
 'use client';
 
-import { useSyncExternalStore, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 export interface Heading {
   id: string;
@@ -20,21 +20,16 @@ function getHeadingsFromDOM(): Heading[] {
     }));
 }
 
-const emptyHeadings: Heading[] = [];
-
 export function useHeadings() {
-  // Subscribe to nothing — headings are static after render.
-  // useSyncExternalStore with a no-op subscribe re-reads on each render,
-  // which captures headings once the MDX content mounts.
-  const subscribe = useCallback((cb: () => void) => {
-    // Re-check after a microtask to pick up headings rendered in the same cycle
-    const id = requestAnimationFrame(cb);
+  const [headings, setHeadings] = useState<Heading[]>([]);
+
+  useEffect(() => {
+    // Read headings after MDX content has mounted
+    const id = requestAnimationFrame(() => {
+      setHeadings(getHeadingsFromDOM());
+    });
     return () => cancelAnimationFrame(id);
   }, []);
 
-  return useSyncExternalStore(
-    subscribe,
-    getHeadingsFromDOM,
-    () => emptyHeadings
-  );
+  return headings;
 }
