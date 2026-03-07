@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useQuery, useMutation } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { useAuth } from '@/hooks/useAuth';
-import { resetAllProgress, type ProgressStore } from '@/lib/progress';
+import { resetAllProgress } from '@/lib/progress';
+import { useDashboardStats } from '@/hooks/useDashboardStats';
 import { guides } from '@/lib/guides';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { api } from '../../../../convex/_generated/api';
@@ -11,14 +12,9 @@ import { api } from '../../../../convex/_generated/api';
 export default function AccountPage() {
   const { clerkUser, loading, signOut, convexAuthenticated } = useAuth();
   const router = useRouter();
+  const { progress } = useDashboardStats();
 
-  const remoteProgress = useQuery(
-    api.progress.getAllProgress,
-    convexAuthenticated ? {} : "skip"
-  );
   const resetRemoteProgress = useMutation(api.progress.resetAllProgress);
-
-  const progress: ProgressStore = (remoteProgress as ProgressStore) ?? {};
 
   if (loading || !clerkUser) {
     return (
@@ -137,11 +133,9 @@ export default function AccountPage() {
                   <p className="font-medium text-text">{guide.title}</p>
                   <span className="text-xs text-text-muted">{percent}%</span>
                 </div>
-                {percent > 0 && (
-                  <div className="mt-2">
-                    <ProgressBar value={percent} size="sm" />
-                  </div>
-                )}
+                <div className="mt-2">
+                  <ProgressBar value={percent} size="sm" />
+                </div>
               </div>
             );
           })}
