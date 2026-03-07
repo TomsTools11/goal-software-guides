@@ -41,7 +41,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'account-review-sop',
-    title: 'Account Review SOP',
+    title: 'Account Reviews',
     description:
       'Standard procedure for conducting monthly and quarterly account reviews — KPIs, 4-phase review cycle, escalation protocol, and key terminology.',
     chapters: 5,
@@ -51,7 +51,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'client-onboarding-sop',
-    title: 'Client Onboarding SOP',
+    title: 'Onboarding New Clients',
     description:
       'Repeatable onboarding process from signup through 30-day post-launch review — pre-onboarding, meeting execution, and activation.',
     chapters: 4,
@@ -61,7 +61,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'campaign-optimization-sop',
-    title: 'Campaign Optimization SOP',
+    title: 'Optimizing Campaigns',
     description:
       'Data-driven campaign optimization across 5 pillars — disposition integration, budget controls, targeting, bid modifiers, and source attribution.',
     chapters: 8,
@@ -71,7 +71,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'right-pricing-sop',
-    title: 'Right Pricing SOP',
+    title: 'Right Pricing',
     description:
       '6-step bid management procedure for achieving target CPA through base bid strategy, source modifiers, and continuous monitoring.',
     chapters: 5,
@@ -81,7 +81,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'sales-demo-sop',
-    title: 'GOAL Sales Demo SOP',
+    title: 'GOAL Sales Demo',
     description:
       'Standardized sales conversation from discovery through platform demo to close — includes scorecard, financial terms, and post-demo workflow.',
     chapters: 7,
@@ -91,7 +91,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'disposition-data-import-sop',
-    title: 'Disposition Data Import SOP',
+    title: 'Importing Disposition Data',
     description:
       'End-to-end process for importing client disposition data into GOAL — file preparation, bulk import workflow, error resolution, and CPH benchmarks.',
     chapters: 11,
@@ -111,7 +111,7 @@ export const guides: GuideMetadata[] = [
   },
   {
     slug: 'setting-expectations-sop',
-    title: 'Setting Firm Expectations & Handling Objections',
+    title: 'Setting Expectations & Handling Objections',
     description:
       'Build confidence handling the data requirement, 90-day ramp conversation, and the "burned by lead vendors" objection — with case studies and talk tracks.',
     chapters: 8,
