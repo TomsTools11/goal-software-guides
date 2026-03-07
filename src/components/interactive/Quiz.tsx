@@ -155,18 +155,20 @@ export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
                   }
 
                   return (
-                    <label
+                    <div
                       key={i}
+                      role="radio"
+                      aria-checked={isSelected}
+                      tabIndex={answered ? -1 : 0}
+                      onClick={() => handleSelect(i)}
+                      onKeyDown={(e) => {
+                        if (e.key === ' ' || e.key === 'Enter') {
+                          e.preventDefault();
+                          handleSelect(i);
+                        }
+                      }}
                       className={`flex min-h-[44px] cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm transition-colors ${optionStyle} ${answered ? 'cursor-default' : ''}`}
                     >
-                      <input
-                        type="radio"
-                        name={`quiz-${id}-q${currentQuestion}`}
-                        checked={isSelected}
-                        onChange={() => handleSelect(i)}
-                        disabled={answered}
-                        className="sr-only"
-                      />
                       <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold ${
                         isSelected
                           ? answered
@@ -190,7 +192,7 @@ export function Quiz({ id, title = 'Knowledge Check', questions }: QuizProps) {
                           <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
                       )}
-                    </label>
+                    </div>
                   );
                 })}
               </div>
