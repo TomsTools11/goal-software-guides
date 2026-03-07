@@ -1,0 +1,589 @@
+# Consultative Campaign Targeting
+
+Transition from order-taker to trusted marketing advisor — coach agents into campaign setups that preserve volume, improve efficiency, and scale sustainably.
+
+---
+
+## Overview & Learning Objectives
+
+<TipCallout variant="info" title="Module Purpose">
+This module teaches reps how to guide agents toward campaign configurations that balance **volume and quality**. The core narrative: over-filtering feels safe but destroys volume, smart pacing comes from strategy not just spend, and winning accounts use a structured approach to day-parting, bid modifiers, and geo strategy.
+</TipCallout>
+
+<InfoCard title="Learning Objectives" icon="target">
+By the end of this module, you will be able to:
+
+1. Diagnose when an agent is unintentionally over-filtering into low volume.
+2. Explain the "volume vs. quality" tradeoff using simple, agent-friendly language.
+3. Recommend day-parting windows that reduce wasted spend and avoid peak competition.
+4. Propose a geo and bid-modifier strategy that balances coverage with "hot zip" focus.
+5. Run a consultative discovery conversation that ends with a clear targeting plan.
+</InfoCard>
+
+<InfoCard title="Prerequisites" icon="clipboard">
+Before starting this module, you should have:
+
+- Basic understanding of GOAL campaign structure and bidding concepts.
+- Familiarity with common KPIs (CPA, lead volume, close rate).
+</InfoCard>
+
+---
+
+## Key Terms & Concepts
+
+Master these terms before diving into the lessons. You will use them in every targeting conversation with agents.
+
+<InfoCard title="Over-Filtering" icon="filter">
+Tight filters that reduce deliverable lead volume below what a budget can efficiently spend. Over-filtering feels like quality control, but it usually collapses volume and inflates CPA. The campaign starves for data, learning slows, and performance becomes unpredictable.
+</InfoCard>
+
+<InfoCard title="Day-Parting" icon="clock">
+Adjusting campaign run times to concentrate spend in higher-performing windows. Instead of running 24/7 and letting budget burn in competitive hours, day-parting directs spend toward times when cost-per-lead is lower and intent is higher.
+</InfoCard>
+
+<InfoCard title="Bid Modifier" icon="sliders">
+Bid adjustments by geo or segment to control where budget wins auctions. Rather than a flat bid everywhere, modifiers let you pay more in areas that close well and less in areas you are testing. Think of it as volume control by zip code.
+</InfoCard>
+
+<InfoCard title="Hot Zips" icon="mappin">
+Zip codes that historically close at higher rates. These are identified from the agent's own close data or from platform performance history. Hot zips get bid emphasis, but they should never be the *only* zips targeted.
+</InfoCard>
+
+<InfoCard title="Statewide Volume" icon="globe">
+Broad geographic coverage to capture lower-cost demand at scale. Statewide volume keeps the funnel fed, generates learning data, and often produces leads at a lower cost-per-acquisition than hyper-targeted campaigns.
+</InfoCard>
+
+<DataTable
+  headers={["Term", "One-Line Definition", "Why It Matters"]}
+  rows={[
+    ["Over-filtering", "Too many filters starve the campaign", "Budget can't spend, CPA spikes, data dries up"],
+    ["Day-parting", "Schedule spend around performance windows", "Avoid peak-competition burn, concentrate budget where it works"],
+    ["Bid modifier", "Adjust bids by geo or segment", "Pay more where you win, less where you're testing"],
+    ["Hot zips", "High-close-rate zip codes", "Prioritize proven areas without abandoning volume"],
+    ["Statewide volume", "Broad coverage at scale", "Keeps the funnel healthy and produces learning data"]
+  ]}
+/>
+
+---
+
+## The Danger of Over-Filtering
+
+**Core Lesson:** Teach agents to spot the "filter trap" and confidently coach them away from it. Over-filtering is the most common campaign mistake — and the hardest to explain without offending the agent.
+
+<TipCallout variant="warning" title="Why This Matters">
+Agents over-filter because they want "only the best" leads. But tight filters reduce volume, increase auction costs, and starve the campaign of the data it needs to learn and optimize. The result is the opposite of what they intended: worse performance, not better.
+</TipCallout>
+
+<Accordion title="The Multi-Car Myth">
+Agents often request strict "multi-car only" targeting. The logic seems sound — multi-car households are higher-value policies.
+
+**The problem:** Many high-intent shoppers will not add a second vehicle on the first form. They are still shopping. By requiring multi-car on the initial form, the campaign excludes a huge segment of shoppers who *are* multi-car households but haven't indicated it yet.
+
+**The outcome:** The campaign starves and CPA rises. The agent gets fewer leads, pays more per lead, and blames "lead quality" — when the real issue is that the filter collapsed the audience before intent could be measured.
+
+**The coaching point:** "Multi-car is a great outcome to optimize toward, but it's a terrible *filter* to start with. Let's capture intent first, then optimize for household size once we have data."
+</Accordion>
+
+### Why Agents Over-Filter
+
+There are three common reasons, and each one requires a different coaching response:
+
+1. **They want "only the best" leads** — They are trying to pre-qualify at the filter level instead of the conversation level.
+2. **They are managing call center workload** — They think fewer leads means less work, but it actually means less *predictable* work.
+3. **Bad experience with other lead vendors** — They got burned by shared or recycled leads and now try to control quality through volume restriction.
+
+### Mini-Diagnosis Checklist
+
+Use this checklist when you suspect an agent is over-filtered. If two or more items are true, the campaign is likely filter-constrained.
+
+<ChecklistItem id="ct-diag-1">Budget is not spending fully or consistently</ChecklistItem>
+<ChecklistItem id="ct-diag-2">Lead volume is inconsistent day to day</ChecklistItem>
+<ChecklistItem id="ct-diag-3">Campaign has too many required attributes (multi-car + homeowner + specific zips + carrier targeting)</ChecklistItem>
+<ChecklistItem id="ct-diag-4">Agent describes their "ideal lead" in a way that collapses the addressable audience</ChecklistItem>
+
+<CopyableTemplate
+  title="Over-Filtering Talk Tracks"
+  sections={[
+    {
+      heading: "The Valve Analogy",
+      fields: [
+        { label: "Script:", placeholder: "Filters are like a valve. If we close it too far, we don't get better water. We just get less water." }
+      ]
+    },
+    {
+      heading: "The Pipeline Approach",
+      fields: [
+        { label: "Script:", placeholder: "We can improve quality after we have stable volume. First we build the pipeline, then we tune it." }
+      ]
+    },
+    {
+      heading: "The Data Argument",
+      fields: [
+        { label: "Script:", placeholder: "Right now the campaign doesn't have enough data to learn what works. If we loosen the filters slightly, we'll get the volume we need to actually see patterns — and then we optimize from a position of strength." }
+      ]
+    }
+  ]}
+/>
+
+### Learner Activity: Diagnose the Over-Filter
+
+<RevealCard
+  id="ct-overfilter-activity"
+  title="Agent Request Scenarios"
+  stages={[
+    {
+      label: "Scenario 1",
+      content: "Agent says: 'I only want multi-car, homeowner, age 35+, in these 8 zip codes.'\n\nConsultative response: Start by validating their goals, then explain the volume math. 'Those are great characteristics for your best customers. But if we require all of them on the first form, we're filtering out 80%+ of shoppers before they even have a chance to convert. Let's keep zip codes and age, drop multi-car and homeowner as hard filters, and track those as performance metrics instead.'",
+      icon: "1"
+    },
+    {
+      label: "Scenario 2",
+      content: "Agent says: 'I only want leads from people shopping for [specific carrier].'\n\nConsultative response: 'Carrier-shopping intent is hard to capture on a form because most consumers don't think in terms of carriers — they think in terms of price and coverage. If we filter to only people who name [Carrier], we miss the vast majority of shoppers who would be a great fit but haven't narrowed their search yet. Let's run broader and use your first-call pitch to win them over.'",
+      icon: "2"
+    },
+    {
+      label: "Scenario 3",
+      content: "Agent says: 'Last vendor sent me junk. I want every possible filter turned on so I only get serious buyers.'\n\nConsultative response: 'I totally understand — that experience is frustrating and it's smart to want quality control. The difference here is that GOAL generates exclusive leads through your branded funnel, not shared leads. So the quality issue you had before was about the source, not the filters. Let's start with moderate filters, review performance at 2 weeks, and tighten only where the data tells us to.'",
+      icon: "3"
+    }
+  ]}
+/>
+
+<Quiz
+  id="ct-overfilter"
+  questions={[
+    {
+      question: "What are two symptoms of over-filtering?",
+      options: [
+        "High volume and low CPA",
+        "Budget not spending fully and inconsistent day-to-day lead volume",
+        "Too many leads and agent can't keep up",
+        "High close rates but low revenue"
+      ],
+      correctIndex: 1,
+      explanation: "Over-filtering starves the campaign. The two clearest symptoms are: (1) the budget isn't spending because there aren't enough qualifying auctions, and (2) lead volume is unpredictable day to day because the audience is too small to produce consistent results."
+    },
+    {
+      question: "Why can 'multi-car only' targeting reduce campaign performance?",
+      options: [
+        "Multi-car leads are more expensive to generate",
+        "Many high-intent shoppers won't indicate multi-car on the first form, so the filter excludes them before intent is measured",
+        "Multi-car households don't buy insurance online",
+        "Carriers don't allow multi-car targeting"
+      ],
+      correctIndex: 1,
+      explanation: "Many shoppers who are multi-car households won't add a second vehicle on the initial form — they're still shopping. Requiring multi-car as a hard filter collapses the audience before intent can be measured, starving the campaign and driving up CPA."
+    }
+  ]}
+/>
+
+---
+
+## Advanced Day-Parting Tactics
+
+**Core Lesson:** Position day-parting as a way to protect budget and concentrate spend where performance is strongest — not as "spending less."
+
+<TipCallout variant="info" title="The Key Insight">
+Day-parting is not about reducing spend. It is about redirecting spend away from expensive, competitive windows and toward hours where cost-per-lead is lower and shopper intent is higher. The agent's total budget stays the same — it just works harder.
+</TipCallout>
+
+### The Competition Problem
+
+Heavy competition in morning rush windows (typically 8:00 AM - 10:00 AM) can burn through budget fast. Every lead vendor and carrier is bidding aggressively in these hours, which drives up cost-per-lead without necessarily improving quality.
+
+The "golden window" is often the afternoon (4:00 PM - 6:00 PM) when working shoppers are actively looking but competition has thinned out.
+
+### Day-Parting Framework
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Start with a Baseline Schedule",
+    content: "Run broad hours for the first 1-2 weeks to collect data. Don't make assumptions about which hours perform best — let the data tell you. A baseline schedule typically runs 7 AM - 9 PM local time."
+  },
+  {
+    title: "Step 2: Identify Budget Burn Windows",
+    content: "Review hourly performance data to find windows where CPA spikes or where budget burns fast without proportional lead quality. Morning rush (8-10 AM) is the most common burn window, but it varies by market."
+  },
+  {
+    title: "Step 3: Shift Spend to Higher-Intent Windows",
+    content: "Reduce or pause spend during burn windows and redirect budget toward windows with better cost efficiency. Afternoon and early evening often produce better results because competition is lower and shoppers are more deliberate."
+  },
+  {
+    title: "Step 4: Re-Check After Sufficient Volume",
+    content: "After 50-100 leads under the new schedule, review again. Day-parting is iterative — the first adjustment won't be perfect. Look for new patterns and refine. Don't change the schedule more than once per week."
+  }
+]} />
+
+### Schedule Templates
+
+<DataTable
+  headers={["Schedule Type", "Hours", "When to Use", "Example"]}
+  rows={[
+    ["Starter", "7 AM - 9 PM (broad)", "New campaigns with no performance data", "Run wide, collect baseline data for 1-2 weeks"],
+    ["Defensive", "10 AM - 8 PM (skip morning rush)", "Budget burning fast in early morning with high CPA", "Cut the most competitive hours, protect budget for midday and afternoon"],
+    ["Scaling", "6 AM - 10 PM (expanded)", "Campaign is stable and agent wants more volume", "Extend hours once CPA is consistent and agent can handle the volume"]
+  ]}
+/>
+
+<CopyableTemplate
+  title="Day-Parting Talk Tracks"
+  sections={[
+    {
+      heading: "The Spending Smarter Pitch",
+      fields: [
+        { label: "Script:", placeholder: "We're not spending less. We're spending smarter. We want your budget fighting in winnable auctions, not paying premium prices during rush hour when every lead vendor in the state is bidding against you." }
+      ]
+    },
+    {
+      heading: "The Competition Frame",
+      fields: [
+        { label: "Script:", placeholder: "If we push all your spend into the most competitive hours, you pay the premium without guaranteed quality. Think of it like rush hour traffic — you can leave at 5 PM and sit in traffic, or leave at 6:30 and get there faster." }
+      ]
+    }
+  ]}
+/>
+
+### Learner Activity: Budget Burn Scenario
+
+<RevealCard
+  id="ct-daypart-activity"
+  title="Diagnose and Fix"
+  stages={[
+    {
+      label: "The Scenario",
+      content: "An agent's campaign burns 60% of daily budget by 10 AM. CPA spikes in the morning window. Volume falls off by midday and the agent complains they're 'not getting enough leads in the afternoon.'\n\nBefore revealing the answer, draft your 3-bullet day-parting recommendation.",
+      icon: "1"
+    },
+    {
+      label: "Recommended Adjustment",
+      content: "1. **Shift to a Defensive schedule:** Pause or reduce bids from 7-10 AM to avoid the morning burn.\n2. **Concentrate budget in 10 AM - 7 PM:** This preserves spend for the afternoon window where the agent actually wants leads.\n3. **Review after 1 week:** Track whether CPA drops and afternoon volume improves. If stable, consider expanding back into morning hours at a lower bid.",
+      icon: "2"
+    }
+  ]}
+/>
+
+<Quiz
+  id="ct-daypart"
+  questions={[
+    {
+      question: "What is the primary goal of day-parting?",
+      options: [
+        "To reduce the total campaign budget",
+        "To concentrate spend in higher-performing windows and avoid wasting budget in peak-competition hours",
+        "To ensure leads only arrive during business hours",
+        "To match the agent's personal schedule"
+      ],
+      correctIndex: 1,
+      explanation: "Day-parting redirects budget — not reduces it. The goal is to avoid burning budget in expensive, highly competitive windows and instead concentrate spend where cost-per-lead is lower and intent is higher."
+    },
+    {
+      question: "Why is the morning rush (8-10 AM) often an inefficient window?",
+      options: [
+        "Consumers aren't shopping for insurance in the morning",
+        "GOAL's platform doesn't run ads before 10 AM",
+        "Heavy competition from other lead vendors drives up costs without guaranteed quality improvement",
+        "Agents aren't available to take calls that early"
+      ],
+      correctIndex: 2,
+      explanation: "Morning rush is when every lead vendor and carrier is bidding aggressively. This drives up cost-per-lead without necessarily improving lead quality. The agent pays a premium just because of competition density, not because the leads are better."
+    }
+  ]}
+/>
+
+---
+
+## Bid Modifiers & Geographic Strategy
+
+**Core Lesson:** Teach agents how to propose a geo strategy that captures affordable volume while prioritizing high-closing areas — without betting everything on a tiny pocket of demand.
+
+<TipCallout variant="info" title="The Hybrid Approach">
+The best geo strategy is almost never "only my best zips." It is a hybrid: broad coverage to keep the funnel fed, with bid modifiers to emphasize areas where close rates are strongest. This gives you volume *and* quality.
+</TipCallout>
+
+### The Hybrid Geo Strategy
+
+<StepByStep steps={[
+  {
+    title: "Step 1: Start Statewide or Broad Coverage",
+    content: "Run the campaign across the full service area. This keeps volume healthy, generates data across geographies, and often produces leads at a lower cost than hyper-targeted campaigns. Broad coverage is the foundation."
+  },
+  {
+    title: "Step 2: Identify 10-30 Hot Zips",
+    content: "Work with the agent to identify zip codes that historically close at higher rates. Sources: agent's own close data, platform performance history, or market knowledge. These become your emphasis zones — not your only zones."
+  },
+  {
+    title: "Step 3: Apply Bid Modifiers",
+    content: "Increase bids in hot zips to win more auctions in those areas. Keep base bids running statewide so you don't lose the volume foundation. The modifier should be meaningful but not extreme — a 20-40% boost is a good starting point."
+  },
+  {
+    title: "Step 4: Review and Adjust",
+    content: "After 2-4 weeks, review performance by geography. Some hot zips may underperform expectations; some 'cold' areas may surprise you. Adjust modifiers based on actual data, not assumptions. Geo strategy is iterative, not permanent."
+  }
+]} />
+
+<CopyableTemplate
+  title="Geo Strategy Talk Tracks"
+  sections={[
+    {
+      heading: "The Hybrid Explanation",
+      fields: [
+        { label: "Script:", placeholder: "We use the whole state to keep volume healthy, and we add emphasis where you win the most. Think of it like fishing — you cast a wide net, but you spend extra time in the spots where you know the fish are biting." }
+      ]
+    },
+    {
+      heading: "The Risk of Over-Targeting",
+      fields: [
+        { label: "Script:", placeholder: "If we only target your 5 best zips, we're betting everything on a tiny pocket of demand. If competition heats up in those zips or volume dips seasonally, the whole campaign stalls. Statewide coverage gives us a safety net." }
+      ]
+    }
+  ]}
+/>
+
+<Accordion title="Common Mistakes in Geo Strategy">
+These are the three most frequent errors reps and agents make with geographic targeting:
+
+1. **Only targeting hot zips and starving volume.** This is the geo equivalent of over-filtering. A campaign that only runs in 5-10 zip codes has a tiny addressable audience and will struggle to spend budget consistently.
+
+2. **Making too many simultaneous changes.** Agents who change geo targeting, day-parting, and bid modifiers all at once can't tell what's working. Change one variable at a time and measure the impact before adjusting another.
+
+3. **Treating geo as permanent instead of iterative.** Markets shift. Zip code performance changes seasonally. A geo strategy that worked in Q1 may need adjustment in Q3. Build in regular review cycles.
+</Accordion>
+
+<Accordion title="Carrier Targeting: Proceed with Caution">
+When agents ask about targeting shoppers of specific carriers, coach them to treat it as a **hypothesis, not a guarantee.**
+
+- Carrier-shopping behavior is harder to capture on forms than agents expect.
+- A controlled test (specific carrier filter on a subset of budget) is better than a sweeping change.
+- Frame it as: "Let's test it with 20% of your budget for 2 weeks and see if the data supports scaling it up."
+- Never promise that carrier targeting will improve results — it may or may not, and the only way to know is to test.
+</Accordion>
+
+<ObjectionCard
+  id="ct-geo-obj1"
+  objection="I only want my 5 best zip codes. Those are where I close."
+  response="I get it — those zips work for you. Here's the thing: if we only target 5 zips, we're betting everything on a tiny slice of demand. When competition heats up or volume dips in those areas, the campaign stalls. The better play is to run statewide with bid boosts in your best zips. You still get priority in those areas, but you also capture affordable volume from the rest of the state. And sometimes the 'cold' zips surprise you."
+  tip="Don't dismiss their insight about their best areas — validate it, then expand the frame. The agent needs to feel heard before they'll accept a broader strategy."
+/>
+
+<Quiz
+  id="ct-geo"
+  questions={[
+    {
+      question: "What is the recommended starting point for geographic targeting?",
+      options: [
+        "Only the agent's 5 best zip codes",
+        "Statewide or broad coverage with bid modifiers on hot zips",
+        "Nationwide targeting to maximize volume",
+        "Rotating between different zip groups each week"
+      ],
+      correctIndex: 1,
+      explanation: "The hybrid approach starts broad (statewide) to keep volume healthy and generate data, then uses bid modifiers to emphasize high-performing zip codes. This balances volume with quality instead of betting everything on a small area."
+    },
+    {
+      question: "Why is 'only targeting hot zips' risky?",
+      options: [
+        "Hot zips always have lower close rates",
+        "GOAL doesn't support zip-level targeting",
+        "It bets everything on a tiny pocket of demand — if competition increases or volume dips, the campaign stalls",
+        "Agents don't know which zips are their best"
+      ],
+      correctIndex: 2,
+      explanation: "Targeting only a handful of zip codes creates a tiny addressable audience. If competition heats up in those areas or seasonal demand shifts, there's no safety net. Broad coverage keeps the funnel fed while bid modifiers still prioritize the best areas."
+    }
+  ]}
+/>
+
+---
+
+## Consultative Discovery Flow
+
+Before giving any targeting recommendations, run this discovery flow. It ensures your recommendations are grounded in the agent's actual situation — not assumptions.
+
+<TipCallout variant="tip" title="Why Discovery First">
+Reps who skip discovery and jump straight to recommendations sound like order-takers, not advisors. The 5 minutes you spend on discovery will save you from recommending a setup the agent doesn't trust or can't execute.
+</TipCallout>
+
+<StepByStep steps={[
+  {
+    title: "Phase 1: Agent Goals",
+    content: "Understand what success looks like.\n\n- What's your growth target? (leads per week, policies per month)\n- What timeline are you working with?\n- What's an acceptable CPA range?\n\nListen for unrealistic expectations early — this is where you calibrate."
+  },
+  {
+    title: "Phase 2: Capacity",
+    content: "Understand what they can actually handle.\n\n- How fast can you or your team call leads? (speed-to-lead)\n- What's your staffing situation?\n- What are your best contact hours?\n\nIf an agent wants 50 leads/day but has one person calling, the targeting plan needs to account for that."
+  },
+  {
+    title: "Phase 3: Market",
+    content: "Understand the competitive landscape.\n\n- What's your service area?\n- How competitive is your market?\n- Any seasonal patterns?\n\nThis informs geo strategy and day-parting. A saturated urban market behaves differently than a rural one."
+  },
+  {
+    title: "Phase 4: Constraints",
+    content: "Understand what's off the table.\n\n- Any compliance requirements?\n- Brand restrictions from the carrier?\n- Budget floor or ceiling?\n\nConstraints aren't objections — they're guardrails that make your recommendation more credible."
+  },
+  {
+    title: "Phase 5: Plan",
+    content: "Synthesize into a clear next step.\n\n- Baseline setup (filters, geo, schedule)\n- Early learning period (2 weeks of data collection)\n- Optimization cycle (review, adjust, repeat)\n\nEnd with: 'Here's what I recommend we start with, and here's when we'll review and adjust.'"
+  }
+]} />
+
+<ChecklistItem id="ct-disc-1">I ask about agent goals (growth target, timeline, CPA range) before recommending a setup</ChecklistItem>
+<ChecklistItem id="ct-disc-2">I confirm capacity (speed-to-lead, staffing, contact hours) to size the campaign correctly</ChecklistItem>
+<ChecklistItem id="ct-disc-3">I gather market context (service area, competition, seasonality) to inform geo and day-parting</ChecklistItem>
+<ChecklistItem id="ct-disc-4">I identify constraints (compliance, brand, budget) to make the recommendation credible</ChecklistItem>
+<ChecklistItem id="ct-disc-5">I synthesize discovery into a baseline setup, learning period, and optimization cycle</ChecklistItem>
+
+---
+
+## Copy-Ready Talk Tracks
+
+Quick-reference talk tracks for use during live calls. Copy and adapt to your style.
+
+<CopyableTemplate
+  title="30-Second Pitch: Consultative Targeting"
+  sections={[
+    {
+      heading: "Full Pitch",
+      fields: [
+        { label: "Script:", placeholder: "Most targeting problems come from over-filtering. It feels like quality control, but it usually collapses volume and drives CPA up. The better approach is a consultative setup: keep volume healthy, then use day-parting and geo bid modifiers to concentrate spend where performance is strongest. That gives you stable lead flow and a clear path to optimization." }
+      ]
+    }
+  ]}
+/>
+
+<CopyableTemplate
+  title="10-Second Definition"
+  sections={[
+    {
+      heading: "Quick Definition",
+      fields: [
+        { label: "Script:", placeholder: "Consultative targeting is keeping the funnel wide enough to learn, then using schedule and geo levers to improve efficiency." }
+      ]
+    }
+  ]}
+/>
+
+<CopyableTemplate
+  title="Complete Talk Track Collection"
+  sections={[
+    {
+      heading: "Over-Filtering (Valve Analogy)",
+      fields: [
+        { label: "Script:", placeholder: "Filters are like a valve. If we close it too far, we don't get better water. We just get less water." }
+      ]
+    },
+    {
+      heading: "Day-Parting (Spending Smarter)",
+      fields: [
+        { label: "Script:", placeholder: "We're not spending less. We're spending smarter. We want your budget fighting in winnable auctions." }
+      ]
+    },
+    {
+      heading: "Geo Strategy (Wide Net)",
+      fields: [
+        { label: "Script:", placeholder: "We use the whole state to keep volume healthy, and we add emphasis where you win the most. Think of it like fishing — cast a wide net, spend extra time where the fish are biting." }
+      ]
+    },
+    {
+      heading: "Pipeline First",
+      fields: [
+        { label: "Script:", placeholder: "We can improve quality after we have stable volume. First we build the pipeline, then we tune it." }
+      ]
+    }
+  ]}
+/>
+
+### Roleplay: Consultative Targeting Conversation
+
+<ScriptBlock
+  title="Rep + Agent Targeting Conversation"
+  lines={[
+    { speaker: "", type: "narrator", text: "The agent has been running for 3 weeks with tight filters and low volume. The rep is calling to discuss optimization." },
+    { speaker: "Rep", type: "agent", text: "Hey [Agent], I've been looking at your campaign data and wanted to talk through some ideas to improve your lead flow. Do you have a few minutes?", highlight: false },
+    { speaker: "Agent", type: "prospect", text: "Sure. I've been frustrated — I'm not getting enough leads and the ones I get are hit or miss." },
+    { speaker: "Rep", type: "agent", text: "I hear you. Let me ask — what does your ideal week look like in terms of lead volume? How many leads do you need to hit your goals?", highlight: true },
+    { speaker: "Agent", type: "prospect", text: "I need at least 15-20 a week. I'm getting maybe 8." },
+    { speaker: "Rep", type: "agent", text: "Got it. So we need to roughly double your volume. Right now you've got multi-car required, homeowner required, and you're only running in 12 zip codes. Those filters are doing exactly what filters do — they're narrowing the audience. But they've narrowed it so much that the campaign can't find enough people to spend your budget on.", highlight: true },
+    { speaker: "Agent", type: "prospect", text: "But I want quality leads. Multi-car households are my best customers." },
+    { speaker: "Rep", type: "agent", text: "Totally agree — multi-car is a great outcome. But here's the thing: a lot of multi-car households don't indicate that on the first form. They're still shopping. So by requiring it upfront, we're filtering out people who actually are multi-car but just haven't told us yet.", highlight: true },
+    { speaker: "Agent", type: "prospect", text: "Hm. I hadn't thought of it that way." },
+    { speaker: "Rep", type: "agent", text: "Here's what I'd recommend: let's keep your zip codes, drop multi-car and homeowner as hard filters, and track them as performance metrics instead. We'll also shift your schedule — right now you're burning 60% of budget before 10 AM. If we move to a 10 AM to 7 PM window, your budget works harder in less competitive hours.", highlight: true },
+    { speaker: "Agent", type: "prospect", text: "And we can always tighten back up if the quality drops?" },
+    { speaker: "Rep", type: "agent", text: "Exactly. We review in two weeks. If the data shows we should add a filter back, we do it — but we'll be making that decision based on real numbers, not guesswork. Sound good?", highlight: true }
+  ]}
+/>
+
+---
+
+## Assessment & Knowledge Check
+
+### Comprehensive Assessment
+
+<Quiz
+  id="ct-final"
+  questions={[
+    {
+      question: "An agent's campaign is spending only 40% of daily budget with a CPA 50% above target. They have multi-car, homeowner, and age 35+ filters active across 10 zip codes. What is the most likely root cause?",
+      options: [
+        "The budget is too low",
+        "The campaign is over-filtered — too many required attributes on a narrow geographic area are collapsing the addressable audience",
+        "The agent needs to increase their bid",
+        "Day-parting settings are wrong"
+      ],
+      correctIndex: 1,
+      explanation: "Classic over-filtering pattern: budget not spending + high CPA + multiple stacked filters on a small geo area. The audience is too narrow for the campaign to find enough qualifying auctions. The fix is to loosen filters, not increase bids."
+    },
+    {
+      question: "What is the correct sequence for implementing a day-parting strategy?",
+      options: [
+        "Immediately restrict to afternoon hours based on industry best practices",
+        "Start with broad hours to collect baseline data, identify burn windows, shift spend to better windows, then re-check after sufficient volume",
+        "Copy the schedule from another successful client",
+        "Only run during the hours the agent is in the office"
+      ],
+      correctIndex: 1,
+      explanation: "Day-parting is data-driven and iterative: baseline first, identify problems, adjust, then verify. Skipping the baseline means you're guessing, and copying another client's schedule ignores market-specific differences."
+    },
+    {
+      question: "An agent says: 'I only want leads from my 5 best zip codes.' What is the best consultative response?",
+      options: [
+        "Agree and restrict the campaign to those 5 zips",
+        "Tell them they're wrong and force statewide targeting",
+        "Validate their insight about those zips, then recommend statewide coverage with bid boosts on their 5 best zips to balance volume with quality",
+        "Suggest they increase their budget to compensate for the small geo area"
+      ],
+      correctIndex: 2,
+      explanation: "The consultative approach validates the agent's knowledge (they DO know their best areas) while expanding the frame. Statewide with bid modifiers gives them priority in top zips while maintaining the volume foundation. Validation + education = trust."
+    },
+    {
+      question: "Which discovery phase should come BEFORE making any targeting recommendation?",
+      options: [
+        "Just the agent's budget",
+        "Goals, capacity, market context, and constraints",
+        "Only the agent's preferred zip codes",
+        "The agent's previous lead vendor history"
+      ],
+      correctIndex: 1,
+      explanation: "All four discovery phases — goals (what they want), capacity (what they can handle), market (where they compete), and constraints (what's off limits) — should inform your recommendation. Skipping any phase means your recommendation may not fit their actual situation."
+    }
+  ]}
+/>
+
+### Module Deliverables Self-Check
+
+You should leave this module with each of these capabilities ready to use on a live call:
+
+<ChecklistItem id="ct-d1">I can explain over-filtering without offending the agent — using the valve analogy or pipeline approach</ChecklistItem>
+<ChecklistItem id="ct-d2">I can recommend a day-parting adjustment with a clear rationale tied to budget efficiency</ChecklistItem>
+<ChecklistItem id="ct-d3">I can propose a hybrid geo strategy (statewide + hot zips) and explain why it outperforms zip-only targeting</ChecklistItem>
+<ChecklistItem id="ct-d4">I can deliver a 60-second targeting plan summary that covers filters, schedule, and geo</ChecklistItem>
+<ChecklistItem id="ct-d5">I can run a 5-phase consultative discovery that ends with a clear, agreed-upon setup</ChecklistItem>
+
+<DataTable
+  headers={["Skill", "Pass Criteria"]}
+  rows={[
+    ["Diagnose over-filtering", "Identifies at least 2 symptoms and proposes which filter to loosen first"],
+    ["Day-parting recommendation", "Recommends a schedule change with rationale tied to data, not guesswork"],
+    ["Hybrid geo strategy", "Proposes statewide + hot zips with bid modifiers and explains the tradeoff"],
+    ["Consultative discovery", "Runs all 5 phases and synthesizes into a baseline setup with a review timeline"]
+  ]}
+/>
