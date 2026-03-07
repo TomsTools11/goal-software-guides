@@ -7,9 +7,15 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 6, 2026 — Session 12)
+## Latest Update (Mar 7, 2026 — Session 13)
 
 ### Changes This Session
+- **Fixed critical production crash** — React error #185 (maximum update depth exceeded) on all guide/SOP pages
+  - **Root cause**: `useHeadings` hook used `useSyncExternalStore` with a `getSnapshot` function (`getHeadingsFromDOM`) that returned a new array reference on every call. Combined with a `requestAnimationFrame`-based `subscribe`, this created an infinite re-render loop: rAF fires → new snapshot (new array) → re-render → re-subscribe → rAF fires → repeat
+  - **Fix**: Replaced `useSyncExternalStore` with `useState` + `useEffect` in `src/hooks/useHeadings.ts` — headings are read once after mount via `requestAnimationFrame`, producing a stable state value
+  - **Commit**: `19eb027`
+
+### Previous Session (Session 12 — Mar 6, 2026)
 - **Codebase refactoring and cleanup** — fixed all ESLint errors, removed dead code, consolidated patterns
   - **Fixed 7 ESLint errors** (`react-hooks/set-state-in-effect`): replaced `useState` + `useEffect` patterns with `useSyncExternalStore` and lazy initializers across `useTheme`, `useHeadings`, `ChecklistItem`, `Quiz`, `ScrollProgress`, `AnimatedDemo`, `useProgressTracker`
   - **Removed dead code**: deleted unused `getDashboardStats` and `getRecentlyAccessed` from `convex/progress.ts` (never called from frontend) and matching unused wrappers from `src/lib/progress.ts`
@@ -113,7 +119,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 6, 2026 — Session 12)
+## Current State (Mar 7, 2026 — Session 13)
 
 ### What's Been Built
 
@@ -178,7 +184,7 @@ A Next.js web application that hosts interactive software training guides for GO
   - `src/components/auth/AuthGuard.tsx` — user sync + localStorage migration
 
 **8. Hooks** (`src/hooks/`)
-- `useHeadings.ts` — extracts headings from content
+- `useHeadings.ts` — extracts headings from content (useState + useEffect, reads once after mount)
 - `useScrollSpy.ts` — tracks active section on scroll
 - `useProgressTracker.ts` — tracks reading progress (localStorage + Convex sync when logged in)
 - `useDashboardStats.ts` — reactive dashboard stats via Convex `useQuery`
