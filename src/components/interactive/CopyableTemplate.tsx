@@ -25,7 +25,7 @@ function buildCopyText(sections: TemplateSection[]): string {
       const lines: string[] = [s.heading];
       if (s.fields) {
         s.fields.forEach((f) => {
-          lines.push(`${f.label} `);
+          lines.push(`${f.label} ${f.placeholder ?? ''}`);
         });
       }
       if (s.bullets) {
@@ -133,15 +133,23 @@ export function CopyableTemplate({ title, sections }: CopyableTemplateProps) {
             {section.fields && (
               <div className="space-y-2">
                 {section.fields.map((field, fi) => (
-                  <div key={fi} className="flex items-baseline gap-2">
-                    <span className="shrink-0 text-sm font-medium text-text">
-                      {field.label}
-                    </span>
-                    <span className="flex-1 border-b border-dashed border-border/80" />
-                    {field.placeholder && (
-                      <span className="shrink-0 text-xs text-text-muted/60 italic">
-                        {field.placeholder}
-                      </span>
+                  <div key={fi}>
+                    {field.placeholder ? (
+                      <div>
+                        <span className="text-sm font-medium text-text">
+                          {field.label}
+                        </span>
+                        <span className="ml-2 text-sm text-text-muted/80 italic leading-relaxed">
+                          {field.placeholder}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-baseline gap-2">
+                        <span className="shrink-0 text-sm font-medium text-text">
+                          {field.label}
+                        </span>
+                        <span className="flex-1 border-b border-dashed border-border/80" />
+                      </div>
                     )}
                   </div>
                 ))}

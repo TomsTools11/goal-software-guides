@@ -7,9 +7,23 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 7, 2026 — Session 13)
+## Latest Update (Mar 7, 2026 — Session 14)
 
 ### Changes This Session
+- **2 new training modules added**:
+  - **Brand Positioning for Captive Agents** (`src/content/brand-positioning-captive/index.mdx`) — 8 chapters, ~30 min. Covers ad positioning, landing page strategy, and bait-educate-reveal sales motion for captive agents
+  - **TCPA Compliance & 1-to-1 Consent** (`src/content/tcpa-compliance/index.mdx`) — 8 chapters, ~45 min. Covers TCPA risk landscape, 1-to-1 consent, GOAL's proof stack, and objection handling
+- **5 new interactive components**:
+  - `FunnelVisualization.tsx` — animated step-by-step funnel diagram
+  - `BeforeAfter.tsx` — side-by-side before/after comparison
+  - `ObjectionCard.tsx` — flip card for objection/response practice
+  - `ScriptBlock.tsx` — formatted script lines with speaker labels
+  - `RevealCard.tsx` — progressive reveal with stage tracking
+- **Registered new components in MDX** — added all 5 new components to `src/components/mdx/MDXComponents.tsx`
+- **Registered new modules in guide registry** — added both new modules to `src/lib/guides.ts` (total: 14 guides/SOPs)
+- **Fixed CopyableTemplate text cutoff** — placeholder text in `CopyableTemplate.tsx` was getting clipped because the field layout forced label + dashed separator + text onto a single flex row with `shrink-0`. Restructured so placeholder text flows inline with the label and wraps naturally. Also fixed `buildCopyText` to include placeholder text when copying. Affects all 6 modules using CopyableTemplate.
+
+### Previous Session (Session 13 — Mar 7, 2026)
 - **Fixed critical production crash** — React error #185 (maximum update depth exceeded) on all guide/SOP pages
   - **Root cause**: `useHeadings` hook used `useSyncExternalStore` with a `getSnapshot` function (`getHeadingsFromDOM`) that returned a new array reference on every call. Combined with a `requestAnimationFrame`-based `subscribe`, this created an infinite re-render loop: rAF fires → new snapshot (new array) → re-render → re-subscribe → rAF fires → repeat
   - **Fix**: Replaced `useSyncExternalStore` with `useState` + `useEffect` in `src/hooks/useHeadings.ts` — headings are read once after mount via `requestAnimationFrame`, producing a stable state value
@@ -119,7 +133,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 7, 2026 — Session 13)
+## Current State (Mar 7, 2026 — Session 14)
 
 ### What's Been Built
 
@@ -158,7 +172,12 @@ A Next.js web application that hosts interactive software training guides for GO
 - `Screenshot.tsx` — browser chrome frame for displaying app screenshots
 - `BrowserChrome.tsx` — browser chrome wrapper
 - `DataTable.tsx` — styled data table with headers, row separators, and responsive scroll
-- `CopyableTemplate.tsx` — structured template card with copy-to-clipboard
+- `CopyableTemplate.tsx` — structured template card with copy-to-clipboard (text wraps naturally)
+- `FunnelVisualization.tsx` — animated step-by-step funnel diagram
+- `BeforeAfter.tsx` — side-by-side before/after comparison
+- `ObjectionCard.tsx` — flip card for objection/response practice
+- `ScriptBlock.tsx` — formatted script lines with speaker labels
+- `RevealCard.tsx` — progressive reveal with stage tracking
 
 **6. Dashboard Components** (`src/components/dashboard/`)
 - `StatsOverview.tsx` — stats cards (total, completed, in progress, not started)
@@ -192,13 +211,13 @@ A Next.js web application that hosts interactive software training guides for GO
 - `useTheme.ts` — dark/light theme toggle
 
 **9. Content & Routing**
-- Guide registry (`src/lib/guides.ts`) with metadata for 12 guides/SOPs
+- Guide registry (`src/lib/guides.ts`) with metadata for 14 guides/SOPs
 - Dynamic route: `src/app/(dashboard)/guides/[slug]/page.tsx` with `GuideLayoutWrapper.tsx`
 - Dashboard page (`src/app/(dashboard)/page.tsx`) with stats, continue learning, course grid
 - Account page (`src/app/(dashboard)/account/page.tsx`) with profile, progress, sign out
 - MDX components mapping (`src/components/mdx/MDXComponents.tsx`)
 
-**10. Guide Content** (`src/content/`) — 12 guides/SOPs
+**10. Guide Content** (`src/content/`) — 14 guides/SOPs
 - `notion/index.mdx` — Mastering Notion (8 chapters)
 - `claude-cowork/index.mdx` — Getting Started with Claude Cowork (6 chapters)
 - `close-crm/index.mdx` — Mastering Close CRM (7 chapters)
@@ -211,6 +230,8 @@ A Next.js web application that hosts interactive software training guides for GO
 - `sales-discovery-process/index.mdx` — Sales Discovery Process (9 chapters)
 - `setting-expectations-sop/index.mdx` — Setting Firm Expectations & Handling Objections (8 chapters)
 - `competition-research/index.mdx` — GOAL Competition Research (8 chapters)
+- `brand-positioning-captive/index.mdx` — Brand Positioning for Captive Agents (8 chapters)
+- `tcpa-compliance/index.mdx` — TCPA Compliance & 1-to-1 Consent (8 chapters)
 
 **11. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility

@@ -129,6 +129,26 @@ export const guides: GuideMetadata[] = [
     difficulty: 'Beginner',
     category: 'sop',
   },
+  {
+    slug: 'brand-positioning-captive',
+    title: 'Brand Positioning for Captive Agents',
+    description:
+      'Help captive agents compete by building a local identity that earns trust before revealing carrier affiliation — ad positioning, landing page strategy, and the bait-educate-reveal sales motion.',
+    chapters: 8,
+    estimatedTime: '30 min',
+    difficulty: 'Intermediate',
+    category: 'sop',
+  },
+  {
+    slug: 'tcpa-compliance',
+    title: 'TCPA Compliance & 1-to-1 Consent',
+    description:
+      'Confidently explain the TCPA risk landscape, clarify 1-to-1 consent, and position GOAL\'s funnel + proof stack as the safest way to buy leads.',
+    chapters: 8,
+    estimatedTime: '45 min',
+    difficulty: 'Intermediate',
+    category: 'sop',
+  },
 ];
 
 export function getGuideBySlug(slug: string): GuideMetadata | undefined {

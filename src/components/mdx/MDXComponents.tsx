@@ -10,6 +10,11 @@ import { Screenshot } from '@/components/interactive/Screenshot';
 import { Quiz } from '@/components/interactive/Quiz';
 import { DataTable } from '@/components/interactive/DataTable';
 import { CopyableTemplate } from '@/components/interactive/CopyableTemplate';
+import { FunnelVisualization } from '@/components/interactive/FunnelVisualization';
+import { BeforeAfter } from '@/components/interactive/BeforeAfter';
+import { ObjectionCard } from '@/components/interactive/ObjectionCard';
+import { ScriptBlock } from '@/components/interactive/ScriptBlock';
+import { RevealCard } from '@/components/interactive/RevealCard';
 
 function slugify(text: string): string {
   return text
@@ -142,4 +147,9 @@ export const mdxComponents: MDXComponents = {
   Quiz,
   DataTable,
   CopyableTemplate,
+  FunnelVisualization,
+  BeforeAfter,
+  ObjectionCard,
+  ScriptBlock,
+  RevealCard,
 };
