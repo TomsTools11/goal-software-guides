@@ -7,9 +7,24 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 7, 2026 — Session 14)
+## Latest Update (Mar 7, 2026 — Session 15)
 
 ### Changes This Session
+- **Category system restructured** — replaced binary `category: 'guide' | 'sop'` with multi-tag `categories: Category[]` where `Category = 'software' | 'account-management' | 'sales'`
+  - Guides can now belong to multiple categories (e.g. Right Pricing → Account Management + Sales)
+  - `CategoryTabs` updated: "Software Guides" / "SOPs" tabs → "Software" / "Account Management" / "Sales"
+  - `CourseCard` shows multiple category badges per card using a `categoryBadge` lookup map
+  - `CourseGrid` filtering uses `categories.includes()` instead of exact match
+  - `AppSidebar` nav restructured into 3 sections: Software, Account Management, Sales
+  - `GuideHeader` and `GuideNavigation` updated for new category structure
+  - `guideIcons.tsx` — replaced single `SOP_ICON_BG` with `ACCT_MGMT_ICON_BG` (#0F4C35) and `SALES_ICON_BG` (#1A3A5C) for visual differentiation
+- **New module: Consultative Campaign Targeting** (`src/content/consultative-targeting-sop/index.mdx`) — 8 chapters, ~30 min. Teaches reps to coach agents on campaign targeting: diagnosing over-filtering, day-parting, geo/bid-modifier strategy, and consultative discovery conversations
+  - Registered in `src/lib/guides.ts` (total: 15 modules)
+  - Icon added to `guideIcons.tsx` (target/bullseye icon with `SALES_ICON_BG`)
+- **Fixed Quiz scroll-on-click** — clicking quiz options caused the page to scroll because hidden `<input type="radio">` with `sr-only` triggered browser scroll-to-focus. Replaced with `<div role="radio">` using ARIA attributes and keyboard handlers (`a3988f4`)
+- **Fixed ObjectionCard overlap** — coaching tip was overlapping knowledge check due to absolute positioning; switched to CSS Grid stacking
+
+### Previous Session (Session 14 — Mar 7, 2026)
 - **2 new training modules added**:
   - **Brand Positioning for Captive Agents** (`src/content/brand-positioning-captive/index.mdx`) — 8 chapters, ~30 min. Covers ad positioning, landing page strategy, and bait-educate-reveal sales motion for captive agents
   - **TCPA Compliance & 1-to-1 Consent** (`src/content/tcpa-compliance/index.mdx`) — 8 chapters, ~45 min. Covers TCPA risk landscape, 1-to-1 consent, GOAL's proof stack, and objection handling
@@ -133,7 +148,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 7, 2026 — Session 14)
+## Current State (Mar 7, 2026 — Session 15)
 
 ### What's Been Built
 
@@ -145,7 +160,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 **2. Layout Components** (`src/components/layout/`)
 - `DashboardShell.tsx` — main app shell with sidebar + topbar
-- `AppSidebar.tsx` — sidebar navigation with guide/SOP links
+- `AppSidebar.tsx` — sidebar navigation with Software, Account Management, and Sales sections
 - `TopBar.tsx` — top bar with search, theme toggle, user avatar
 
 **3. UI Components** (`src/components/ui/`)
@@ -168,7 +183,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `ChecklistItem.tsx` — trackable checklist items
 - `InfoCard.tsx` — highlighted info cards
 - `TipCallout.tsx` — tip/warning callout blocks
-- `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback
+- `Quiz.tsx` — multiple-choice quiz with score tracking and answer feedback (ARIA role="radio" for accessibility)
 - `Screenshot.tsx` — browser chrome frame for displaying app screenshots
 - `BrowserChrome.tsx` — browser chrome wrapper
 - `DataTable.tsx` — styled data table with headers, row separators, and responsive scroll
@@ -184,7 +199,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `ContinueLearning.tsx` — recently accessed in-progress courses
 - `CourseGrid.tsx` — filterable course card grid
 - `CourseCard.tsx` — individual course card with progress
-- `CategoryTabs.tsx` — guide/SOP filter tabs
+- `CategoryTabs.tsx` — Software / Account Management / Sales filter tabs
 - `StatCard.tsx` — individual stat card
 - `guideIcons.tsx` — SVG icons for each guide
 
@@ -211,27 +226,34 @@ A Next.js web application that hosts interactive software training guides for GO
 - `useTheme.ts` — dark/light theme toggle
 
 **9. Content & Routing**
-- Guide registry (`src/lib/guides.ts`) with metadata for 14 guides/SOPs
+- Guide registry (`src/lib/guides.ts`) with metadata for 15 modules across 3 categories (`software`, `account-management`, `sales`)
 - Dynamic route: `src/app/(dashboard)/guides/[slug]/page.tsx` with `GuideLayoutWrapper.tsx`
 - Dashboard page (`src/app/(dashboard)/page.tsx`) with stats, continue learning, course grid
 - Account page (`src/app/(dashboard)/account/page.tsx`) with profile, progress, sign out
 - MDX components mapping (`src/components/mdx/MDXComponents.tsx`)
 
-**10. Guide Content** (`src/content/`) — 14 guides/SOPs
+**10. Guide Content** (`src/content/`) — 15 modules
+
+*Software:*
 - `notion/index.mdx` — Mastering Notion (8 chapters)
 - `claude-cowork/index.mdx` — Getting Started with Claude Cowork (6 chapters)
 - `close-crm/index.mdx` — Mastering Close CRM (7 chapters)
-- `account-review-sop/index.mdx` — Account Review SOP (5 chapters)
-- `client-onboarding-sop/index.mdx` — Client Onboarding SOP (4 chapters)
-- `campaign-optimization-sop/index.mdx` — Campaign Optimization SOP (8 chapters)
-- `right-pricing-sop/index.mdx` — Right Pricing SOP (5 chapters)
-- `sales-demo-sop/index.mdx` — GOAL Sales Demo SOP (7 chapters)
-- `disposition-data-import-sop/index.mdx` — Disposition Data Import SOP (11 chapters)
-- `sales-discovery-process/index.mdx` — Sales Discovery Process (9 chapters)
-- `setting-expectations-sop/index.mdx` — Setting Firm Expectations & Handling Objections (8 chapters)
-- `competition-research/index.mdx` — GOAL Competition Research (8 chapters)
-- `brand-positioning-captive/index.mdx` — Brand Positioning for Captive Agents (8 chapters)
-- `tcpa-compliance/index.mdx` — TCPA Compliance & 1-to-1 Consent (8 chapters)
+
+*Account Management:*
+- `account-review-sop/index.mdx` — Account Reviews (5 sections)
+- `client-onboarding-sop/index.mdx` — Onboarding New Clients (4 sections)
+- `campaign-optimization-sop/index.mdx` — Optimizing Campaigns (8 sections)
+- `right-pricing-sop/index.mdx` — Right Pricing (5 sections)
+- `sales-demo-sop/index.mdx` — GOAL Sales Demo (7 sections)
+- `disposition-data-import-sop/index.mdx` — Importing Disposition Data (11 sections)
+
+*Sales:*
+- `sales-discovery-process/index.mdx` — GOAL Sales Discovery Process (9 sections)
+- `setting-expectations-sop/index.mdx` — Setting Expectations & Handling Objections (8 sections)
+- `competition-research/index.mdx` — GOAL Competition Research (8 sections)
+- `brand-positioning-captive/index.mdx` — Brand Positioning for Captive Agents (8 sections)
+- `tcpa-compliance/index.mdx` — TCPA Compliance & 1-to-1 Consent (8 sections)
+- `consultative-targeting-sop/index.mdx` — Consultative Campaign Targeting (8 sections)
 
 **11. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
