@@ -1,8 +1,11 @@
 'use client';
 
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
+import { useSearch } from '@/hooks/useSearch';
+import { SearchOverlay } from './SearchOverlay';
 
 interface TopBarProps {
   onMenuClick: () => void;
@@ -11,9 +14,43 @@ interface TopBarProps {
 export function TopBar({ onMenuClick }: TopBarProps) {
   const { theme, toggleTheme } = useTheme();
   const { clerkUser } = useAuth();
+  const { query, setQuery, results, isLoading, loadIndex } = useSearch();
+  const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const email = clerkUser?.primaryEmailAddress?.emailAddress ?? '';
   const initial = email?.[0]?.toUpperCase() ?? '?';
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    setQuery('');
+    inputRef.current?.blur();
+  }, [setQuery]);
+
+  // Cmd+K / Ctrl+K shortcut
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    }
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  // Click outside to close
+  useEffect(() => {
+    if (!isOpen) return;
+    function onClick(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        handleClose();
+      }
+    }
+    document.addEventListener('mousedown', onClick);
+    return () => document.removeEventListener('mousedown', onClick);
+  }, [isOpen, handleClose]);
 
   return (
     <div className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-surface px-4 lg:px-6">
@@ -39,9 +76,9 @@ export function TopBar({ onMenuClick }: TopBarProps) {
         </svg>
       </button>
 
-      {/* Search (cosmetic) */}
+      {/* Search */}
       <div className="flex flex-1 items-center">
-        <div className="relative w-full max-w-sm">
+        <div className="relative w-full max-w-sm" ref={wrapperRef}>
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
             width="16"
@@ -57,11 +94,28 @@ export function TopBar({ onMenuClick }: TopBarProps) {
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
           <input
+            ref={inputRef}
             type="text"
-            placeholder="Search guides..."
-            className="h-9 w-full rounded-lg border border-border bg-background-soft pl-9 pr-3 text-sm text-text placeholder:text-text-muted/60 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-            readOnly
+            placeholder="Search guides…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {
+              loadIndex();
+              setIsOpen(true);
+            }}
+            className="h-9 w-full rounded-lg border border-border bg-background-soft pl-9 pr-16 text-sm text-text placeholder:text-text-muted/60 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
+          <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 select-none items-center gap-0.5 rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-medium text-text-muted sm:inline-flex">
+            ⌘K
+          </kbd>
+          {isOpen && (
+            <SearchOverlay
+              results={results}
+              isLoading={isLoading}
+              query={query}
+              onClose={handleClose}
+            />
+          )}
         </div>
       </div>
 
