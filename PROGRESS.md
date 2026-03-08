@@ -7,9 +7,19 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 7, 2026 — Session 16)
+## Latest Update (Mar 8, 2026 — Session 17)
 
 ### Changes This Session
+- **Site-wide search implemented** — TopBar search input is now fully functional with Fuse.js fuzzy matching
+  - **Build-time index generator** (`scripts/generate-search-index.ts`) — parses all 15 MDX files, splits on `##` headings, strips JSX/markdown, extracts text from component props (`title`, `content`, `label`, etc.), outputs `public/search-index.json` (141 entries)
+  - **Search hook** (`src/hooks/useSearch.ts`) — lazy-loads index on first focus, initializes Fuse.js with weighted keys (guideTitle 1.0, sectionHeading 0.8, guideDescription 0.6, content 0.4), 150ms debounce, deduplicates results by guide (best section per guide), returns top 8
+  - **Search overlay** (`src/components/layout/SearchOverlay.tsx`) — Framer Motion animated dropdown showing guide title + section heading + text snippet + difficulty badge. Full keyboard support (arrows, Enter, Escape), click-outside dismiss, same-page anchor scrolling
+  - **TopBar updated** (`src/components/layout/TopBar.tsx`) — removed `readOnly`, wired search hook + overlay, added `⌘K` / `Ctrl+K` keyboard shortcut with visual badge
+  - **Package scripts** — added `prebuild` and `predev` scripts to auto-generate search index before dev/build
+  - **Dependencies** — added `fuse.js` (~6 KB gzipped)
+  - `.gitignore` updated to exclude generated `public/search-index.json`
+
+### Previous Session (Session 16 — Mar 7, 2026)
 - **Fixed RevealCard stages not clickable** — `RevealCard` component had a progressive unlock mechanism that locked stages 2 and 3 until the user clicked through in order. This made them appear broken/non-interactive. Removed the locking system, localStorage persistence, and success banner — all stages are now freely clickable with content revealed on click. Affects 3 instances across `brand-positioning-captive` and `consultative-targeting-sop` modules.
 - **Fixed account page not showing progress** — Account page was only reading progress from Convex (remote database), while progress data was stored in localStorage. Dashboard worked because `useDashboardStats` falls back to localStorage. Switched account page to use the same `useDashboardStats` hook so it picks up progress from either source.
 - **Progress bars always visible on account page** — Previously only shown when > 0%. Now every module row shows a progress bar track regardless of completion state.
@@ -154,7 +164,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 7, 2026 — Session 15)
+## Current State (Mar 8, 2026 — Session 17)
 
 ### What's Been Built
 
@@ -167,7 +177,8 @@ A Next.js web application that hosts interactive software training guides for GO
 **2. Layout Components** (`src/components/layout/`)
 - `DashboardShell.tsx` — main app shell with sidebar + topbar
 - `AppSidebar.tsx` — sidebar navigation with Software, Account Management, and Sales sections
-- `TopBar.tsx` — top bar with search, theme toggle, user avatar
+- `TopBar.tsx` — top bar with functional search (Fuse.js), ⌘K shortcut, theme toggle, user avatar
+- `SearchOverlay.tsx` — search results dropdown with keyboard navigation and deep-linking
 
 **3. UI Components** (`src/components/ui/`)
 - `Button.tsx`
@@ -230,6 +241,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - `useDashboardStats.ts` — reactive dashboard stats via Convex `useQuery`
 - `useAuth.tsx` — unified auth hook wrapping Clerk + Convex
 - `useTheme.ts` — dark/light theme toggle
+- `useSearch.ts` — Fuse.js fuzzy search with lazy index loading, debounced queries, deduplicated results
 
 **9. Content & Routing**
 - Guide registry (`src/lib/guides.ts`) with metadata for 15 modules across 3 categories (`software`, `account-management`, `sales`)
@@ -263,6 +275,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 **11. Scripts** (`scripts/`)
 - `capture-screenshots.ts` — Playwright-based Close CRM screenshot capture utility
+- `generate-search-index.ts` — build-time MDX parser that generates `public/search-index.json` (141 entries across 15 guides)
 
 **12. Plans** (`plans/`)
 - `online-course-redesign.md` — 6-phase plan to transform site into online course platform
@@ -277,6 +290,7 @@ A Next.js web application that hosts interactive software training guides for GO
 | Content | MDX |
 | Auth | Clerk (Google OAuth) |
 | Database | Convex (reactive) |
+| Search | Fuse.js (client-side fuzzy) |
 | Hosting | Netlify |
 
 ---
@@ -301,7 +315,7 @@ A Next.js web application that hosts interactive software training guides for GO
 - [ ] Create a Dia Browser guide
 
 ### Infrastructure
-- [ ] Add search functionality across lessons
+- [x] ~~Add search functionality across lessons~~ (implemented Session 17)
 - [ ] Move reference PDFs/docs out of the repo root or into a `docs/` folder
 - [ ] Replace placeholder Close CRM screenshots with live captures
 
