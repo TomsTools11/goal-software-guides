@@ -7,9 +7,24 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Latest Update (Mar 8, 2026 — Session 17)
+## Latest Update (Mar 8, 2026 — Session 18)
 
 ### Changes This Session
+- **Command palette search** — replaced inline TopBar search dropdown with a centered command palette modal (`src/components/layout/CommandPalette.tsx`)
+  - Opens/closes with `⌘K` / `Ctrl+K` keyboard shortcut (toggle behavior)
+  - Centered modal overlay at 12vh from top, max-width `xl`, with backdrop blur
+  - Search input with magnifying glass icon and `ESC` keyboard hint
+  - Results feed below input: document icon + guide title + difficulty badge + section heading + content snippet
+  - Full keyboard navigation: arrow keys to move, Enter to open, Escape to close
+  - Footer bar showing keyboard shortcut hints when results are visible
+  - Active result highlighted with primary-tinted background (`bg-primary/10`)
+  - Empty state prompt: "Type to search across all guides and SOPs"
+  - Animated with Framer Motion (backdrop fade + scale/translate on palette)
+  - Self-contained component — owns its own `useSearch` instance
+  - **TopBar simplified** — search input replaced with a clickable trigger button showing "Search guides..." with `⌘K` badge; removed `useSearch`, `SearchOverlay`, and related state imports
+  - `SearchOverlay.tsx` is now unused (superseded by `CommandPalette.tsx`)
+
+### Previous Session (Session 17 — Mar 8, 2026)
 - **Site-wide search implemented** — TopBar search input is now fully functional with Fuse.js fuzzy matching
   - **Build-time index generator** (`scripts/generate-search-index.ts`) — parses all 15 MDX files, splits on `##` headings, strips JSX/markdown, extracts text from component props (`title`, `content`, `label`, etc.), outputs `public/search-index.json` (141 entries)
   - **Search hook** (`src/hooks/useSearch.ts`) — lazy-loads index on first focus, initializes Fuse.js with weighted keys (guideTitle 1.0, sectionHeading 0.8, guideDescription 0.6, content 0.4), 150ms debounce, deduplicates results by guide (best section per guide), returns top 8
@@ -164,7 +179,7 @@ A Next.js web application that hosts interactive software training guides for GO
 
 ---
 
-## Current State (Mar 8, 2026 — Session 17)
+## Current State (Mar 8, 2026 — Session 18)
 
 ### What's Been Built
 
@@ -177,8 +192,9 @@ A Next.js web application that hosts interactive software training guides for GO
 **2. Layout Components** (`src/components/layout/`)
 - `DashboardShell.tsx` — main app shell with sidebar + topbar
 - `AppSidebar.tsx` — sidebar navigation with Software, Account Management, and Sales sections
-- `TopBar.tsx` — top bar with functional search (Fuse.js), ⌘K shortcut, theme toggle, user avatar
-- `SearchOverlay.tsx` — search results dropdown with keyboard navigation and deep-linking
+- `TopBar.tsx` — top bar with search trigger button, theme toggle, user avatar
+- `CommandPalette.tsx` — centered modal command palette with Fuse.js search, keyboard navigation, and deep-linking
+- `SearchOverlay.tsx` — (deprecated, superseded by CommandPalette)
 
 **3. UI Components** (`src/components/ui/`)
 - `Button.tsx`
