@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOAL — 2-Week Account Executive Training Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg-primary: #191919;
+    --color-bg-secondary: #202020;
+    --color-bg-elevated: #2F2F2F;
+    --color-bg-hover: #474C50;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #EDEEEE;
+    --color-text-muted: #A7A39A;
+    --color-blue-primary: #407EC9;
+    --color-blue-hover: #327DA9;
+    --color-blue-secondary: #1E73BE;
+    --color-success: #448361;
+    --color-warning: #D9730D;
+    --color-error: #D44E49;
+    --color-border: #444B4E;
+    --color-form: #364954;
+    --font-display: 'Red Hat Display', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --transition: 250ms ease;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(64,126,201,0.12);
+    color: var(--color-blue-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .header p {
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Stats Row ── */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 2rem;
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Filter Tabs ── */
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 2rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .filter-btn:hover { border-color: var(--color-blue-primary); color: var(--color-text-secondary); }
+  .filter-btn.active { background: var(--color-blue-primary); color: #fff; border-color: var(--color-blue-primary); }
+
+  /* ── Container ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ── Week Label ── */
+  .week-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--color-text-primary);
+    margin-top: 2.5rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.01em;
+  }
+  .week-theme {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Day Card ── */
+  .day-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .day-card:hover {
+    border-color: rgba(64,126,201,0.35);
+    box-shadow: 0 0 0 1px rgba(64,126,201,0.1);
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header:hover { background: rgba(255,255,255,0.02); }
+
+  .day-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .day-number {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .day-number.wk1 { background: var(--color-blue-primary); }
+  .day-number.wk2 { background: var(--color-success); }
+
+  .day-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+  }
+  .day-subtitle {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.1rem;
+  }
+
+  .day-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .day-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .chevron {
+    color: var(--color-text-muted);
+    transition: transform var(--transition);
+    font-size: 1rem;
+  }
+  .day-card.open .chevron { transform: rotate(180deg); }
+
+  /* ── Day Body ── */
+  .day-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .day-card.open .day-body { display: block; }
+
+  /* ── Module Row ── */
+  .module {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(68,75,78,0.4);
+    align-items: flex-start;
+  }
+  .module:last-child { border-bottom: none; }
+
+  .module-icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .module-icon.software { background: rgba(64,126,201,0.15); }
+  .module-icon.sales { background: rgba(217,115,13,0.15); }
+  .module-icon.am { background: rgba(68,131,97,0.15); }
+  .module-icon.practice { background: rgba(167,163,154,0.15); }
+
+  .module-content { flex: 1; min-width: 0; }
+  .module-name {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+  }
+  .module-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+    line-height: 1.5;
+  }
+
+  .module-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-top: 0.4rem;
+  }
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+  }
+  .tag.software { background: rgba(64,126,201,0.12); color: var(--color-blue-primary); }
+  .tag.sales { background: rgba(217,115,13,0.12); color: var(--color-warning); }
+  .tag.am { background: rgba(68,131,97,0.12); color: var(--color-success); }
+  .tag.practice { background: rgba(167,163,154,0.12); color: var(--color-text-muted); }
+
+  .module-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .module-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .module-difficulty {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .module-difficulty.beginner { background: rgba(68,131,97,0.12); color: var(--color-success); }
+  .module-difficulty.intermediate { background: rgba(64,126,201,0.12); color: var(--color-blue-primary); }
+  .module-difficulty.advanced { background: rgba(217,115,13,0.12); color: var(--color-warning); }
+
+  /* ── Activity Row (non-module) ── */
+  .activity {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(68,75,78,0.4);
+    align-items: center;
+  }
+  .activity:last-child { border-bottom: none; }
+  .activity-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+  }
+  .activity-text {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+  .legend-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+  }
+  .legend-dot.software { background: var(--color-blue-primary); }
+  .legend-dot.sales { background: var(--color-warning); }
+  .legend-dot.am { background: var(--color-success); }
+  .legend-dot.practice { background: var(--color-text-muted); }
+
+  /* ── Progress Bar ── */
+  .progress-track {
+    width: 100%;
+    height: 4px;
+    background: var(--color-bg-elevated);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-fill.wk1 { background: var(--color-blue-primary); }
+  .progress-fill.wk2 { background: var(--color-success); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Utility ── */
+  .hidden { display: none; }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; color: #333; }
+    .day-body { display: block !important; }
+    .filter-bar, .chevron { display: none; }
+    .day-card { border: 1px solid #ddd; break-inside: avoid; }
+    .day-number.wk1, .day-number.wk2 { background: #555; }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .module { flex-direction: column; gap: 0.5rem; }
+    .module-meta { align-self: flex-start; }
+    .stats { gap: 1.25rem; }
+    .day-meta { gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-badge">New Hire Onboarding</div>
+  <h1>Account Executive Training</h1>
+  <p>2-week guided schedule covering tools, sales methodology, competitive intelligence, account management, and compliance — everything you need to ramp confidently at GOAL.</p>
+</div>
+
+<!-- ── Stats ── -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">10</div>
+    <div class="stat-label">Training Days</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">15</div>
+    <div class="stat-label">Modules</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">~6 hrs</div>
+    <div class="stat-label">Total Content</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">3</div>
+    <div class="stat-label">Categories</div>
+  </div>
+</div>
+
+<!-- ── Legend ── -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot software"></div> Software & Tools</div>
+  <div class="legend-item"><div class="legend-dot sales"></div> Sales Skills</div>
+  <div class="legend-item"><div class="legend-dot am"></div> Account Management</div>
+  <div class="legend-item"><div class="legend-dot practice"></div> Practice / Application</div>
+</div>
+
+<!-- ── Filters ── -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Days</button>
+  <button class="filter-btn" data-filter="wk1">Week 1</button>
+  <button class="filter-btn" data-filter="wk2">Week 2</button>
+  <button class="filter-btn" data-filter="software">Software</button>
+  <button class="filter-btn" data-filter="sales">Sales</button>
+  <button class="filter-btn" data-filter="am">Account Mgmt</button>
+</div>
+
+<!-- ── Schedule ── -->
+<div class="container">
+
+  <!-- ════════ WEEK 1 ════════ -->
+  <div class="week-label" data-week="wk1">Week 1</div>
+  <div class="week-theme" data-week="wk1">Foundation — Tools, Product, and Sales Methodology</div>
+
+  <!-- Day 1 -->
+  <div class="day-card open" data-week="wk1" data-cats="software">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk1">1</div>
+        <div>
+          <div class="day-title">Internal Tools Setup</div>
+          <div class="day-subtitle">Notion workspace + Claude Cowork</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~50 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon software">📐</div>
+        <div class="module-content">
+          <div class="module-name">Mastering Notion</div>
+          <div class="module-desc">Workspace architecture, databases, views, automations, and integrations. Learn the system your team runs on before anything else.</div>
+          <div class="module-tags"><span class="tag software">Software</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">30 min</span>
+          <span class="module-difficulty beginner">Beginner</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-icon software">🤖</div>
+        <div class="module-content">
+          <div class="module-name">Getting Started with Claude Cowork</div>
+          <div class="module-desc">Multi-step task automation with Claude Desktop. Set up, learn real-world use cases, and start working faster from Day 1.</div>
+          <div class="module-tags"><span class="tag software">Software</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">20 min</span>
+          <span class="module-difficulty beginner">Beginner</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Finish by completing your Notion profile and creating a test Cowork task</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card" data-week="wk1" data-cats="software">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk1">2</div>
+        <div>
+          <div class="day-title">Close CRM Mastery</div>
+          <div class="day-subtitle">Pipeline, Smart Views, and daily workflow</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~25 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon software">💼</div>
+        <div class="module-content">
+          <div class="module-name">Mastering Close CRM</div>
+          <div class="module-desc">Configure your Close environment, capture high-signal leads, manage opportunities, and optimize your sales pipeline. This is your daily operating system as an AE.</div>
+          <div class="module-tags"><span class="tag software">Software</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">25 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Set up your personal Smart Views and pipeline stages in Close</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card" data-week="wk1" data-cats="sales">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk1">3</div>
+        <div>
+          <div class="day-title">Know Your Enemy</div>
+          <div class="day-subtitle">Competitive landscape + GOAL positioning</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~25 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon sales">⚔️</div>
+        <div class="module-content">
+          <div class="module-name">GOAL Competition Research</div>
+          <div class="module-desc">Market overview, competitor profiles (EverQuote, MediaAlpha, QuoteWizard, NextGen, etc.), battlecards, objection handling, and landmine questions you can plant in every call.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">25 min</span>
+          <span class="module-difficulty beginner">Beginner</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Write a 2-minute "why GOAL is different" pitch using what you learned</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card" data-week="wk1" data-cats="sales">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk1">4</div>
+        <div>
+          <div class="day-title">Discovery Fundamentals</div>
+          <div class="day-subtitle">Consultative sales discovery from open to close</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~35 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon sales">🔍</div>
+        <div class="module-content">
+          <div class="module-name">GOAL Sales Discovery Process</div>
+          <div class="module-desc">Master consultative discovery — scorecard framework, qualification, deep problem exploration, quantifying pain, and earning the right to demo. This is your longest single module; take your time.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">35 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Practice: run a mock discovery with a teammate using the scorecard</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card" data-week="wk1" data-cats="sales">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk1">5</div>
+        <div>
+          <div class="day-title">The Demo & The Close</div>
+          <div class="day-subtitle">Platform demo + setting expectations</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~50 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon sales">🎤</div>
+        <div class="module-content">
+          <div class="module-name">GOAL Sales Demo</div>
+          <div class="module-desc">Standardized sales conversation from discovery through platform demo to close. Includes the scorecard, financial terms, and post-demo workflow.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span><span class="tag am">Account Mgmt</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">20 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-icon sales">🚧</div>
+        <div class="module-content">
+          <div class="module-name">Setting Expectations & Handling Objections</div>
+          <div class="module-desc">The data requirement, the 90-day ramp conversation, and the "burned by lead vendors" objection. Case studies and talk tracks that separate closers from order-takers.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">30 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">End-of-week checkpoint: record a full mock discovery + demo for review</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WEEK 2 ════════ -->
+  <div class="week-label" data-week="wk2">Week 2</div>
+  <div class="week-theme" data-week="wk2">Depth — Compliance, Optimization, and Client Success</div>
+
+  <!-- Day 6 -->
+  <div class="day-card" data-week="wk2" data-cats="sales">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk2">6</div>
+        <div>
+          <div class="day-title">TCPA & Compliance</div>
+          <div class="day-subtitle">1-to-1 consent, proof stack, and risk framing</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~45 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon sales">🛡️</div>
+        <div class="module-content">
+          <div class="module-name">TCPA Compliance & 1-to-1 Consent</div>
+          <div class="module-desc">The TCPA risk landscape, shared leads vs. 1-to-1 consent, GOAL's end-to-end funnel, and the proof stack (TrustedForm / Jornaya / session replay). This is your biggest competitive weapon — learn it cold.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">45 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Practice: explain the TCPA risk to a "prospect" in under 90 seconds</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day-card" data-week="wk2" data-cats="sales">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk2">7</div>
+        <div>
+          <div class="day-title">Advanced Sales Positioning</div>
+          <div class="day-subtitle">Captive agent branding + consultative targeting</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~60 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon sales">🏷️</div>
+        <div class="module-content">
+          <div class="module-name">Brand Positioning for Captive Agents</div>
+          <div class="module-desc">Help captive agents compete by building a local identity that earns trust before revealing carrier affiliation — ad positioning, landing page strategy, and the bait-educate-reveal motion.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">30 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-icon sales">🎯</div>
+        <div class="module-content">
+          <div class="module-name">Consultative Campaign Targeting</div>
+          <div class="module-desc">Transition from order-taker to trusted advisor. Diagnose over-filtering, recommend day-parting windows, and propose hybrid geo strategies that balance volume with quality.</div>
+          <div class="module-tags"><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">30 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Build a sample targeting plan for a hypothetical captive State Farm agent in a mid-size market</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 8 -->
+  <div class="day-card" data-week="wk2" data-cats="am">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk2">8</div>
+        <div>
+          <div class="day-title">Campaign & Bid Optimization</div>
+          <div class="day-subtitle">Right Pricing + campaign optimization SOPs</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~40 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon am">💲</div>
+        <div class="module-content">
+          <div class="module-name">Right Pricing</div>
+          <div class="module-desc">6-step bid management procedure for achieving target CPA through base bid strategy, source modifiers, and continuous monitoring. This is the math behind every account.</div>
+          <div class="module-tags"><span class="tag am">Account Mgmt</span><span class="tag sales">Sales</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">15 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-icon am">📊</div>
+        <div class="module-content">
+          <div class="module-name">Optimizing Campaigns</div>
+          <div class="module-desc">Data-driven campaign optimization across 5 pillars: disposition integration, budget controls, targeting, bid modifiers, and source attribution. The deep-dive companion to Right Pricing.</div>
+          <div class="module-tags"><span class="tag am">Account Mgmt</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">25 min</span>
+          <span class="module-difficulty advanced">Advanced</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Walk through a real campaign export and identify 3 optimization opportunities</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day-card" data-week="wk2" data-cats="am">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk2">9</div>
+        <div>
+          <div class="day-title">Onboarding & Disposition Flow</div>
+          <div class="day-subtitle">Client onboarding SOP + disposition data imports</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~40 min</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon am">🚀</div>
+        <div class="module-content">
+          <div class="module-name">Onboarding New Clients</div>
+          <div class="module-desc">Consistent, repeatable onboarding from signup through the 30-day post-launch review. Pre-onboarding checklist, meeting execution, and activation milestones.</div>
+          <div class="module-tags"><span class="tag am">Account Mgmt</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">20 min</span>
+          <span class="module-difficulty beginner">Beginner</span>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-icon am">📤</div>
+        <div class="module-content">
+          <div class="module-name">Importing Disposition Data</div>
+          <div class="module-desc">End-to-end process for importing client disposition data — file preparation, bulk import workflow, error resolution, and CPH benchmarks. The feedback loop that powers optimization.</div>
+          <div class="module-tags"><span class="tag am">Account Mgmt</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">20 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Run through a practice disposition import using sample CSV data</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 10 -->
+  <div class="day-card" data-week="wk2" data-cats="am,practice">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-left">
+        <div class="day-number wk2">10</div>
+        <div>
+          <div class="day-title">Account Reviews & Graduation</div>
+          <div class="day-subtitle">Account review SOP + full-cycle practice</div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="day-time">~15 min + practice</div>
+        <span class="chevron">▾</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="module">
+        <div class="module-icon am">📋</div>
+        <div class="module-content">
+          <div class="module-name">Account Reviews</div>
+          <div class="module-desc">Standard procedure for conducting monthly and quarterly account reviews — KPIs, the 4-phase review cycle, escalation protocol, and key terminology. The final AM module ties everything together.</div>
+          <div class="module-tags"><span class="tag am">Account Mgmt</span></div>
+        </div>
+        <div class="module-meta">
+          <span class="module-time">15 min</span>
+          <span class="module-difficulty intermediate">Intermediate</span>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Capstone: run a full mock account review meeting using real platform data</div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Final checkpoint: record a full discovery → demo → objection handling session</div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div class="activity-text">Debrief with manager — identify areas for continued development</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer">
+  GOAL Platform · Account Executive Training Schedule · 15 modules across 10 days
+</div>
+
+<script>
+function toggleDay(header) {
+  header.closest('.day-card').classList.toggle('open');
+}
+
+// Filter logic — cached queries + event delegation
+const filterBtns = document.querySelectorAll('.filter-btn');
+const dayCards = document.querySelectorAll('.day-card');
+const weekEls = document.querySelectorAll('.week-label, .week-theme');
+
+document.querySelector('.filter-bar').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+
+  filterBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filter = btn.dataset.filter;
+
+  dayCards.forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+    } else if (filter === 'wk1' || filter === 'wk2') {
+      card.classList.toggle('hidden', card.dataset.week !== filter);
+    } else {
+      card.classList.toggle('hidden', !card.dataset.cats.split(',').includes(filter));
+    }
+  });
+
+  weekEls.forEach(el => {
+    if (filter === 'all') { el.classList.remove('hidden'); return; }
+    if (filter === 'wk1' || filter === 'wk2') {
+      el.classList.toggle('hidden', el.dataset.week !== filter);
+    } else {
+      el.classList.remove('hidden');
+    }
+  });
+});
+</script>
+</body>
+</html>
